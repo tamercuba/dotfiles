@@ -95,26 +95,7 @@
     "**/.git/": false
   },
   "terminal.integrated.shell.linux": "/usr/bin/zsh",
-  "sqltools.connections": [
-    {
-      "database": "bs_analyzer",
-      "driver": "PostgreSQL",
-      "name": "QA",
-      "password": "Y29n1mSjks2C",
-      "port": 5432,
-      "server": "gfg-qa-mkt-automation-bs-system.cvnbyl45rck7.us-east-1.rds.amazonaws.com",
-      "username": "postgres"
-    },
-    {
-      "database": "bs_order",
-      "driver": "PostgreSQL",
-      "name": "qaORDER",
-      "password": "Y29n1mSjks2C",
-      "port": 5432,
-      "server": "gfg-qa-mkt-automation-bs-system.cvnbyl45rck7.us-east-1.rds.amazonaws.com",
-      "username": "postgres"
-    }
-  ],
+  "sqltools.connections": [],
   "elixirLS.projectDir": "/core/",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "[sql]": {

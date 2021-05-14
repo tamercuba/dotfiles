@@ -43,8 +43,11 @@
 		]
 	},
 
-	"Order URL": {
-		"prefix": "https",
-		"body": ["https://bs-order.priv.live.dafiti.local/"]
-	}
+	"DELETE request": {
+		"prefix": "DELETE",
+		"body": [
+			"DELETE $0 HTTP/1.1",
+			"Content-Type: application/json",
+		]
+	},
 }
