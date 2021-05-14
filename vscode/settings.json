@@ -1,0 +1,145 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "One Dark Pro",
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.minimap.maxColumn": 80,
+  "editor.fontSize": 13,
+  "editor.rulers": [80],
+  "editor.renderWhitespace": "boundary",
+  "editor.formatOnSave": false,
+  "editor.renderControlCharacters": true,
+  "workbench.tree.indent": 20,
+  "workbench.startupEditor": "newUntitledFile",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.suggestSelection": "first",
+  "telemetry.enableTelemetry": false,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "editor.tabSize": 2
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.formatOnSave": false
+  },
+  "python.languageServer": "Jedi",
+  "python.analysis.autoSearchPaths": true,
+  "python.linting.lintOnSave": true,
+  "python.workspaceSymbols.rebuildOnFileSave": true,
+  "python.autoComplete.extraPaths": ["."],
+  "python.analysis.disabled": ["unresolved-import"],
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    "-S",
+    "-t",
+    "py27",
+    "-l",
+    "79",
+    "--exclude",
+    "'/(\\.git|\\.venv|env|venv|build|dist)/'"
+  ],
+  "editor.suggest.localityBonus": true,
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/bower_components": true,
+    "**/env": true,
+    "**/venv": true,
+    "**/.venv": true,
+    "**/.git": true,
+    "**/*.pyc": true,
+    ".local": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/env/**": true,
+    "**/venv/**": true,
+    "**/.venv/**": true,
+    "env-*": true,
+    ".local": true
+  },
+  "files.exclude": {
+    ".pytest_cache": true,
+    ".local": true,
+    "**/*.pyc": true,
+    "**/.vscode": true,
+    "**/.venv": true,
+    "**/__pycache__/": true,
+    "**/.git/": false
+  },
+  "terminal.integrated.shell.linux": "/usr/bin/zsh",
+  "sqltools.connections": [
+    {
+      "database": "bs_analyzer",
+      "driver": "PostgreSQL",
+      "name": "QA",
+      "password": "Y29n1mSjks2C",
+      "port": 5432,
+      "server": "gfg-qa-mkt-automation-bs-system.cvnbyl45rck7.us-east-1.rds.amazonaws.com",
+      "username": "postgres"
+    },
+    {
+      "database": "bs_order",
+      "driver": "PostgreSQL",
+      "name": "qaORDER",
+      "password": "Y29n1mSjks2C",
+      "port": 5432,
+      "server": "gfg-qa-mkt-automation-bs-system.cvnbyl45rck7.us-east-1.rds.amazonaws.com",
+      "username": "postgres"
+    }
+  ],
+  "elixirLS.projectDir": "/core/",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "http.proxySupport": "off",
+  "python.analysis.extraPaths": ["."],
+  "python.showStartPage": false,
+  "files.associations": {
+    "*.py": "python"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "material-icon-theme.folders.color": "#42a5f5",
+  "material-icon-theme.folders.theme": "classic",
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "window.zoomLevel": -1
+}
