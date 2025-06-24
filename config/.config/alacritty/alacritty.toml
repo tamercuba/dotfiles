@@ -1,0 +1,11 @@
+[window]
+decorations = "none"
+opacity = 0.93
+startup_mode = "Windowed"
+
+[colors]
+transparent_background_colors = true
+
+[terminal.shell]
+program = "/bin/zsh"
+args = ["-c", "tmux attach || tmux new-session"]
