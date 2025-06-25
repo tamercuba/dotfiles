@@ -1,8 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_PYENV_LAZY_VIRTUALENV="true"
 ZSH_THEME="bira"
 plugins=(git autoenv zsh-autosuggestions python rust golang pyenv-lazy)
 source $ZSH/oh-my-zsh.sh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin:/bin:/usr/bin"
 
@@ -11,11 +11,8 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 export PYENV_ROOT="$HOME/.pyenv"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
 
-if [[ -f .python-version ]]; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"

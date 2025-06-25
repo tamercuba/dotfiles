@@ -1,11 +1,35 @@
+general.live_config_reload = true
+
+[terminal.shell]
+program = "tmux"
+
 [window]
-decorations = "none"
-opacity = 0.93
-startup_mode = "Windowed"
+opacity = 0.9
+startup_mode = "Maximized"
+decorations = "Buttonless"
+option_as_alt = "Both"
 
 [colors]
 transparent_background_colors = true
 
-[terminal.shell]
-program = "/bin/zsh"
-args = ["-c", "tmux attach || tmux new-session"]
+[font]
+size = 13
+
+[font.bold]
+family= "JetBrainsMono Nerd Font"
+style= "Bold"
+
+[font.italic]
+family= "JetBrainsMono Nerd Font"
+style= "Italic"
+
+[font.normal]
+family= "JetBrainsMono Nerd Font"
+style = "Thin"
+
+[font.bold_italic]
+family= "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[keyboard]
+bindings = [{key = 'F', mods = 'Alt', action = 'ToggleSimpleFullscreen'}]
