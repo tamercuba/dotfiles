@@ -10,19 +10,17 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.breakindent = true
 vim.opt.wrap = false
 
 vim.cmd("set number")
 vim.cmd("set colorcolumn=80,120")
 vim.cmd("set clipboard+=unnamedplus")
-vim.cmd("set smartindent")
 vim.cmd("set laststatus=2")
 vim.g.python3_host_prog = "/Users/tamer.cuba/.pyenv/shims/python3"
-vim.opt.smartindent = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.breakindent = true
 
 vim.opt.incsearch = true
 vim.opt.inccommand = "split"
