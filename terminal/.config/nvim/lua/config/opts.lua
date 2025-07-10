@@ -11,7 +11,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.breakindent = true
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 vim.cmd("set number")
 vim.cmd("set colorcolumn=80,120")
