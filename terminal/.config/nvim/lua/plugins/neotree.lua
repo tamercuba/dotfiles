@@ -22,6 +22,7 @@ return {
 						"**/*.pyc",
 						"**/.*_cache",
 						"**/.vscode",
+						"**/*.egg-info",
 					},
 				},
 			},
