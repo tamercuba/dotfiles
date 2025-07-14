@@ -1,0 +1,4 @@
+{:source-paths #{"src" "test"}
+ :dependency-scheme "jar"
+ :project-specs [{:project-path "project.clj"
+                  :classpath-cmd ["lein" "classpath"]}]}

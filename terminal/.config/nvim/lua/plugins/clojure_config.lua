@@ -40,17 +40,65 @@ return {
 		ft = { "clojure" },
 	},
 	{
-		"luochen1990/rainbow",
-
-		ft = { "clojure" },
+		"HiPhish/rainbow-delimiters.nvim",
 		config = function()
-			vim.g.rainbow_active = 1
-			vim.g.rainbow_conf = {
-				guifont = "Fira Code",
-				guifontwide = "Fira Code",
-				guifontbold = "Fira Code",
-				guifontitalic = "Fira Code",
+			local rainbow_delimiters = require("rainbow-delimiters")
+
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = rainbow_delimiters.strategy["global"],
+					vim = rainbow_delimiters.strategy["local"],
+				},
+				query = {
+					[""] = "rainbow-delimiters",
+					lua = "rainbow-blocks",
+				},
+				priority = {
+					[""] = 110,
+					lua = 210,
+				},
+				highlight = {
+					"RainbowDelimiterRed",
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					"RainbowDelimiterOrange",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
 			}
+
+			-- Ativar apenas para linguagens Lisp-like
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "clojure", "edn", "scheme", "lisp", "racket", "fennel" },
+				callback = function()
+					vim.b.rainbow_delimiters = {
+						strategy = rainbow_delimiters.strategy["global"],
+						query = "rainbow-delimiters",
+					}
+				end,
+			})
+
+			-- Desativar para todas as outras linguagens
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "*",
+				callback = function()
+					local lisp_filetypes = { "clojure", "edn", "scheme", "lisp", "racket", "fennel" }
+					local current_ft = vim.bo.filetype
+
+					local is_lisp_like = false
+					for _, ft in ipairs(lisp_filetypes) do
+						if current_ft == ft then
+							is_lisp_like = true
+							break
+						end
+					end
+
+					if not is_lisp_like then
+						vim.b.rainbow_delimiters = { strategy = {} }
+					end
+				end,
+			})
 		end,
 	},
 }
