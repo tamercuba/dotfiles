@@ -1,7 +1,6 @@
 return {
 	{
 		"Olical/conjure",
-		dependencies = { "PaterJason/cmp-conjure" },
 		ft = { "clojure", "fennel", "janet", "racket", "scheme", "lisp" }, -- Carregar quando abrir arquivos Clojure
 		-- <localleader>ls   -  Open log buffer in horizontal split window.
 		-- <localleader>lv   -  Open log buffer in vertical split window.
@@ -10,17 +9,6 @@ return {
 		-- <localleader>ece  -  Evaluate the form under the cursor and display the result as a comment.
 		-- <localleader>er   -  Evaluate the root form under the cursor.
 		-- <localleader>ecr  -  Evaluate the root form under the cursor and display the result as a comment.
-	},
-	{
-		"PaterJason/cmp-conjure",
-		dependencies = { "hrsh7th/nvim-cmp" },
-		ft = { "clojure" },
-		config = function()
-			local cmp = require("cmp")
-			local config = cmp.get_config()
-			table.insert(config.sources, { name = "conjure" })
-			cmp.setup(config)
-		end,
 	},
 	{
 		"venantius/vim-cljfmt",
