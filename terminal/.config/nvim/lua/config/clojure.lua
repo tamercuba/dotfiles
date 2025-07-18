@@ -28,4 +28,11 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_user_command("ConjureGo", function()
 	vim.cmd("ConjureConnect")
-end, {desc = "Conecta o Conjure ao REPL"})
+end, { desc = "Conecta o Conjure ao REPL" })
+
+vim.keymap.set("n", "<localleader>cr", function()
+	print("Matando REPL")
+	vim.cmd("!pkill -f lein")
+	vim.cmd("sleep 1")
+	vim.cmd("ConjureClientConnect")
+end, { desc = "Restart REPL" })

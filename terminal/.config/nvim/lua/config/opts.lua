@@ -18,6 +18,7 @@ vim.cmd("set colorcolumn=80,120")
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set laststatus=2")
 vim.g.python3_host_prog = "/Users/tamer.cuba/.pyenv/shims/python3"
+vim.g.transparent_background = false
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
