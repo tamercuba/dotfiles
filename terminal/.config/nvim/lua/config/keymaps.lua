@@ -67,3 +67,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+vim.keymap.set("n", "<localleader>rp", function()
+	vim.fn.system("pkill -f lein")
+	vim.fn.jobstart("lein repl", { detach = true })
+end, { desc = "Kill lein processes, start new REPL ", noremap = true, silent = true })

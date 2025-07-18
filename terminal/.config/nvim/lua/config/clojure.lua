@@ -1,5 +1,5 @@
-vim.g["conjure#client#clojure#nrepl#eval#auto_require"] = false
-vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = false
+vim.g["conjure#client#clojure#nrepl#eval#auto_require"] = true
+vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = true
 vim.g["conjure#client#clojure#nrepl#eval#pretty_print"] = true
 vim.g["conjure#extract#tree_sitter#enabled"] = true
 vim.g["conjure#client#clojure#nrepl#test#runner"] = "clojure"
@@ -25,14 +25,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
-
-vim.api.nvim_create_user_command("ConjureGo", function()
-	vim.cmd("ConjureConnect")
-end, { desc = "Conecta o Conjure ao REPL" })
-
-vim.keymap.set("n", "<localleader>cr", function()
-	print("Matando REPL")
-	vim.cmd("!pkill -f lein")
-	vim.cmd("sleep 1")
-	vim.cmd("ConjureClientConnect")
-end, { desc = "Restart REPL" })
