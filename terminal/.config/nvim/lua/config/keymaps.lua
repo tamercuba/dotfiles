@@ -30,12 +30,36 @@ vim.keymap.set("n", "<leader>fn", function()
 	end)
 end, { desc = "[N]ew [F]ile", noremap = true, silent = true })
 
+-- Split current buffer
+vim.keymap.set("n", "<leader>pn", ":vsplit<CR>", { desc = "New vertical panel", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ph", ":split<CR>", { desc = "New horizontal panel", noremap = true, silent = true })
+
+-- Navigate tabs
 vim.keymap.set("n", "<c-l>", ":wincmd l<CR>", { desc = "Go to right table" })
 vim.keymap.set("n", "<c-h>", ":wincmd h<CR>", { desc = "Go to left table" })
 vim.keymap.set("n", "<c-j>", ":wincmd j<CR>", { desc = "Go to upper table" })
 vim.keymap.set("n", "<c-k>", ":wincmd k<CR>", { desc = "Go to bottom table" })
-vim.keymap.set("n", "<C-\\>", ":vsplit<CR>", opts)
-vim.keymap.set("n", "<C-|>", ":split<CR>", opts)
+
+-- Resize tabs
+vim.keymap.set("n", "<Leader>prl", function()
+	local count = vim.v.count1
+	vim.cmd("vertical resize +" .. (5 * count))
+end, { desc = "Increase window width" })
+
+vim.keymap.set("n", "<Leader>prh", function()
+	local count = vim.v.count1
+	vim.cmd("vertical resize -" .. (5 * count))
+end, { desc = "Decrease window width" })
+
+vim.keymap.set("n", "<Leader>prk", function()
+	local count = vim.v.count1
+	vim.cmd("resize +" .. (3 * count))
+end, { desc = "Increase window height" })
+
+vim.keymap.set("n", "<Leader>prj", function()
+	local count = vim.v.count1
+	vim.cmd("resize -" .. (3 * count))
+end, { desc = "Decrease window height" })
 
 -- Navigate between tabs and terminal
 vim.api.nvim_set_keymap("t", "<C-k>", [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })

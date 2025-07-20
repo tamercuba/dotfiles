@@ -15,6 +15,7 @@ return {
 			{ "<leader>g", group = "[G]it" },
 			{ "<leader>v", group = "LSP" },
 			{ "<leader>h", group = "Git [H]unk", mode = "v" },
+			{ "<leader>p", group = "[P]anel" },
 		})
 	end,
 }

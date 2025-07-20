@@ -20,6 +20,7 @@ return {
 			ensure_installed = {
 				"bash",
 				"c",
+				"clojure",
 				"html",
 				"javascript",
 				"json",
