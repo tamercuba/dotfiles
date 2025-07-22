@@ -41,9 +41,6 @@ bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
 
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
-
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
@@ -290,15 +287,8 @@ bindsym $mod+F12 exec flameshot gui
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-#exec --no-startup-id manjaro-hello
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
@@ -364,9 +354,7 @@ set_from_resource $term_color15    color15
 # }
 
 # POLYBAR 
-exec_always --no-startup-id ~/.config/polybar/script.sh
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+exec_always ~/.config/polybar/launch.sh &
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
@@ -434,4 +422,4 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-exec --no-startup-id setxkbmap us -variant alt-intl
+exec_always --no-startup-id setxkbmap us -variant alt-intl
