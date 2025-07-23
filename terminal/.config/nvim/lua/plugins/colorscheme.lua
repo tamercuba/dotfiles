@@ -15,11 +15,19 @@
 -- 		which_key = true,
 -- 	},
 -- }
+-- return {
+-- 	"ellisonleao/gruvbox.nvim",
+-- 	priority = 1000,
+-- 	config = function()
+-- 		vim.o.background = "dark"
+-- 		vim.cmd("colorscheme gruvbox")
+-- 	end,
+-- }
+
 return {
-	"ellisonleao/gruvbox.nvim",
+	"shaunsingh/nord.nvim",
 	priority = 1000,
 	config = function()
-		vim.o.background = "dark"
-		vim.cmd("colorscheme gruvbox")
+		vim.cmd("colorscheme nord")
 	end,
 }
