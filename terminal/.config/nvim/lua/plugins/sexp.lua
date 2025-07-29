@@ -1,0 +1,12 @@
+-- return {
+-- 	"Grazfather/sexp.nvim",
+-- 	dependencies = { "tpope/vim-repeat" },
+-- 	config = {
+-- 		enable_insert_mode_mappings = true,
+-- 		insert_after_wrap = true,
+-- 		filetypes = "clojure,scheme,lisp,timl,fennel",
+-- 		maxlines = -1,
+-- 	},
+-- }
+--
+return {}
