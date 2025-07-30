@@ -13,6 +13,7 @@ DEFAULT_SESSION='i3 --shmlog-size 0'
 
 # merge in defaults and keymaps
 
+
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
@@ -28,8 +29,20 @@ fi
 if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
-# start some nice programs
 
+# Commands
+setxkbmap us -variant alt-intl &
+xrandr --output DP-0 --mode 1920x1080 --rate 144 &
+
+# NVIDIA Config
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export GBM_BACKEND=nvidia-drm
+export GTK_IM_MODULE=xim
+export QT_IM_MODULE=xim
+export XMODIFIERS=@im=none
+
+
+# start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
         [ -x "$f" ] && . "$f"
