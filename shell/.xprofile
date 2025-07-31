@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export DISPLAY=$(ps aux | grep "Xorg :" | grep -v grep | grep $USER | awk '{print $12}' | head -1)
