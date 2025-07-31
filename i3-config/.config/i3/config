@@ -1,6 +1,7 @@
 set $mod Mod4
 set $blurlock ~/.local/bin/blurlock
 set $i3exit ~/.local/bin/i3exit
+set $audio_switcher ~/.config/rofi/as-rofi.sh
 
 default_border pixel 2
 default_floating_border normal
@@ -23,11 +24,15 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+d exec rofi -show run
 bindsym $mod+Tab exec rofi -show window
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+# Audio
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Shift+a exec --no-startup-id $audio_switcher
+
 
 # change focus
 bindsym $mod+h focus left
@@ -182,6 +187,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 exec --no-startup-id clipit
 exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id dunst
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
