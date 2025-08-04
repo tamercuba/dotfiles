@@ -22,7 +22,7 @@ export NVM_DIR="$HOME/.nvm"
 export XCOMPOSEFILE=~/.XCompose
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
-    export DISPLAY=$(ps aux | grep "Xorg :" | grep -v grep | grep $USER | awk '{print $12}' | head -1)
+if [ -z "$DISPLAY" ]; then
+    DISPLAY=$(ps aux | grep "Xorg :" | grep -v grep | grep $USER | awk '{for(i=1;i<=NF;i++) if($i ~ /^:/) print $i}' | head -1)
+    export DISPLAY=${DISPLAY:-:0}
 fi
-

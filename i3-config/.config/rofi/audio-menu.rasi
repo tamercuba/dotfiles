@@ -1,0 +1,61 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 11";
+    show-icons: false;
+    disable-history: true;
+    click-to-exit: true;
+    
+    /* Keybindings vim-like */
+    kb-row-up: "k,Up,Control+p";
+    kb-row-down: "j,Down,Control+n";
+    kb-accept-entry: "Return,space";
+    kb-remove-to-eol: "";
+    kb-remove-char-back: "";
+}
+
+* {
+    /* Cores */
+    fg:               #ffffff;
+    gray-dark:        #1b2124;
+    gray-medium:      #272A2B;
+    gray-light:       #3B4252;
+    
+    background-color: @gray-dark;
+    text-color:       @fg;
+}
+
+window {
+    transparency:     "real";
+    width:            400px;
+    location:         center;
+    padding:          0px;
+}
+
+mainbox {
+    children: [ listview ];  /* Remove inputbar */
+}
+
+listview {
+    background-color: @gray-dark;
+    padding:          10px;
+    columns:          1;
+    lines:            3;     /* Apenas 3 opções de áudio */
+    spacing:          5px;
+    scrollbar:        false;
+}
+
+element {
+    background-color: @gray-dark;
+    text-color:       @fg;
+    padding:          8px 15px;
+    border-radius:    4px;
+}
+
+element selected {
+    background-color: @gray-light;
+    text-color:       @fg;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}

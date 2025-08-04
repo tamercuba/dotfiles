@@ -1,0 +1,73 @@
+configuration {
+    modi: "drun,run";
+    font: "JetBrainsMono Nerd Font 11";
+    show-icons: false;
+    drun-display-format: "{name}";
+    matching: "fuzzy";
+    tokenize: true;
+}
+
+* {
+    /* Cores definidas */
+    fg:               #ffffff;
+    blue:             #5294e2;
+    gray-dark:        #1b2124;
+    gray-medium:      #272A2B;
+    gray-light:       #3B4252;
+    
+    /* Aplicação padrão */
+    background-color: @gray-dark;
+    text-color:       @fg;
+}
+
+window {
+    transparency:     "real";
+    width:            600px;
+    location:         center;
+    padding:          0px;
+}
+
+inputbar {
+    background-color: @gray-medium;
+    padding:          10px 15px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @blue;
+    font:             "JetBrainsMono Nerd Font Bold 11";
+    padding:          0px 8px 0px 0px;
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @fg;
+    placeholder:      "Search...";
+    placeholder-color: #666666;
+}
+
+listview {
+    background-color: @gray-dark;
+    padding:          0px;
+    columns:          1;
+    lines:            15;
+    spacing:          0px;
+    scrollbar:        false;
+}
+
+element {
+    background-color: @gray-dark;
+    text-color:       @fg;
+    padding:          4px 15px;
+}
+
+element selected {
+    background-color: @gray-light;
+    text-color:       @fg;
+}
+
+element-text {
+    background-color: inherit;    /* Herda do elemento pai */
+    text-color:       inherit;    /* Herda do elemento pai */
+}
