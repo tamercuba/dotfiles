@@ -29,7 +29,7 @@ local config = { -- Autoformat
 			lua = { "stylua" },
 			go = { "goimports", "golines", "gofmt" },
 			python = { "ruff_format" },
-			rust = { "rust_analyzer" },
+			rust = { "rustfmt" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			--

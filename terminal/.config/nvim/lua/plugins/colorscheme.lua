@@ -1,18 +1,13 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"neanias/everforest-nvim",
+	name = "everforest",
+	version = false,
+	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.cmd("colorscheme catppuccin-mocha")
+		require("everforest").setup({
+			background = "hard",
+		})
+		require("everforest").load()
 	end,
-	transparent_background = true,
-	integrations = {
-		alpha = true,
-		gitsigns = true,
-		mason = true,
-		neotree = true,
-		cmp = true,
-		which_key = true,
-		harpoon = true,
-	}
 }

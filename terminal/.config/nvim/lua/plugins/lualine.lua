@@ -15,7 +15,7 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
+				theme = "everforest",
 			},
 			sections = {
 				lualine_c = { filename_with_path },
