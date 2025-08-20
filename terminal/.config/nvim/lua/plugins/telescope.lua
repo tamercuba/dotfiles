@@ -14,6 +14,12 @@ return {
 					layout_config = {
 						preview_width = 0.3,
 					},
+					file_ignore_patterns = {
+						"node_modules/",
+						".git/",
+						"%.lock",
+						"target/",
+					},
 				},
 			})
 		end,
