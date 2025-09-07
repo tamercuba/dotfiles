@@ -155,7 +155,7 @@
       "float" : 0
     },
     "screenEdgeGapTop" : {
-      "float" : 32
+      "float" : 0
     },
     "screenEdgeGapTopNotch" : {
       "float" : 0
@@ -320,7 +320,7 @@
       "keyCode" : 11,
       "modifierFlags" : 786432
     },
-    "topHalf" : {
+    "" : {
       "keyCode" : 126,
       "modifierFlags" : 786432
     },
