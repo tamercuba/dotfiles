@@ -182,7 +182,7 @@ mode "$mode_resize" {
         bindsym q mode "default"
 }
 bindsym $mod+shift+Delete exec --no-startup-id $blurlock
-bindsym $mod+F12 exec flameshot gui
+bindsym $mod+shift+s exec flameshot gui
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
