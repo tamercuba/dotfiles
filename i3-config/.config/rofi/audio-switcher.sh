@@ -15,10 +15,10 @@ get_sinks() {
         # Devices aliases
         case "$description" in
             *"Starship/Matisse"*)
-                description="Speakers"
+                description="Headphone"
                 ;;
-            *"HyperX"*)
-                description="HyperX Headphone"
+            *"PCM2902"*)
+                description="Speakers"
                 ;;
         esac
         
@@ -46,11 +46,11 @@ else
     selected_clean=$(echo "$selected" | sed 's/^[●○] //')
     
     case "$selected_clean" in
-        "Speakers")
+        "Headphone")
             search_term="Starship/Matisse"
             ;;
-        "HyperX Headphone")
-            search_term="HyperX"
+        "Speakers")
+            search_term="PCM2902"
             ;;
         *)
             search_term="$selected_clean"
