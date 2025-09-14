@@ -3,9 +3,12 @@ vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = true
 vim.g["conjure#client#clojure#nrepl#eval#pretty_print"] = true
 vim.g["conjure#extract#tree_sitter#enabled"] = true
 vim.g["conjure#client#clojure#nrepl#test#runner"] = "clojure"
-
 vim.g["conjure#completion#enabled"] = true
 vim.g["conjure#completion#omnifunc"] = "v:lua.require'blink.cmp'.omnifunc"
+vim.g["conjure#mapping#doc_word"] = false -- Let LSP handle K
+vim.g["conjure#log#hud#enabled"] = false -- Use buffer, not popup
+vim.g["conjure#mapping#log_vsplit"] = false
+vim.g["conjure#mapping#log_tab"] = false
 
 vim.api.nvim_create_augroup("LeinBackground", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {

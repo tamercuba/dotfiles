@@ -4,6 +4,8 @@ return {
 	root_markers = {
 		"project.clj",
 		"deps.edn",
+		"build.boot",
+		"shadow-cljs.edn",
 		"bb.edn",
 		".git",
 	},
