@@ -63,7 +63,8 @@ alt-shift-equal = 'resize smart +50'
 alt-v = 'layout tiles horizontal vertical'
 alt-shift-v = 'layout accordion horizontal vertical'
 
-alt-shift-s = 'exec-and-forget screencapture -i -c'
+alt-shift-s = 'exec-and-forget usr/sbin/screencapture -i ~/Pictures/ss/ss-$(date +%Y%m%d-%H%M%S).png'
+
 
 [workspace-to-monitor-force-assignment]
 1 = 1

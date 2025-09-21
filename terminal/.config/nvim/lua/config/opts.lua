@@ -13,6 +13,12 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.breakindent = true
 vim.opt.wrap = true
+vim.opt.linebreak = true       -- only wrap at characters in 'breakat'
+vim.opt.breakindent = true
+vim.opt.breakindentopt = { 'shift:2', 'sbr' }  -- indent wrapped parts + use showbreak
+vim.opt.showbreak = '↳ '       -- what to display at the start of a wrapped screen line
+vim.opt.sidescrolloff = 8
+vim.opt.display:append('lastline')
 
 vim.cmd("set number")
 vim.cmd("set colorcolumn=80,120")

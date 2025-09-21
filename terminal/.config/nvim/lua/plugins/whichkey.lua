@@ -77,39 +77,23 @@ return {
 			pattern = { "clojure", "fennel", "scheme" },
 			callback = function()
 				wk.add({
-					{ "<localleader>", group = "󱗘 Structural Edit" },
-					{ "<localleader>s", desc = "Slurp forwards" },
-					{ "<localleader>b", desc = "Barf forwards" },
-					{ "<localleader>r", desc = "Raise form" },
-					{ "<localleader>@", desc = "Splice (unwrap)" },
+					{ "<localleader>p", group = "󱗘 Paredit" },
 
-					-- Navigation
-					{ "<localleader>j", desc = "󰒕 Next element" },
-					{ "<localleader>k", desc = "󰒖 Prev element" },
-					{ "<localleader>h", desc = "󰒖 Prev form end" },
-					{ "<localleader>l", desc = "󰒕 Next form end" },
-					{ "<localleader>u", desc = "󰜷 Parent form start" },
-					{ "<localleader>d", desc = "󰜮 Parent form end" },
+					{ "<localleader>ps", desc = "Slurp forwards" },
+					{ "<localleader>pS", desc = "Slurp backwards" },
 
-					-- REPL evaluation
-					{ "<localleader>e", group = "󰐊 Evaluate" },
-					{ "<localleader>ee", desc = "Evaluate form" },
-					{ "<localleader>er", desc = "Evaluate root form" },
-					{ "<localleader>eb", desc = "Evaluate buffer" },
-					{ "<localleader>ew", desc = "Evaluate word" },
+					{ "<localleader>pb", desc = "Barf forwards" },
+					{ "<localleader>pB", desc = "Barf backwards" },
 
-					-- REPL log management
-					{ "<localleader>l", group = "󰦔 REPL Log" },
-					{ "<localleader>lt", desc = "Open log in tab" },
-					{ "<localleader>ls", desc = "Open log in split" },
-					{ "<localleader>lr", desc = "Reset REPL" },
+					{ "<localleader>pf", desc = "Select current form" },
+					{ "<localleader>pF", desc = "Select form content" },
 
-					-- Connection management
-					{ "<localleader>c", group = "󰌘 Connection" },
-					{ "<localleader>cf", desc = "Connect to REPL" },
-					{ "<localleader>cd", desc = "Disconnect" },
+					{ "<localleader>pn", desc = "New empty form ()" },
+					{ "<localleader>pw", desc = "Wrap symbol with ()" },
+					{ "<localleader>pW", desc = "Wrap form with ()" },
 				})
 			end,
 		})
 	end,
 }
+

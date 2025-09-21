@@ -1,57 +1,72 @@
 return {
-	{
-		"julienvincent/nvim-paredit",
-		ft = { "clojure", "fennel", "scheme" },
-		config = function()
-			local paredit = require("nvim-paredit")
-			paredit.setup({
-				keys = {
-					[">)"] = false,
-					["<)"] = false,
-					[">("] = false,
-					["<("] = false,
-					["<localleader>o"] = false,
+  {
+    "julienvincent/nvim-paredit",
+    ft = { "clojure", "fennel", "scheme" },
+    config = function()
+      local paredit = require("nvim-paredit")
+      paredit.setup({
+        keys = {
+          -- Slurps
+          ["<localleader>ps"] = { paredit.api.slurp_forwards, "Slurp forwards" },
+            ["<localleader>pS"] = { paredit.api.slurp_backwards, "Slurp backwards" },
 
-					-- CORE EDITING (your essentials)
-					["<localleader>s"] = { paredit.api.slurp_forwards, "Slurp forwards" },
-					["<localleader>b"] = { paredit.api.barf_forwards, "Barf forwards" },
-					["<localleader>r"] = { paredit.api.raise_form, "Raise form" },
-					["<localleader>@"] = { paredit.unwrap.unwrap_form_under_cursor, "Splice" },
+            -- Barfs
+            ["<localleader>pb"] = { paredit.api.barf_forwards, "Barf forwards" },
+            ["<localleader>pB"] = { paredit.api.barf_backwards, "Barf backwards" },
 
-					-- STRUCTURAL NAVIGATION (new!)
-					["<localleader>j"] = { paredit.api.move_to_next_element, "Next element" },
-					["<localleader>k"] = { paredit.api.move_to_prev_element, "Prev element" },
-					["<localleader>l"] = { paredit.api.move_to_next_element_tail, "Next form end" },
-					["<localleader>h"] = { paredit.api.move_to_prev_element_tail, "Prev form end" },
-					["<localleader>u"] = { paredit.api.move_to_parent_form_start, "Parent form start" },
-					["<localleader>d"] = { paredit.api.move_to_parent_form_end, "Parent form end" },
+            -- Select current form / content of current form
+            ["<localleader>pf"] = {
+              function()
+                vim.cmd("normal! va(")
+              end,
+              "Select current form",
+            },
+            ["<localleader>pF"] = {
+              function()
+                vim.cmd("normal! vi(")
+              end,
+              "Select form content",
+            },
 
-					-- TODO
-					-- ["<localleader>S"] = { paredit.api.slurp_backwards, "Slurp backwards" },
-					-- ["<localleader>B"] = { paredit.api.barf_backwards, "Barf backwards" },
-					-- ["<localleader>e"] = { paredit.api.drag_element_forwards, "Move element right" },
-					-- ["<localleader>E"] = { paredit.api.drag_element_backwards, "Move element left" },
-					-- ["<localleader>f"] = { paredit.api.drag_form_forwards, "Move form right" },
-					-- ["<localleader>F"] = { paredit.api.drag_form_backwards, "Move form left" },
-					cursor_behaviour = "auto", -- "remain", "follow", "auto"
-					indent = {
-						enabled = true,
-						indentor = require("nvim-paredit.indentation.native").indentor,
-					},
-					dragging = {
-						auto_drag_pairs = true,
-					},
-				},
-			})
-		end,
-	},
+            -- New empty form ()
+            ["<localleader>pn"] = {
+              function()
+                local keys = vim.api.nvim_replace_termcodes("i()", true, false, true)
+                vim.api.nvim_feedkeys(keys, "n", false)
+                local left = vim.api.nvim_replace_termcodes("<Left>", true, false, true)
+                vim.api.nvim_feedkeys(left, "n", false)
+              end,
+              "New empty form",
+            },
 
-	{
-		"kylechui/nvim-surround",
-		event = "VeryLazy",
-		config = function()
-			return require("nvim-surround").setup()
-		end,
-	},
-	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
+            -- Wrap current symbol with ()
+            ["<localleader>pw"] = {
+              function()
+                vim.cmd("normal! ysiw(")
+              end,
+              "Wrap symbol with ()",
+            },
+
+            -- Wrap current form with ()
+            ["<localleader>pW"] = {
+              function()
+                vim.cmd("normal! va(")
+                local keys = vim.api.nvim_replace_termcodes("S(", true, false, true)
+                vim.api.nvim_feedkeys(keys, "x", false)
+              end,
+              "Wrap form with ()",
+            },
+        },
+      })
+    end,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function()
+      return require("nvim-surround").setup()
+    end,
+  },
+  { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 }
