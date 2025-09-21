@@ -10,6 +10,15 @@ vim.g["conjure#log#hud#enabled"] = false -- Use buffer, not popup
 vim.g["conjure#mapping#log_vsplit"] = false
 vim.g["conjure#mapping#log_tab"] = false
 
+vim.g["conjure#mapping#session_select"] = false
+vim.g["conjure#mapping#session_prev"] = false
+vim.g["conjure#mapping#session_next"] = false
+vim.g["conjure#mapping#session_list"] = false
+vim.g["conjure#mapping#session_close"] = false
+vim.g["conjure#mapping#session_close_all"] = false
+vim.g["conjure#mapping#session_fresh"] = false
+vim.g["conjure#mapping#session_clone"] = false
+
 vim.api.nvim_create_augroup("LeinBackground", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = "LeinBackground",

@@ -5,7 +5,6 @@ return {
 		local wk = require("which-key")
 		wk.setup({
 			preset = "modern",
-			delay = 500,
 			filter = function(mapping)
 				return mapping.desc and mapping.desc ~= ""
 			end,
