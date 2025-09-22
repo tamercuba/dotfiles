@@ -62,3 +62,52 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_user_command("ConjureGo", function()
 	vim.cmd("ConjureConnect")
 end, { desc = "Conecta o Conjure ao REPL" })
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+	pattern = "*.clj",
+	callback = function(args)
+		local buf = args.buf
+		if vim.api.nvim_buf_line_count(buf) > 1 then
+			return
+		end
+		local file = vim.api.nvim_buf_get_name(buf)
+		if file == "" then
+			return
+		end
+
+		-- Find project root (deps.edn or project.clj)
+		local dir = vim.fs.dirname(file)
+		local marker = vim.fs.find({ "deps.edn", "project.clj" }, { upward = true, path = dir, type = "file" })[1]
+		if not marker then
+			return
+		end
+		local root = vim.fs.dirname(marker)
+
+		-- Only derive if under a src/ or test/ directory
+		local rel = file:sub(#root + 2) -- path relative to root
+		local subpath = rel:match("^src/(.+)") or rel:match("^test/(.+)")
+		if not subpath then
+			return
+		end
+		if not subpath:match("%.clj$") then
+			return
+		end
+		subpath = subpath:gsub("%.clj$", "")
+
+		-- Convert path to namespace: / -> ., underscores -> hyphens
+		local ns = subpath:gsub("/", "."):gsub("_", "-")
+		-- Avoid leading dots
+		ns = ns:gsub("^%.*", "")
+		if ns == "" then
+			return
+		end
+
+		-- Insert if buffer empty
+		local existing = vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1]
+		if existing and existing ~= "" then
+			return
+		end
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "(ns " .. ns .. ")", "" })
+		vim.api.nvim_buf_set_mark(buf, "n", 1, 1, {})
+	end,
+})
