@@ -18,26 +18,3 @@ vim.g["conjure#mapping#session_close"] = false
 vim.g["conjure#mapping#session_close_all"] = false
 vim.g["conjure#mapping#session_fresh"] = false
 vim.g["conjure#mapping#session_clone"] = false
-
-vim.api.nvim_create_augroup("LeinBackground", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	group = "LeinBackground",
-	pattern = "clojure",
-	callback = function()
-		-- Verificar se é projeto Lein
-		if vim.fn.filereadable("project.clj") == 1 then
-			-- Verificar se já não está rodando checando o arquivo .nrepl-port
-			if vim.fn.filereadable(".nrepl-port") == 0 then
-				-- Executar Lein criando explicitamente o arquivo .nrepl-port
-				vim.fn.jobstart("cd " .. vim.fn.getcwd() .. " && lein repl :headless", {
-					detach = true,
-					on_exit = function(_, code)
-						if code ~= 0 then
-							print("Erro ao iniciar Lein REPL")
-						end
-					end,
-				})
-			end
-		end
-	end,
-})

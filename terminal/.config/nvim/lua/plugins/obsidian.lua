@@ -1,37 +1,39 @@
 return {
 	"obsidian-nvim/obsidian.nvim",
-	version = "*", -- recommended, use latest release instead of latest commit
+	version = "*",
 	event = {
-		"BufReadPre ~/projects/obsidian-vault/*.md",
-		"BufNewFile ~/projects/obsidian-vault/*.md",
+		"BufReadPre " .. vim.fn.expand("~") .. "/projects/obsidian-vault/*.md",
+		"BufNewFile " .. vim.fn.expand("~") .. "/projects/obsidian-vault/*.md",
 	},
-	---@module 'obsidian'
-	---@type obsidian.config
-	opts = {
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/projects/obsidian-vault",
+	config = function()
+		require("obsidian").setup({
+			workspaces = {
+				{
+					name = "personal",
+					path = "~/projects/obsidian-vault",
+				},
 			},
-		},
-		daily_notes = {
-			folder = "Nubank/Diarios",
-			date_format = "%d-%m-%y",
-			default_tags = { "daily-notes" },
-			template = "Daily",
-		},
+			daily_notes = {
+				folder = "Nubank/Diarios",
+				date_format = "%d-%m-%y",
+				default_tags = { "daily-notes" },
+				template = "Daily",
+			},
 
-		templates = {
-			folder = "Templates",
-			date_format = "%d-%m-%y",
-			time_format = "%H:%M",
-		},
+			templates = {
+				folder = "Templates",
+				date_format = "%d-%m-%y",
+				time_format = "%H:%M",
+			},
 
-		completion = {
-			nvim_cmp = false,
-			blink = true,
-			min_chars = 2,
-			create_new = true,
-		},
-	},
+			completion = {
+				nvim_cmp = false,
+				blink = true,
+				min_chars = 2,
+				create_new = true,
+			},
+			legacy_commands = false,
+		})
+		vim.keymap.set("n", "<leader>o", ":Obsidian<CR>", { desc = "[O]bsidian", silent = true })
+	end,
 }
