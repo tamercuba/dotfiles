@@ -6,7 +6,7 @@ vim.g["conjure#client#clojure#nrepl#test#runner"] = "clojure"
 vim.g["conjure#completion#enabled"] = true
 vim.g["conjure#completion#omnifunc"] = "v:lua.require'blink.cmp'.omnifunc"
 vim.g["conjure#mapping#doc_word"] = false -- Let LSP handle K
-vim.g["conjure#log#hud#enabled"] = false -- Use buffer, not popup
+vim.g["conjure#log#hud#enabled"] = true -- Use buffer, not popup
 vim.g["conjure#mapping#log_vsplit"] = false
 vim.g["conjure#mapping#log_tab"] = false
 
@@ -18,3 +18,5 @@ vim.g["conjure#mapping#session_close"] = false
 vim.g["conjure#mapping#session_close_all"] = false
 vim.g["conjure#mapping#session_fresh"] = false
 vim.g["conjure#mapping#session_clone"] = false
+vim.g["conjure#client#clojure#nrepl#test#current_form_names"] =
+	{ "deftest", "defflow", "defflow-i18n", "defspec", "facts" }
