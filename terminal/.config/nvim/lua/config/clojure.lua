@@ -20,3 +20,12 @@ vim.g["conjure#mapping#session_fresh"] = false
 vim.g["conjure#mapping#session_clone"] = false
 vim.g["conjure#client#clojure#nrepl#test#current_form_names"] =
 	{ "deftest", "defflow", "defflow-i18n", "defspec", "facts" }
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = { "conjure-log-*" }, -- Conjure REPL buffer pattern
+	callback = function()
+		local total_cols = vim.o.columns
+		local target_width = math.floor(total_cols * 0.3)
+		vim.cmd("vertical resize " .. target_width)
+	end,
+})
