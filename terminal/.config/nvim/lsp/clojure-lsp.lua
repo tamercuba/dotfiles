@@ -23,12 +23,6 @@ return {
 				type = "clj",
 				autoStart = true,
 			},
-			-- project = {
-			-- 	classpath = {
-			-- 		command = "lein",
-			-- 		args = { "classpath" },
-			-- 	},
-			-- },
 		},
 	},
 	single_file_support = true,
