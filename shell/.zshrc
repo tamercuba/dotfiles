@@ -20,7 +20,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export XCOMPOSEFILE=~/.XCompose
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.emacs.d/bin/:$PATH"
 
 if [ -z "$DISPLAY" ]; then
     DISPLAY=$(ps aux | grep "Xorg :" | grep -v grep | grep $USER | awk '{for(i=1;i<=NF;i++) if($i ~ /^:/) print $i}' | head -1)
