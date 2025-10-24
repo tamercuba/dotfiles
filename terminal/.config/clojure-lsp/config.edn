@@ -1,4 +1,23 @@
 {:source-paths #{"src" "test"}
  :dependency-scheme "jar"
+ :ignore-paths #{"target"
+                 ".lsp"
+                 ".lsp/.cache"
+                 ".lsp/.cache/.stubs"
+                 ".cpcache"
+                 ".git"
+                 "node_modules"
+                 "out"}
+ :format {:provider "cljfmt"
+          :cljfmt {:indentation? true
+                   :remove-surrounding-whitespace? true}}
+ :linters {:clj-kondo {:level :warning}}
+ :lint-project-files-after-startup? true
+ :lint-project-files-on-startup? false
+ :completion {:snippets? true
+              :add-used-ns-to-new-require? true}
+ :documentation {:enabled true}
+ :hover {:enabled true}
+ :show-docs-arity-on-same-line? true
  :project-specs [{:project-path "project.clj"
                   :classpath-cmd ["lein" "classpath"]}]}

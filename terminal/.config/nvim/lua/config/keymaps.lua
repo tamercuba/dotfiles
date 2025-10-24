@@ -43,12 +43,12 @@ vim.keymap.set("n", "<c-k>", ":wincmd k<CR>", { desc = "Go to bottom table" })
 -- Resize tabs
 vim.keymap.set("n", "<Leader>prl", function()
 	local count = vim.v.count1
-	vim.cmd("vertical resize +" .. (5 * count))
+	vim.cmd("vertical resize -" .. (5 * count))
 end, { desc = "Increase window width" })
 
 vim.keymap.set("n", "<Leader>prh", function()
 	local count = vim.v.count1
-	vim.cmd("vertical resize -" .. (5 * count))
+	vim.cmd("vertical resize +" .. (5 * count))
 end, { desc = "Decrease window width" })
 
 vim.keymap.set("n", "<Leader>prk", function()
