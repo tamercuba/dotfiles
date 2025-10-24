@@ -7,6 +7,10 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin:/bin:/usr/bin"
 
+
+# Datomic
+export PATH="$HOME/.datomic/datomic-pro-1.0.7394/:$HOME/.datomic/datomic-pro-1.0.7394/bin:$PATH"
+
 export PYTHONBREAKPOINT=ipdb.set_trace
 export PYENV_ROOT="$HOME/.pyenv"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
