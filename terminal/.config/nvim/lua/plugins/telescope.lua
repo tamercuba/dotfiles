@@ -5,16 +5,35 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
+			local actions = require("telescope.actions")
+			
+			-- Find files without preview - better for large codebases
+			vim.keymap.set("n", "<leader>ff", function()
+				builtin.find_files({
+					previewer = false,
+					layout_strategy = "vertical",
+					layout_config = {
+						width = 0.9,
+						height = 0.9,
+					},
+				})
+			end, { desc = "[F]ind [F]iles" })
+			
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffer" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [Help]" })
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[F]ind [R]eferences" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+			
 			require("telescope").setup({
 				defaults = {
 					layout_config = {
-						preview_width = 0.3,
+						horizontal = {
+							preview_width = 0.3,
+						},
+						vertical = {
+							preview_width = 0.3,
+						},
 					},
 					file_ignore_patterns = {
 						"node_modules/",

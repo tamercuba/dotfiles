@@ -9,7 +9,6 @@ return {
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			sync_install = true,
-			ignore_install = { "javascript" },
 			modules = {},
 			highlight = {
 				enable = true,
@@ -23,6 +22,7 @@ return {
 				"clojure",
 				"html",
 				"javascript",
+				"typescript",
 				"json",
 				"lua",
 				"luadoc",

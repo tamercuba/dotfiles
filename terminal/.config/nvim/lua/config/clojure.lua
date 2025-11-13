@@ -10,6 +10,11 @@ vim.g["conjure#log#hud#enabled"] = false -- Use buffer, not popup
 vim.g["conjure#mapping#log_vsplit"] = false
 vim.g["conjure#mapping#log_tab"] = false
 
+-- Enable refresh operations with CIDER middleware
+vim.g["conjure#client#clojure#nrepl#refresh#backend"] = "clojure.tools.namespace"
+vim.g["conjure#client#clojure#nrepl#refresh#before"] = nil
+vim.g["conjure#client#clojure#nrepl#refresh#after"] = nil
+
 vim.g["conjure#mapping#session_select"] = false
 vim.g["conjure#mapping#session_prev"] = false
 vim.g["conjure#mapping#session_next"] = false

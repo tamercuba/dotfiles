@@ -111,6 +111,18 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	callback = insert_clojure_ns_if_needed,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.clj", "*.cljs", "*.cljc", "*.edn" },
+	callback = function()
+		local total_lines = vim.api.nvim_buf_line_count(0)
+		local last_nonblank = vim.fn.prevnonblank(total_lines)
+		
+		if last_nonblank < total_lines - 1 then
+			vim.api.nvim_buf_set_lines(0, last_nonblank + 1, total_lines, false, {})
+		end
+	end,
+})
+
 -- Setup Avante after Neovim fully loads (essential because lazy.nvim config isn't being called)
 vim.api.nvim_create_autocmd("VimEnter", {
 	group = vim.api.nvim_create_augroup("avante-setup", { clear = true }),
