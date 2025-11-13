@@ -27,6 +27,10 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
+# Cycle through windows in accordion/tabbed layout (like i3)
+alt-tab = 'focus right'
+alt-shift-tab = 'focus left'
+
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'  
@@ -60,8 +64,15 @@ alt-shift-q = 'close'
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
+# Quick resize for mobile emulator - set to mobile-friendly width
+alt-m = 'resize width 450'
+alt-shift-m = 'resize width 550'
+
 alt-v = 'layout tiles horizontal vertical'
 alt-shift-v = 'layout accordion horizontal vertical'
+
+# Quick toggle to accordion for Chrome windows (like i3 tabbed)
+alt-a = 'layout accordion horizontal'
 
 alt-shift-s = 'exec-and-forget usr/sbin/screencapture -i ~/Pictures/ss/ss-$(date +%Y%m%d-%H%M%S).png'
 
@@ -94,3 +105,7 @@ run = 'move-node-to-workspace 6'
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace 0'
+
+[[on-window-detected]]
+if.app-id = 'nubank'
+run = 'layout tiling'
