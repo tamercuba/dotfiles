@@ -1,0 +1,37 @@
+-- Example REPL Configuration File
+-- Copy this file and rename it to something like "my_projects.repl.lua"
+-- IMPORTANT: Files MUST be named *.repl.lua to be automatically loaded
+
+return {
+	-- Each key is the absolute path to your project root
+	["/path/to/your/project"] = {
+		-- Each entry has a display name as key
+		["Project Root REPL"] = {
+			-- The command to run (will be executed after cd to cwd)
+			command = "lein repl",
+			-- The working directory where the command should run
+			cwd = "/path/to/your/project",
+		},
+		["Module A REPL"] = {
+			command = "lein repl",
+			cwd = "/path/to/your/project/modules/module_a",
+		},
+		["Module B REPL"] = {
+			command = "python -m venv .venv && source .venv/bin/activate && python",
+			cwd = "/path/to/your/project/modules/module_b",
+		},
+	},
+
+	-- You can have multiple projects in the same file
+	["/path/to/another/project"] = {
+		["Node REPL"] = {
+			command = "node",
+			cwd = "/path/to/another/project",
+		},
+		["Backend REPL"] = {
+			command = "lein repl",
+			cwd = "/path/to/another/project/backend",
+		},
+	},
+}
+

@@ -2,3 +2,6 @@
 .clj-kondo/
 **/.nrepl-port
 .cursor/
+
+# Company-specific REPL configurations
+terminal/.config/nvim/lua/config/repl_picker/company.repl.lua

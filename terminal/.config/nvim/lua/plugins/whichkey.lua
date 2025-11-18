@@ -91,6 +91,10 @@ return {
 					{ "<localleader>pn", desc = "New empty form ()" },
 					{ "<localleader>pw", desc = "Wrap symbol with ()" },
 					{ "<localleader>pW", desc = "Wrap form with ()" },
+
+					{ "<localleader>r", group = " REPL" },
+					{ "<localleader>rp", desc = "Restart REPL" },
+					{ "<localleader>mr", desc = "REPL Picker" },
 				})
 			end,
 		})
