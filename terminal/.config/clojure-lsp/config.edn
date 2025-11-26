@@ -20,4 +20,30 @@
  :hover {:enabled true}
  :show-docs-arity-on-same-line? true
  :project-specs [{:project-path "project.clj"
-                  :classpath-cmd ["lein" "classpath"]}]}
+                  :classpath-cmd ["lein" "classpath"]}]
+ 
+ ;; Archstone/Catalyst custom macros for code actions
+ :additional-snippets [{:name "Extract to |fn"
+                        :detail "Extract selection to catalyst |fn"
+                        :snippet "(|fn [$1] $0)"}
+                       {:name "Extract to |defn"
+                        :detail "Extract selection to catalyst |defn"
+                        :snippet "(|defn $1 [$2] $0)"}
+                       {:name "Introduce |let"
+                        :detail "Introduce catalyst |let binding"
+                        :snippet "(|let [$1 $2] $0)"}
+                       {:name "|fn"
+                        :detail "Catalyst anonymous function"
+                        :snippet "(|fn [$1] $0)"}
+                       {:name "|let"
+                        :detail "Catalyst let binding"
+                        :snippet "(|let [$1 $2] $0)"}
+                       {:name "|defn"
+                        :detail "Catalyst function definition"
+                        :snippet "(|defn $1 [$2] $0)"}
+                       {:name "|if"
+                        :detail "Catalyst if expression"
+                        :snippet "(|if $1 $2 $3)"}
+                       {:name "|cond"
+                        :detail "Catalyst cond expression"
+                        :snippet "(|cond $1 $2 :else $0)"}]}

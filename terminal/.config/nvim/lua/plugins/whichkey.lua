@@ -16,6 +16,7 @@ return {
 			{ "<leader>ff", desc = "Find Files" },
 			{ "<leader>fg", desc = "Live Grep" },
 			{ "<leader>fb", desc = "Find Buffers" },
+			{ "<leader>fc", desc = "Find Conflicts" },
 			{ "<leader>fh", desc = "Find Help" },
 			{ "<leader>fn", desc = "New File" },
 

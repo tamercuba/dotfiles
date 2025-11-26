@@ -2,12 +2,14 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"Snikimonkd/telescope-git-conflicts.nvim",
+		},
 		config = function()
 			local builtin = require("telescope.builtin")
 			local actions = require("telescope.actions")
 			
-			-- Find files without preview - better for large codebases
 			vim.keymap.set("n", "<leader>ff", function()
 				builtin.find_files({
 					previewer = false,
@@ -24,6 +26,7 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [Help]" })
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[F]ind [R]eferences" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+			vim.keymap.set("n", "<leader>fc", "<cmd>Telescope conflicts<CR>", { desc = "[F]ind [C]onflicts" })
 			
 			require("telescope").setup({
 				defaults = {
@@ -43,6 +46,8 @@ return {
 					},
 				},
 			})
+			
+			require("telescope").load_extension("conflicts")
 		end,
 	},
 	{

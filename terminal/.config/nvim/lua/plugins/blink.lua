@@ -1,17 +1,15 @@
--- Check if Avante is available (only on work machine with LITELLM_ENDPOINT set)
-local avante_available = os.getenv("LITELLM_ENDPOINT") ~= nil
 
 return {
 	{ "saghen/blink.compat", version = "*", lazy = true },
 	{
 		"saghen/blink.cmp",
 		version = "*",
-		dependencies = vim.list_extend({
+		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"PaterJason/cmp-conjure",
 			"mikavilpas/blink-ripgrep.nvim",
 			"L3MON4D3/LuaSnip",
-		}, avante_available and { "Kaiser-Yang/blink-cmp-avante" } or {}),
+		},
 		opts = {
 			keymap = {
 				["<C-j>"] = { "select_next", "fallback" },
@@ -58,22 +56,16 @@ return {
 			appearance = { use_nvim_cmp_as_default = true, nerd_font_variant = "mono" },
 			snippets = { preset = "luasnip" },
 			sources = {
-				default = vim.list_extend({
+				default = {
 					"lsp",
 					"path",
 					"snippets",
 					"buffer",
 					"conjure",
-				}, avante_available and { "avante" } or {}),
-				providers = vim.tbl_extend("force", {
+				},
+				providers = {
 					conjure = { name = "conjure", module = "blink.compat.source", score_offset = -3 },
-				}, avante_available and {
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						score_offset = 100, -- Show avante items at the top
 					},
-				} or {}),
 			},
 		},
 		lazy = false,
