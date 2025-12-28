@@ -32,7 +32,7 @@ fi
 
 # Commands
 setxkbmap us -variant alt-intl &
-xrandr --output DP-0 --mode 1920x1080 --rate 144 &
+xrandr --output DP-2 --mode 1920x1080 --rate 144 &
 
 # NVIDIA Config
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
