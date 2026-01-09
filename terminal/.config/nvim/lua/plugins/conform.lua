@@ -37,6 +37,8 @@ local config = { -- Autoformat
 			-- is found.
 			javascript = { "prettier" },
 			typescript = { "prettier" },
+			javascriptreact = { "prettier" },
+			typescriptreact = { "prettier" },
 		},
 	},
 }

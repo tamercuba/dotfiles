@@ -27,6 +27,13 @@ return {
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[F]ind [R]eferences" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 			vim.keymap.set("n", "<leader>fc", "<cmd>Telescope conflicts<CR>", { desc = "[F]ind [C]onflicts" })
+			vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus" })
+			vim.keymap.set("n", "<leader>fu", function()
+				builtin.find_files({
+					find_command = { "git", "diff", "--name-only", "--diff-filter=d", "--relative" },
+					prompt_title = "Unstaged Changes",
+				})
+			end, { desc = "[F]ind [U]nstaged" })
 			
 			require("telescope").setup({
 				defaults = {

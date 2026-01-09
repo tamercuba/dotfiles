@@ -23,6 +23,7 @@ return {
 				"html",
 				"javascript",
 				"typescript",
+				"tsx",
 				"json",
 				"lua",
 				"luadoc",

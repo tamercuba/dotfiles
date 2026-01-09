@@ -43,5 +43,9 @@ return {
 			},
 		})
 		vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "[G]it [P]review Hunk" })
+		vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "[G]it [R]eset Hunk" })
+		vim.keymap.set("n", "<leader>ghn", ":Gitsigns next_hunk<CR>", { desc = "[G]it [N]ext Hunk" })
+		vim.keymap.set("n", "<leader>ghp", ":Gitsigns prev_hunk<CR>", { desc = "[G]it [P]revious Hunk" })
+		vim.keymap.set("n", "<leader>gha", ":Gitsigns stage_hunk<CR>", { desc = "[G]it [H]unk [A]dd"})
 	end,
 }
