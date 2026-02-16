@@ -56,73 +56,96 @@ tooltip label {
     color: @text;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd {
-    padding: 0px 10px;
-    margin: 5px 0px;
+#custom-clock {
+    padding: 0px 15px;
+    margin: 5px 10px;
     margin-top: 10px;
     border: 0px;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 15px;
     background: @surface0;
-    color: @text;
-}
-
-#clock {
-    color: @blue;
-    background: @surface0;
-    border-radius: 0px 15px 15px 0px;
-    margin-right: 10px;
-}
-
-#battery {
-    color: @green;
-    border-radius: 0 15px 15px 0;
-}
-
-#battery.charging {
-    color: @green;
-}
-
-#battery.warning:not(.charging) {
-    background-color: @red;
-    color: @base;
-}
-
-#network {
-    color: @flamingo;
-    border-radius: 15px 0px 0px 15px;
-    margin-left: 10px;
+    color: @sapphire;
 }
 
 #pulseaudio {
-    color: @yellow;
+    padding: 0px 10px;
+    margin: 5px 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px;
+    background: @surface0;
+    color: @sapphire;
 }
 
 #pulseaudio.muted {
     color: @red;
 }
 
-#tray {
-    border-radius: 15px;
-    margin-right: 10px;
+#temperature.cpu {
+    padding: 0px 10px;
+    margin: 5px 0px 5px 5px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px 0px 0px 15px;
+    background: @surface0;
+    color: @peach;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+#cpu {
+    padding: 0px 10px;
+    margin: 5px 5px 5px 0px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    background: @surface0;
+    color: @peach;
 }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
+#custom-gpu_temp {
+    padding: 0px 10px;
+    margin: 5px 0px 5px 5px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px 0px 0px 15px;
+    background: @surface0;
+    color: @green;
 }
+
+#custom-gpu_usage {
+    padding: 0px 10px;
+    margin: 5px 5px 5px 0px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    background: @surface0;
+    color: @green;
+}
+
+#disk.nvme {
+    padding: 0px 10px;
+    margin: 5px 0px 5px 5px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px 0px 0px 15px;
+    background: @surface0;
+    color: @sapphire;
+}
+
+#disk.ssd {
+    padding: 0px 10px;
+    margin: 5px 10px 5px 0px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 0px 15px 15px 0px;
+    background: @surface0;
+    color: @sapphire;
+}
+
