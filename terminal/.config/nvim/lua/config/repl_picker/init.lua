@@ -38,8 +38,14 @@ local function find_project_root()
 	return nil
 end
 
+M.projects_dir = os.getenv("PROJECTS")
+
 local function get_current_project_repls()
 	local project_root = find_project_root()
+
+	if project_root and M.projects_dir then
+		project_root = string.gsub(project_root, M.projects_dir, "")
+	end
 
 	if project_root and M.project_repls[project_root] then
 		return M.project_repls[project_root], project_root
@@ -56,7 +62,16 @@ end
 
 local function start_repl_in_tmux(display_name, repl_config)
 	local command = repl_config.command
+
+
+
 	local cwd = repl_config.cwd
+	if M.projects_dir then
+		cwd = M.projects_dir .. cwd
+		vim.print("start_repl_in_tmux: " .. cwd)
+	end
+
+
 	local full_command = string.format("cd %s && %s", vim.fn.shellescape(cwd), command)
 
 	local in_tmux = vim.fn.system("tmux display-message -p '#{session_name}' 2>/dev/null")
@@ -123,37 +138,37 @@ function M.select_and_start_repl()
 	end)
 
 	pickers
-		.new({}, {
-			prompt_title = "REPL Picker",
-			finder = finders.new_table({
-				results = repl_list,
-				entry_maker = function(entry)
-					return {
-						value = entry,
-						display = entry.display,
-						ordinal = entry.display,
-					}
+			.new({}, {
+				prompt_title = "REPL Picker",
+				finder = finders.new_table({
+					results = repl_list,
+					entry_maker = function(entry)
+						return {
+							value = entry,
+							display = entry.display,
+							ordinal = entry.display,
+						}
+					end,
+				}),
+				sorter = conf.generic_sorter({}),
+				layout_strategy = "center",
+				layout_config = {
+					height = 0.4,
+					width = 0.5,
+					prompt_position = "top",
+				},
+				attach_mappings = function(prompt_bufnr, map)
+					actions.select_default:replace(function()
+						actions.close(prompt_bufnr)
+						local selection = action_state.get_selected_entry()
+						if selection then
+							start_repl_in_tmux(selection.value.display, selection.value.config)
+						end
+					end)
+					return true
 				end,
-			}),
-			sorter = conf.generic_sorter({}),
-			layout_strategy = "center",
-			layout_config = {
-				height = 0.4, 
-				width = 0.5,
-				prompt_position = "top",
-			},
-			attach_mappings = function(prompt_bufnr, map)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
-					local selection = action_state.get_selected_entry()
-					if selection then
-						start_repl_in_tmux(selection.value.display, selection.value.config)
-					end
-				end)
-				return true
-			end,
-		})
-		:find()
+			})
+			:find()
 end
 
 function M.setup(opts)
@@ -181,4 +196,3 @@ M.setup({
 })
 
 return M
-

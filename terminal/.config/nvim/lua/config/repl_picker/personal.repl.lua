@@ -1,8 +1,8 @@
 return {
-	["/mnt/storage/projects/crypto-backtester"] = {
+	["crypto-backtester"] = {
 		["REPL"] = {
 			command = "lein repl",
-			cwd = "/mnt/storage/projects/crypto-backtester",
+			cwd = "crypto-backtester",
 		},
 	},
 }
