@@ -1,0 +1,31 @@
+#!/bin/bash
+# Toggle default audio sink between USB speaker and onboard (headphones)
+# Moves all active streams to the new sink
+
+# Sink IDs (from wpctl status)
+SINK_USB=39    # PCM2902 Audio Codec
+SINK_ONBOARD=47 # Starship/Matisse (headphones)
+
+sinks=($SINK_USB $SINK_ONBOARD)
+
+# Find current default
+current_id=$(wpctl status | sed -n '/Sinks:/,/Sources:/p' | grep '\*' | grep -oP '\*\s*\K[0-9]+(?=\.)')
+
+# Pick the other one
+if [ "$current_id" = "$SINK_USB" ]; then
+    next_id=$SINK_ONBOARD
+else
+    next_id=$SINK_USB
+fi
+
+# Set new default sink
+wpctl set-default "$next_id"
+
+# Move all running audio streams to the new sink
+pactl list short sink-inputs 2>/dev/null | while read -r index _rest; do
+    pactl move-sink-input "$index" "$(pactl get-default-sink)" 2>/dev/null
+done
+
+# Notify
+new_name=$(wpctl inspect "$next_id" 2>/dev/null | grep 'node.description' | sed "s/.*= \"//;s/\"//")
+notify-send "Audio" "Switched to: $new_name" 2>/dev/null

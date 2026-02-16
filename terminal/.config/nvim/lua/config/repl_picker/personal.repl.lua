@@ -1,8 +1,8 @@
 return {
-	["/home/tamer/projects/vinculum"] = {
+	["/mnt/storage/projects/crypto-backtester"] = {
 		["REPL"] = {
-			command = "bb nrepl 1666",
-			cwd = "/home/tamer/projects/vinculum",
+			command = "lein repl",
+			cwd = "/mnt/storage/projects/crypto-backtester",
 		},
 	},
 }

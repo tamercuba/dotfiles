@@ -30,8 +30,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if
-			client
-			and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+				client
+				and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
 		then
 			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 
@@ -83,7 +83,8 @@ local function insert_clojure_ns_if_needed(args)
 	local root = vim.fs.dirname(marker)
 
 	local rel = file:sub(#root + 2) -- path relative to root
-	local subpath = rel:match("^src/(.+)") or rel:match("^test/(.+)")
+	local subpath = rel:match("^src/clj[sc]?/(.+)") or rel:match("^test/clj[sc]?/(.+)") or rel:match("^src/(.+)") or
+			rel:match("^test/(.+)")
 	if not subpath then
 		return
 	end
@@ -116,7 +117,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
 		local total_lines = vim.api.nvim_buf_line_count(0)
 		local last_nonblank = vim.fn.prevnonblank(total_lines)
-		
+
 		if last_nonblank < total_lines - 1 then
 			vim.api.nvim_buf_set_lines(0, last_nonblank + 1, total_lines, false, {})
 		end

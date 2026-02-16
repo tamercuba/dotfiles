@@ -27,6 +27,7 @@
         "format-muted": "婢",
         "format-icons": {
             "default": ["", "", ""]
-        }
+        },
+        "on-click": "~/.local/bin/toggle-audio-sink"
     }
 }
