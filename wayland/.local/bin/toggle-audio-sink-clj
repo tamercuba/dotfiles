@@ -1,0 +1,42 @@
+#!/usr/bin/env bb
+(require '[babashka.process :as p]
+         '[clojure.string :as s])
+
+(defn devices []
+  (-> (p/sh "wpctl" "status")
+      :out
+      s/split-lines
+      (->> (drop-while #(not (s/includes? % "Sinks:")))
+           (drop 1)
+           (take-while #(not (s/includes? % "Sources:")))
+           (keep #(re-find #"(\*?)\s+(\d+)\.\s+(.+?)\s+\[vol:" %))
+           (map (fn [[_ default? id name]]
+                  {:id id
+                   :name (s/trim name)
+                   :default? (not (s/blank? default?))}))
+           (sort-by :id))))
+(defn next-id [sound-devices]
+  (loop [next? false
+         targets sound-devices]
+    (if (= 0 (count targets))
+      (do
+        (println "No sound devices found")
+        0)
+      0)
+    (if (:default? (first sound-devices))
+      (if next?
+        (:id (first targets))
+        (recur true (rest targets)))
+      (do
+        (println "caiu")
+        (recur true (rest targets))))))
+
+(devices)
+;(next-id (devices))
+
+(defn- ^:private -main []
+  (let [sound-devices (devices)]
+    (println sound-devices)))
+
+(-main)
+
