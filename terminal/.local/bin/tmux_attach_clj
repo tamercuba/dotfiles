@@ -1,0 +1,20 @@
+#!/usr/bin/env bb
+(require '[babashka.process :as p]
+         '[clojure.string :as s])
+
+(defn- ^:private parse-session-names [sessions]
+  (map #(first (s/split % #":")) sessions))
+
+(defn ^:private main []
+  (let  [sessions (-> (p/sh "tmux" "ls")
+                      (:out)
+                      (s/split-lines)
+                      (parse-session-names))
+         sessions-len (count sessions)]
+    (if (= 0 sessions-len)
+      (p/exec "tmux" "new-session" "-s" "default")
+      (p/exec "tmux" "new-session" "-s" (str "default" sessions-len)))))
+
+(main)
+
+

@@ -1,5 +1,5 @@
 vim.g["conjure#client#clojure#nrepl#eval#auto_require"] = true
-vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = true
+vim.g["conjure#client#clojure#nrepl#connection#auto_repl#enabled"] = false
 vim.g["conjure#client#clojure#nrepl#eval#pretty_print"] = true
 
 vim.g["conjure#client#clojure#nrepl#connection#port_files"] = {

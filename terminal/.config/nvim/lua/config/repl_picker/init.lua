@@ -66,7 +66,7 @@ local function start_repl_in_tmux(display_name, repl_config)
 
 
 	local cwd = repl_config.cwd
-	if M.projects_dir then
+	if M.projects_dir and not cwd:match("^/") then
 		cwd = M.projects_dir .. cwd
 		vim.print("start_repl_in_tmux: " .. cwd)
 	end
@@ -108,11 +108,6 @@ end
 function M.select_and_start_repl()
 	local repls, project_root = get_current_project_repls()
 
-	if not repls then
-		vim.notify("No REPL configurations found for this project", vim.log.levels.WARN)
-		return
-	end
-
 	local has_telescope, telescope = pcall(require, "telescope.pickers")
 	if not has_telescope then
 		vim.notify("Telescope is not installed", vim.log.levels.ERROR)
@@ -126,10 +121,22 @@ function M.select_and_start_repl()
 	local action_state = require("telescope.actions.state")
 
 	local repl_list = {}
-	for display_name, config in pairs(repls) do
+
+	if repls then
+		for display_name, config in pairs(repls) do
+			table.insert(repl_list, {
+				display = display_name,
+				config = config,
+			})
+		end
+	else
+		-- No project REPLs configured — offer Babashka as fallback
 		table.insert(repl_list, {
-			display = display_name,
-			config = config,
+			display = "Babashka",
+			config = {
+				command = "bb-nrepl",
+				cwd = vim.fn.getcwd(),
+			},
 		})
 	end
 

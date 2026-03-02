@@ -1,0 +1,7 @@
+#!/usr/bin/env bb
+(require '[babashka.process :as p])
+
+(let [port (+ 10000 (rand-int 20000))]
+  (spit ".nrepl-port" port)
+  (println (str "Started nREPL server at localhost:" port))
+  (p/shell "bb" "nrepl-server" (str "localhost:" port)))
