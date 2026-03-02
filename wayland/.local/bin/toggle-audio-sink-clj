@@ -2,6 +2,22 @@
 (require '[babashka.process :as p]
          '[clojure.string :as s])
 
+(def aliases
+  [{:name  "PCM2902 Audio Codec Estéreo analógico"
+    :alias "Speakers"}
+   {:name  "Starship/Matisse HD Audio Controller Estéreo analógico"
+    :alias "Earphones"}
+   {:name  "AD107 High Definition Audio Controller Estéreo digital (HDMI)"
+    :alias "HDMI"}])
+
+(defn set-aliases [device]
+  (let [device-name  (:name device)
+        device-alias (-> (filter #(= device-name (:name %)) aliases)
+                         first
+                         :alias)
+        device-alias (if device-alias device-alias device-name)]
+    (assoc device :alias device-alias)))
+
 (defn devices []
   (-> (p/sh "wpctl" "status")
       :out
@@ -14,29 +30,48 @@
                   {:id id
                    :name (s/trim name)
                    :default? (not (s/blank? default?))}))
-           (sort-by :id))))
-(defn next-id [sound-devices]
-  (loop [next? false
-         targets sound-devices]
-    (if (= 0 (count targets))
-      (do
-        (println "No sound devices found")
-        0)
-      0)
-    (if (:default? (first sound-devices))
-      (if next?
-        (:id (first targets))
-        (recur true (rest targets)))
-      (do
-        (println "caiu")
-        (recur true (rest targets))))))
+           (sort-by :id)
+           (map set-aliases))))
 
-(devices)
-;(next-id (devices))
+(defn next-device [sound-devices]
+  (if (:default?  (last sound-devices))
+    (first sound-devices)
+    (loop [targets sound-devices
+           current (first targets)
+           next-   (second targets)]
+      (cond
+        (nil? current)      nil
+        (nil? next-)        current
+        (:default? current) next-
+        :else              (let [next-targets (rest targets)]
+                             (recur next-targets
+                                    (first next-targets)
+                                    (second next-targets)))))))
+
+(defn set-new-default-sink [device]
+  (p/process ["wpctl" "set-default" (:id device)] {:out :string}))
+
+(defn move-running-audio-streams []
+  (let [sink-inputs (->> (p/sh "pactl" "list" "short" "sink-inputs")
+                         :out
+                         s/split-lines
+                         (map #(first (s/split % #"\s+")))
+                         (filter seq))
+        default-sink (:out (p/sh "pactl" "get-default-sink"))]
+    (doseq [index sink-inputs]
+      (p/sh "pactl" "move-sink-input" index (s/trim default-sink)))))
+
+(defn notify [device]
+  (if (nil? device)
+    (p/sh "notify-send" "🔊 Audio" "Device not found")
+    (p/sh "notify-send" "🔊 Audio" (str "   " (:alias device)))))
 
 (defn- ^:private -main []
-  (let [sound-devices (devices)]
-    (println sound-devices)))
+  (let [sound-devices   (devices)
+        selected-device (next-device sound-devices)]
+    (set-new-default-sink       selected-device)
+    (move-running-audio-streams)
+    (notify                     selected-device)))
 
 (-main)
 

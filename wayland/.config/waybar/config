@@ -15,7 +15,7 @@
         "format": "󰕾  {volume}%",
         "format-muted": "󰖁  Mudo",
         "tooltip-format": "{desc}",
-        "on-click": "~/.local/bin/toggle-audio-sink"
+        "on-click": "~/.local/bin/toggle-audio-sink-clj"
     },
     "temperature#cpu": {
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
