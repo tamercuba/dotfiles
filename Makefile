@@ -1,11 +1,11 @@
-linux: 
-	@stow -t ~ --adopt -vv terminal i3-config
-	@sudo stow -t / --adopt -vv devices
+STOW_DIR := $(realpath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+STOW     := stow --dir=$(STOW_DIR) --target=$(HOME)
 
-.PHONY: linux
+linux:
+	@$(STOW) terminal wayland
 
 macos:
-	@stow -t ~ --adopt -vv shell-macos terminal
+	@$(STOW) shell-macos terminal
 
-
+.PHONY: linux macos
 
