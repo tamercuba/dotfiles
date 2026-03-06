@@ -10,7 +10,7 @@
                       (:out)
                       (s/split-lines)
                       (parse-session-names))
-         sessions-len (count sessions)]
+         sessions-len (+ 1  (count sessions))]
     (if (= 0 sessions-len)
       (p/exec "tmux" "new-session" "-s" "default")
       (p/exec "tmux" "new-session" "-s" (str "default" sessions-len)))))
