@@ -22,11 +22,16 @@
     extraGroups = ["networkmanager" "wheel" "video" "input"];
   };
 
-  home-manager.users.tamer-vm = {
-    imports = [
-      ../../home/linux.nix
-      ../../home/hosts/tamer-vm-pc.nix
-    ];
+  home-manager = {
+    users.tamer-vm = {
+      imports = [
+        ../../home/linux.nix
+        ../../home/hosts/tamer-vm-pc.nix
+      ];
+    };
+    extraSpecialArgs = {
+      inherit pkgs pkgs-unstable;
+    };
   };
 
   # VM only

@@ -21,12 +21,16 @@
     description = "tamer";
     extraGroups = ["networkmanager" "wheel" "video" "input"];
   };
-
-  home-manager.users.tamer = {
-    imports = [
-      ../../home/linux.nix
-      ../../home/hosts/tamer-pc.nix
-    ];
+  home-manager = {
+    users.tamer = {
+      imports = [
+        ../../home/linux.nix
+        ../../home/hosts/tamer-pc.nix
+      ];
+    };
+    extraSpecialArgs = {
+      inherit pkgs pkgs-unstable;
+    };
   };
 
   system.stateVersion = "25.11";
