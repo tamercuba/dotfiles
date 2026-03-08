@@ -55,18 +55,18 @@
 
 
   # ============================================================
-  # NVIDIA — GTX 4060 (Ada Lovelace)
-  # Tunar após migração — hardware-configuration.nix do host real
-  # pode mudar o que for necessário aqui
+  # NVIDIA — RTX 4060 (Ada Lovelace)
   # ============================================================
 
-  # hardware.graphics.enable = true;
-  # hardware.graphics.enable32Bit = true;
+  services.xserver.videoDrivers = ["nvidia"];
 
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   open = true;
-  #   nvidiaSettings = true;
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-  # };
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 }

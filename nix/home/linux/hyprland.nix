@@ -13,9 +13,7 @@
       "$browser" = "chromium";
       "$mainMod" = "SUPER";
 
-      env = [
-        "WLR_NO_HARDWARE_CURSORS,1" # VM ONLY
-      ];
+      env = [];
 
       general = {
         gaps_in = 5;
@@ -87,6 +85,10 @@
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = false;
+      };
+
+      cursor = {
+        inactive_timeout = 0;
       };
 
       input = {
