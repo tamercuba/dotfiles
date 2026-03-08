@@ -19,6 +19,7 @@
     pkgs-unstable.uwsm
     pkgs.libnotify
     pkgs.gamemode
+    pkgs.rose-pine-cursor
   ];
 
   programs.steam = {
