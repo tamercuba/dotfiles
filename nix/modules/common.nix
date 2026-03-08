@@ -30,6 +30,7 @@
     pkgs.babashka
 
     pkgs.spotify
+    pkgs.gcc
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

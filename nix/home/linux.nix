@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  home.stateVersion = "25.11";
+  imports = [ ./common.nix ];
 
-  # Pacotes e dotfiles do usuário vão aqui progressivamente
+  home.stateVersion = "25.11";
 }
