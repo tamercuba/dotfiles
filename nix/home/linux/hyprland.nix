@@ -4,8 +4,8 @@
     package = pkgs-unstable.hyprland;
 
     settings = {
-      monitor = ",preferred,auto,1";
-      # monitor=,1920x1080@144,auto,1
+      # monitor = ",preferred,auto,1";
+      monitor = ",1920x1080@144,auto,1";
 
       "$terminal" = "kitty";
       "$fileManager" = "dolphin";

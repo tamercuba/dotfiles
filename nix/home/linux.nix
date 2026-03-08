@@ -23,12 +23,16 @@
 
     pkgs.brightnessctl
     pkgs.playerctl
-    pkgs.firefox
-    pkgs.alacritty
   ];
 
   nixpkgs.config.allowUnfree = true;
   home.stateVersion = "25.11";
+
+  home.file.".XCompose".text = ''
+    include "%L"
+    <dead_acute> <c> : "ç" ccedilla
+    <dead_acute> <C> : "Ç" Ccedilla
+  '';
 
   home.pointerCursor = {
     name = "BreezeX-RosePine-Linux";

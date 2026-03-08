@@ -12,7 +12,7 @@
         "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "disk#nvme" "disk#ssd"];
         "custom/clock" = {
           "format" = "󰃭  {}";
-          "exec" = "LC_TIME=pt_BR.UTF-8 date '+%d de %B; %H=%M'";
+          "exec" = "LC_TIME=pt_BR.UTF-8 date '+%d de %B, %H:%M'";
           "interval" = 1;
           "tooltip" = false;
         };
@@ -31,12 +31,12 @@
           "interval" = 2;
         };
         "custom/gpu_temp" = {
-          "exec" = "nvidia-smi --query-gpu=temperature.gpu --format=csv;noheader";
+          "exec" = "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader";
           "format" = "󰢮  {}°C";
           "interval" = 5;
         };
         "custom/gpu_usage" = {
-          "exec" = "nvidia-smi --query-gpu=utilization.gpu --format=csv;noheader;nounits";
+          "exec" = "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits";
           "format" = "{}%";
           "interval" = 5;
         };

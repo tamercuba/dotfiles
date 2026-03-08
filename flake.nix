@@ -32,13 +32,5 @@
       ];
     };
 
-    nixosConfigurations.tamer-vm-pc = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit pkgs-unstable;};
-      modules = [
-        ./nix/hosts/tamer-vm-pc/configuration.nix
-        home-manager.nixosModules.home-manager
-      ];
-    };
   };
 }
