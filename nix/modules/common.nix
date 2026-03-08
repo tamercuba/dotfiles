@@ -25,6 +25,11 @@
     pkgs.gcc
   ];
 
+  users.users.tamer-vm = {
+    shell = pkgs.zsh;
+  };
+  programs.zsh.enable = true;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   fonts.packages = with pkgs; [

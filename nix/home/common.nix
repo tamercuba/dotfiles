@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -14,6 +15,7 @@
     pkgs.tmux
     pkgs.babashka
     pkgs.stow # Remove later
+    pkgs-unstable.claude-code
   ];
 
   home.file.".config/nvim".source = ../../terminal/.config/nvim;

@@ -35,11 +35,9 @@
     theme = "sddm-astronaut-theme";
     extraPackages = [pkgs.qt6.qtmultimedia];
     settings = {
-      services.displayManager.sddm.settings = {
-        Theme = {
+      Theme = {
           CursorTheme = "BreezeX-RosePine-Linux";
           CursorSize = "35";
-        };
       };
     };
   };
