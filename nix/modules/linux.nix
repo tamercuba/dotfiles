@@ -16,7 +16,7 @@
 
   environment.systemPackages = [
     pkgs.sddm-astronaut
-    pkgs.uwsm
+    pkgs-unstable.uwsm
 
     # Áudio/mídia
     pkgs.libnotify
