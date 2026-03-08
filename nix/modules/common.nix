@@ -21,15 +21,7 @@
   environment.systemPackages = [
     pkgs.vim
     pkgs.wget
-    pkgs.kitty
     pkgs.git
-    pkgs.neovim
-    pkgs.stow # Remove later
-
-    pkgs.tmux
-    pkgs.babashka
-
-    pkgs.spotify
     pkgs.gcc
   ];
 
