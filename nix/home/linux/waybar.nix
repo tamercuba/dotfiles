@@ -50,6 +50,6 @@
         };
       }
     ];
-    style = builtins.readFile ../../wayland/.config/waybar/style.css;
+    style = builtins.readFile ../../../wayland/.config/waybar/style.css;
   };
 }
