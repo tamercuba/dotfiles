@@ -14,9 +14,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Tamer Cuba";
-    userEmail = "tamercuba@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Tamer Cuba";
+      user.email = "tamercuba@gmail.com";
       init.defaultBranch = "main";
     };
   };
