@@ -23,6 +23,8 @@
 
     pkgs.brightnessctl
     pkgs.playerctl
+    pkgs.firefox
+    pkgs.alacritty
   ];
 
   nixpkgs.config.allowUnfree = true;
