@@ -17,14 +17,9 @@
   environment.systemPackages = [
     pkgs.sddm-astronaut
     pkgs-unstable.uwsm
-
-    # Áudio/mídia
     pkgs.libnotify
-
-    # Aplicativos
-
-    # Gaming
     pkgs.gamemode
+    pkgs.rose-pine-cursor
   ];
 
   programs.steam = {
@@ -49,6 +44,11 @@
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
+  };
+
+  environment.variables = {
+    XCURSOR_THEME = "BreezeX-RosePine-Linux";
+    XCURSOR_SIZE = "35";
   };
 
   # ============================================================
