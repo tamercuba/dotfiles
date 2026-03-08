@@ -39,7 +39,8 @@ local config = { -- Autoformat
 			typescript = { "prettier" },
 			javascriptreact = { "prettier" },
 			typescriptreact = { "prettier" },
-			sql = { "sql-formatter" }
+			sql = { "sql-formatter" },
+			nix = { "alejandra" },
 		},
 	},
 }
