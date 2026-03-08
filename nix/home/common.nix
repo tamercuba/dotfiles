@@ -21,7 +21,7 @@
     };
   };
 
-  home.file.".config/nvim".source = ../../../terminal/.config/nvim;
-  home.file.".config/kitty".source = ../../../terminal/.config/kitty;
-  home.file.".config/tmux".source = ../../../terminal/.config/tmux;
+  home.file.".config/nvim".source = ../../terminal/.config/nvim;
+  home.file.".config/kitty".source = ../../terminal/.config/kitty;
+  home.file.".config/tmux".source = ../../terminal/.config/tmux;
 }

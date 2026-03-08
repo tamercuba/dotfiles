@@ -27,7 +27,7 @@
       inherit system;
       specialArgs = {inherit pkgs-unstable;};
       modules = [
-        ./hosts/tamer-pc/configuration.nix
+        ./nix/hosts/tamer-pc/configuration.nix
         home-manager.nixosModules.home-manager
       ];
     };
@@ -36,7 +36,7 @@
       inherit system;
       specialArgs = {inherit pkgs-unstable;};
       modules = [
-        ./hosts/tamer-vm-pc/configuration.nix
+        ./nix/hosts/tamer-vm-pc/configuration.nix
         home-manager.nixosModules.home-manager
       ];
     };
