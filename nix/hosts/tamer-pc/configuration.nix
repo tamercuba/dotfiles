@@ -13,8 +13,9 @@
   networking.hostName = "tamer-pc";
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.efiSupport = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   users.users.tamer = {
     isNormalUser = true;
@@ -33,6 +34,12 @@
     extraSpecialArgs = {
       inherit pkgs pkgs-unstable;
     };
+  };
+
+  fileSystems."/mnt/storage" = {
+    device = "/dev/disk/by-uuid/3e4c39a3-799a-42e6-92d5-fe7d136fac6a";
+    fsType = "btrfs";
+    options = ["defaults" "nofail"];
   };
 
   system.stateVersion = "25.11";
