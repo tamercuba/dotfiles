@@ -34,7 +34,16 @@
     wayland.enable = true;
     theme = "sddm-astronaut-theme";
     extraPackages = [pkgs.qt6.qtmultimedia];
+    settings = {
+      services.displayManager.sddm.settings = {
+        Theme = {
+          CursorTheme = "BreezeX-RosePine-Linux";
+          CursorSize = "35";
+        };
+      };
+    };
   };
+
 
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
@@ -46,10 +55,6 @@
     pulse.enable = true;
   };
 
-  environment.variables = {
-    XCURSOR_THEME = "BreezeX-RosePine-Linux";
-    XCURSOR_SIZE = "35";
-  };
 
   # ============================================================
   # NVIDIA — GTX 4060 (Ada Lovelace)
