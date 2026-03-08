@@ -3,11 +3,11 @@
          '[clojure.string :as s])
 
 (def aliases
-  [{:name  "PCM2902 Audio Codec Estéreo analógico"
+  [{:name  "PCM2902 Audio Codec Analog Stereo"
     :alias "Speakers"}
-   {:name  "Starship/Matisse HD Audio Controller Estéreo analógico"
+   {:name  "Starship/Matisse HD Audio Controller Analog Stereo"
     :alias "Earphones"}
-   {:name  "AD107 High Definition Audio Controller Estéreo digital (HDMI)"
+   {:name  "AD107 High Definition Audio Controller Digital Stereo (HDMI)"
     :alias "HDMI"}])
 
 (defn set-aliases [device]
