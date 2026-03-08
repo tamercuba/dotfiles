@@ -1,0 +1,38 @@
+{
+  config,
+  pkgs,
+  ...
+}: {
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        font = "JetBrains Mono:size=13";
+        width = 50;
+        lines = 10;
+        horizontal-pad = 16;
+        vertical-pad = 12;
+        inner-pad = 8;
+        prompt = " ";
+        placeholder = "Procurar...";
+        icons-enabled = true;
+        match-mode = "fzf";
+        fields = "filename,name,generic,keywords";
+      };
+      colors = {
+        background = "24273aff";
+        text = "cad3f5ff";
+        match = "c6a0f6ff";
+        selection = "363a4fff";
+        selection-text = "cad3f5ff";
+        selection-match = "c6a0f6ff";
+        border = "b7bdf8ff";
+        input = "cad3f5ff";
+      };
+      border = {
+        width = 2;
+        radius = 8;
+      };
+    };
+  };
+}

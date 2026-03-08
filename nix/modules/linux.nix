@@ -16,32 +16,12 @@
 
   environment.systemPackages = [
     pkgs.sddm-astronaut
-    pkgs.chromium
-
-    # Wayland/Hyprland
-    pkgs.waybar
-    pkgs.mako
-    pkgs.fuzzel
-    pkgs.hyprlock
-    pkgs.hyprpaper
-    pkgs.wl-clipboard
-    pkgs.cliphist
     pkgs.uwsm
 
-    # Screenshots
-    pkgs.grim
-    pkgs.slurp
-    pkgs.swappy
-
     # Áudio/mídia
-    pkgs.playerctl
-    pkgs.brightnessctl
     pkgs.libnotify
 
     # Aplicativos
-    pkgs.kdePackages.dolphin
-    pkgs.dbeaver-bin
-    pkgs.pwvucontrol
 
     # Gaming
     pkgs.gamemode

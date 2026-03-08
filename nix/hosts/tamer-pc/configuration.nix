@@ -22,7 +22,12 @@
     extraGroups = ["networkmanager" "wheel" "video" "input"];
   };
 
-  home-manager.users.tamer = import ../../home/linux.nix;
+  home-manager.users.tamer = {
+    imports = [
+      ../../home/linux.nix
+      ../../home/hosts/tamer-pc.nix
+    ];
+  };
 
   system.stateVersion = "25.11";
 }

@@ -22,7 +22,12 @@
     extraGroups = ["networkmanager" "wheel" "video" "input"];
   };
 
-  home-manager.users.tamer-vm = import ../../home/linux.nix;
+  home-manager.users.tamer-vm = {
+    imports = [
+      ../../home/linux.nix
+      ../../home/hosts/tamer-vm-pc.nix
+    ];
+  };
 
   # VM only
   services.openssh.enable = true;

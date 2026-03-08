@@ -1,9 +1,32 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="bira"
-plugins=(git python rust golang )
+DISABLE_MAGIC_FUNCTIONS="true"
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+
+plugins=(git fzf extract python rust golang )
+
 source $ZSH/oh-my-zsh.sh
+
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Instalar
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+#
+export HISTCONTROL=ignoreboth
+export HISTORY_IGNORE="(\&|[bf]g|c|clear|history|exit|q|pwd|* --help)"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+export LESS_TERMCAP_md="$(tput bold 2> /dev/null; tput setaf 2 2> /dev/null)"
+export LESS_TERMCAP_me="$(tput sgr0 2> /dev/null)"
+
+# Env
+export PATH="$HOME/.local/bin:$PATH"
+export PROJECTS="/mnt/storage/projects/"
+# export FZF_BASE=/usr/share/fzf
 
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin:/bin:/usr/bin"
 
