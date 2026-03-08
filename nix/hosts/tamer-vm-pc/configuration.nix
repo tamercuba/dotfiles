@@ -20,7 +20,7 @@
     isNormalUser = true;
     description = "tamer";
     extraGroups = ["networkmanager" "wheel" "video" "input"];
-    shell = pkgs.zsh
+    shell = pkgs.zsh;
   };
 
   home-manager = {
