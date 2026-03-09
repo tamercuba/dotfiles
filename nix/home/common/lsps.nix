@@ -9,6 +9,8 @@
     pkgs.stylua
     pkgs.prettierd
     pkgs.nodePackages.prettier
+    pkgs.nixd
+    pkgs.alejandra
   ];
 
   home.file.".config/clojure-lsp/config.edn" = {

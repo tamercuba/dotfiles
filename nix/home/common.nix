@@ -18,6 +18,7 @@
     pkgs.stow 
     pkgs-unstable.claude-code
     pkgs.btop
+    pkgs.gnumake
 
     pkgs.go
     pkgs.rustc
@@ -27,7 +28,7 @@
     pkgs.leiningen
   ];
 
-  home.file.".config/nvim".source = ../../terminal/.config/nvim;
-  home.file.".config/kitty".source = ../../terminal/.config/kitty;
-  home.file.".config/tmux".source = ../../terminal/.config/tmux;
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
+  home.file.".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/kitty";
+  home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/tmux";
 }
