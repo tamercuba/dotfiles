@@ -22,6 +22,7 @@
     pkgs.nodejs
     pkgs.ripgrep
 
+    pkgs.neofetch
     pkgs.go
     pkgs.rustc
     pkgs.cargo
