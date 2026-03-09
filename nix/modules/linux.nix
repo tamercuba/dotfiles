@@ -25,6 +25,7 @@
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
   programs.gamemode.enable = true;
@@ -50,6 +51,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
   };
 
