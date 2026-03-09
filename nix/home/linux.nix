@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ./linux/cliphist.nix
+    ./linux/gdrive.nix
     ./linux/fuzzel.nix
     ./linux/hyprland.nix
     ./linux/hyprlock.nix

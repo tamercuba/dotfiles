@@ -21,6 +21,13 @@
     pkgs.gamemode
     pkgs.rose-pine-cursor
     pkgs.smartmontools
+    pkgs.rclone
+  ];
+
+  programs.fuse.userAllowOther = true;
+
+  systemd.tmpfiles.rules = [
+    "d /mnt/drive 0755 tamer users -"
   ];
 
   security.sudo.extraRules = [{

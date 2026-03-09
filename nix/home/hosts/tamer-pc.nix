@@ -12,6 +12,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/walls";
     };
 
+    file."drive" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/mnt/drive";
+    };
+
     file.".local/bin/toggle-audio-sink-clj" = {
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
     };
