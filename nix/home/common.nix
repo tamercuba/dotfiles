@@ -20,6 +20,7 @@
     pkgs.btop
     pkgs.gnumake
     pkgs.nodejs
+    pkgs.ripgrep
 
     pkgs.go
     pkgs.rustc
