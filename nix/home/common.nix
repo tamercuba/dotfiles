@@ -15,10 +15,11 @@
     pkgs.kitty
     pkgs.tmux
     pkgs.babashka
-    pkgs.stow 
+    pkgs.stow
     pkgs-unstable.claude-code
     pkgs.btop
     pkgs.gnumake
+    pkgs.nodejs
 
     pkgs.go
     pkgs.rustc

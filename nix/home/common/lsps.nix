@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = [
     pkgs.clojure-lsp
     pkgs.lua-language-server
