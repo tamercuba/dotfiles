@@ -16,6 +16,7 @@
     pkgs.babashka
     pkgs.stow # Remove later
     pkgs-unstable.claude-code
+    pkgs.btop
   ];
 
   home.file.".config/nvim".source = ../../terminal/.config/nvim;
