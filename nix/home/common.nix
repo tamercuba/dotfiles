@@ -7,6 +7,7 @@
   imports = [
     ./common/git.nix
     ./common/zsh.nix
+    ./common/lsps.nix
   ];
 
   home.packages = [
@@ -14,9 +15,16 @@
     pkgs.kitty
     pkgs.tmux
     pkgs.babashka
-    pkgs.stow # Remove later
+    pkgs.stow 
     pkgs-unstable.claude-code
     pkgs.btop
+
+    pkgs.go
+    pkgs.rustc
+    pkgs.cargo
+    pkgs.jdk
+    pkgs.clojure
+    pkgs.leiningen
   ];
 
   home.file.".config/nvim".source = ../../terminal/.config/nvim;
