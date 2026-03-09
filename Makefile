@@ -9,3 +9,8 @@ macos:
 
 .PHONY: linux macos
 
+
+# -----------------------------NIXOS------------------------------------------
+
+rebuild-%:
+	@sudo nixos-rebuild switch --flake ~/projects/dotfiles#$*

@@ -9,7 +9,7 @@
         "height" = 30;
         "modules-left" = ["hyprland/workspaces"];
         "modules-center" = ["custom/clock"];
-        "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "disk#nvme" "disk#ssd"];
+        "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "custom/disk_nvme" "custom/disk_sata"];
         "custom/clock" = {
           "format" = "󰃭  {}";
           "exec" = "LC_TIME=pt_BR.UTF-8 date '+%d de %B, %H:%M'";
@@ -40,13 +40,17 @@
           "format" = "{}%";
           "interval" = 5;
         };
-        "disk#nvme" = {
-          "path" = "/home";
-          "format" = "󰋊  {percentage_used}%";
+        "custom/disk_nvme" = {
+          "exec" = "echo \"$(df /home | awk 'NR==2{print $5}') $(awk '{printf \"%d°C\", $1/1000}' /sys/class/hwmon/hwmon0/temp1_input)\"";
+          "format" = "󰋊  {}";
+          "interval" = 10;
+          "tooltip" = false;
         };
-        "disk#ssd" = {
-          "path" = "/mnt/storage";
-          "format" = "{percentage_used}%";
+        "custom/disk_sata" = {
+          "exec" = "echo \"$(df /mnt/storage | awk 'NR==2{print $5}') $(sudo smartctl -A /dev/sda | awk '/Temperature_Celsius/{print $10\"°C\"}')\"";
+          "format" = "  {}";
+          "interval" = 30;
+          "tooltip" = false;
         };
       }
     ];

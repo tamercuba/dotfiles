@@ -20,7 +20,16 @@
     pkgs.libnotify
     pkgs.gamemode
     pkgs.rose-pine-cursor
+    pkgs.smartmontools
   ];
+
+  security.sudo.extraRules = [{
+    users = [ "tamer" ];
+    commands = [{
+      command = "/run/current-system/sw/bin/smartctl";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
 
   programs.steam = {
     enable = true;
