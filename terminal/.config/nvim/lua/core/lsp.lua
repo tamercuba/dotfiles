@@ -1,4 +1,4 @@
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "ruff", "ruff_lsp", "ts_ls", "clojure-lsp", "eslint", "nixd" })
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "ruff", "ruff_lsp", "ts_ls", "clojure-lsp", "eslint", "nixd", "yamlls" })
 vim.lsp.set_log_level("DEBUG")
 
 vim.diagnostic.config({

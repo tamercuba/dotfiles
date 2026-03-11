@@ -15,6 +15,11 @@
     pkgs.nodePackages.prettier
     pkgs.nixd
     pkgs.alejandra
+    pkgs.gotools
+    pkgs.golines
+    pkgs.rustfmt
+    pkgs.sql-formatter
+    pkgs.yaml-language-server
   ];
 
   home.file.".config/clojure-lsp/config.edn" = {
