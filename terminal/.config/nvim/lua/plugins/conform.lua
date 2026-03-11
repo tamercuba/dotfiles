@@ -30,16 +30,13 @@ local config = { -- Autoformat
 			go = { "goimports", "golines", "gofmt" },
 			python = { "ruff_format" },
 			rust = { "rustfmt" },
-			-- Conform can also run multiple formatters sequentially
-			-- python = { "isort", "black" },
-			--
-			-- You can use a sub-list to tell conform to run *until* a formatter
-			-- is found.
 			javascript = { "prettier" },
 			typescript = { "prettier" },
 			javascriptreact = { "prettier" },
 			typescriptreact = { "prettier" },
-			sql = { "sql-formatter" }
+			sql = { "sql_formatter" },
+			yaml = { "prettier" },
+			nix = { "alejandra" },
 		},
 	},
 }

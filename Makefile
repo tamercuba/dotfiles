@@ -5,7 +5,12 @@ linux:
 	@$(STOW) terminal wayland
 
 macos:
-	@$(STOW) shell-macos terminal
+	@$(STOW) macos terminal
 
 .PHONY: linux macos
 
+
+# -----------------------------NIXOS------------------------------------------
+
+rebuild-%:
+	@sudo nixos-rebuild switch --flake ~/projects/dotfiles#$*

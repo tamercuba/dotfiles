@@ -4,3 +4,4 @@
 .cursor/
 **/claude
 terminal/.config/nvim/lua/config/repl_picker/company.repl.lua
+**/.config/environment.d/

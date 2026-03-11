@@ -1,8 +1,8 @@
 return {
-	["crypto-backtester"] = {
+	["julius"] = {
 		["REPL"] = {
 			command = "lein repl",
-			cwd = "crypto-backtester",
+			cwd = "julius",
 		},
 	},
 }
