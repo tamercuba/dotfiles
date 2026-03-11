@@ -12,6 +12,8 @@
 
   networking.hostName = "tamer-pc";
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
@@ -20,9 +22,11 @@
   users.users.tamer = {
     isNormalUser = true;
     description = "tamer";
-    extraGroups = ["networkmanager" "wheel" "video" "input"];
+    extraGroups = ["networkmanager" "wheel" "video" "input" "docker"];
     shell = pkgs.zsh;
   };
+
+  virtualisation.docker.enable = true;
 
   home-manager = {
     users.tamer = {

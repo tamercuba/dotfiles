@@ -24,6 +24,10 @@
 
     pkgs.brightnessctl
     pkgs.playerctl
+    pkgs.spotify
+
+    pkgs.kind
+    pkgs.kubectl
   ];
 
   nixpkgs.config.allowUnfree = true;
