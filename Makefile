@@ -5,7 +5,7 @@ linux:
 	@$(STOW) terminal wayland
 
 macos:
-	@$(STOW) shell-macos terminal
+	@$(STOW) macos terminal
 
 .PHONY: linux macos
 

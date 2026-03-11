@@ -23,11 +23,6 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 export LESS_TERMCAP_md="$(tput bold 2> /dev/null; tput setaf 2 2> /dev/null)"
 export LESS_TERMCAP_me="$(tput sgr0 2> /dev/null)"
 
-# Env
-export PATH="$HOME/.local/bin:$PATH"
-export PROJECTS="/mnt/storage/projects/"
-# export FZF_BASE=/usr/share/fzf
-
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin:/bin:/usr/bin"
 
 
