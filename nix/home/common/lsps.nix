@@ -17,6 +17,7 @@
     pkgs.alejandra
     pkgs.gotools
     pkgs.golines
+    pkgs.gofumpt
     pkgs.rustfmt
     pkgs.sql-formatter
     pkgs.yaml-language-server
