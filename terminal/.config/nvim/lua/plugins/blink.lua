@@ -64,6 +64,14 @@ return {
 					"buffer",
 					"conjure",
 				},
+				transform_items = function(_, items)
+					for _, item in ipairs(items) do
+						if not item.label then
+							item.label = item.insertText or item.filterText or "?"
+						end
+					end
+					return items
+				end,
 				providers = {
 					conjure = { name = "conjure", module = "blink.compat.source", score_offset = -3 },
 					},
