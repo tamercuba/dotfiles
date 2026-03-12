@@ -1,40 +1,25 @@
-{...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
-
-    oh-my-zsh = {
-      enable = true;
-      theme = "bira";
-      plugins = ["git" "fzf" "extract"];
-    };
-
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
-    historySubstringSearch.enable = true;
-
-    history = {
-      ignoreDups = true;
-      ignoreSpace = true;
-      share = true;
-    };
-
-    sessionVariables = {
-      DISABLE_MAGIC_FUNCTIONS = "true";
-      ENABLE_CORRECTION = "true";
-      COMPLETION_WAITING_DOTS = "true";
-      LESS_TERMCAP_md = "$(tput bold 2>/dev/null; tput setaf 2 2>/dev/null)";
-      LESS_TERMCAP_me = "$(tput sgr0 2>/dev/null)";
-    };
-
-    shellAliases = {
-      img = "kitten icat";
-    };
+    dotDir = ".config/zsh";
+    initExtra = ''
+      [[ -f "$HOME/.zshrc" ]] && source "$HOME/.zshrc"
+    '';
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  home.packages = with pkgs; [
+    oh-my-zsh
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-history-substring-search
+    fzf
+  ];
 
-  home.sessionPath = ["$HOME/.local/bin"];
+  home.file.".zshrc".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "/mnt/storage/projects/dotfiles/terminal/.zshrc";
 }

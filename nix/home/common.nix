@@ -19,9 +19,10 @@
     pkgs-unstable.claude-code
     pkgs.btop
     pkgs.gnumake
-    pkgs.nodejs
     pkgs.ripgrep
+    pkgs.unzip
 
+    pkgs.nodejs
     pkgs.neofetch
     pkgs.go
     pkgs.rustc

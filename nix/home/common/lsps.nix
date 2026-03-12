@@ -21,6 +21,7 @@
     pkgs.rustfmt
     pkgs.sql-formatter
     pkgs.yaml-language-server
+    pkgs.tree-sitter
   ];
 
   home.file.".config/clojure-lsp/config.edn" = {
