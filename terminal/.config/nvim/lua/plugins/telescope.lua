@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"Snikimonkd/telescope-git-conflicts.nvim",
@@ -9,7 +8,7 @@ return {
 		config = function()
 			local builtin = require("telescope.builtin")
 			local actions = require("telescope.actions")
-			
+
 			vim.keymap.set("n", "<leader>ff", function()
 				builtin.find_files({
 					previewer = false,
@@ -20,7 +19,7 @@ return {
 					},
 				})
 			end, { desc = "[F]ind [F]iles" })
-			
+
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind [B]uffer" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [Help]" })
@@ -28,13 +27,14 @@ return {
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
 			vim.keymap.set("n", "<leader>fc", "<cmd>Telescope conflicts<CR>", { desc = "[F]ind [C]onflicts" })
 			vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus" })
+			vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, { desc = "[F]ind [I]mplementations" })
 			vim.keymap.set("n", "<leader>fu", function()
 				builtin.find_files({
 					find_command = { "git", "diff", "--name-only", "--diff-filter=d", "--relative" },
 					prompt_title = "Unstaged Changes",
 				})
 			end, { desc = "[F]ind [U]nstaged" })
-			
+
 			require("telescope").setup({
 				defaults = {
 					layout_config = {
@@ -52,8 +52,16 @@ return {
 						"target/",
 					},
 				},
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+					live_grep = {
+						additional_args = { "--hidden" },
+					},
+				},
 			})
-			
+
 			require("telescope").load_extension("conflicts")
 		end,
 	},

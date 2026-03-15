@@ -5,8 +5,8 @@
 }: {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
-    initExtra = ''
+    dotDir = "${config.xdg.configHome}/zsh";
+    initContent = ''
       [[ -f "$HOME/.zshrc" ]] && source "$HOME/.zshrc"
     '';
   };
