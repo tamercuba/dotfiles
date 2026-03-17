@@ -1,7 +1,12 @@
+-- Copilot is only enabled on the personal machine (host "tamer.cuba").
+-- On any other host the plugin is not loaded at all.
+local is_personal_host = vim.fn.getenv("HOST") == "tamer.cuba"
+
 return {
 	"zbirenbaum/copilot.lua",
 	cmd = "Copilot",
 	event = "InsertEnter",
+	enabled = is_personal_host,
 	config = function()
 		require("copilot").setup({
 			suggestion = {
