@@ -1,4 +1,4 @@
-local is_work_host = vim.fn.getenv("HOST") == "tamer.cuba"
+local is_work_host = vim.uv.os_gethostname() == "tamer.cuba"
 
 return {
 	"zbirenbaum/copilot.lua",
