@@ -3,6 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
 		build = ":TSUpdate",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		config = function()
 			require("nvim-treesitter").setup({
 				ensure_installed = {
@@ -29,24 +30,6 @@ return {
 					"gosum",
 					"nix",
 				},
-			})
-
-			vim.api.nvim_create_autocmd("FileType", {
-				callback = function(ev)
-					local ok = pcall(vim.treesitter.start, ev.buf)
-					if ok then
-						vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-					end
-				end,
-			})
-		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		lazy = false,
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("nvim-treesitter.configs").setup({
 				textobjects = {
 					select = {
 						enable = true,
@@ -98,6 +81,16 @@ return {
 					},
 				},
 			})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(ev)
+					local ok = pcall(vim.treesitter.start, ev.buf)
+					if ok then
+						vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
+			})
 		end,
 	},
+	{ "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
 }
