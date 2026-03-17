@@ -1,6 +1,6 @@
 return {
-	-- "editor-code-assistant/eca-nvim",
-	dir = "~/projects/eca-nvim", -- local path takes priority
+	"editor-code-assistant/eca-nvim",
+	-- dir = "~/projects/eca-nvim", -- local path takes priority
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
