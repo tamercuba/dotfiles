@@ -1,14 +1,17 @@
+local is_work_host = vim.fn.getenv("HOST") == "tamer.cuba"
+
 return {
 	"zbirenbaum/copilot.lua",
 	cmd = "Copilot",
 	event = "InsertEnter",
+	enabled = is_work_host,
 	config = function()
 		require("copilot").setup({
 			suggestion = {
 				enabled = true,
 				auto_trigger = true,
 				keymap = {
-					accept = "<Tab>", -- Tab aceita Copilot
+					accept = "<Tab>",
 					next = "<M-]>",
 					prev = "<M-[>",
 					dismiss = "<C-]>",
