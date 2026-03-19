@@ -14,6 +14,7 @@
     ./linux/mako.nix
     ./linux/screenshot.nix
     ./linux/waybar.nix
+    ./linux/kb.nix
   ];
 
   home.packages = [
