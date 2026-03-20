@@ -30,6 +30,9 @@
     pkgs.jdk
     pkgs.clojure
     pkgs.leiningen
+
+    pkgs.python3
+    pkgs.uv
   ];
 
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";

@@ -33,7 +33,17 @@
 
     pkgs.mpv
     pkgs.swayimg
+
+    pkgs.freecad
   ];
+
+  xdg.desktopEntries.freecad = {
+    name = "FreeCAD";
+    exec = "env QT_QPA_PLATFORM=xcb freecad %F";
+    icon = "freecad";
+    comment = "Feature based parametric modeler";
+    categories = [ "Graphics" "Science" "Engineering" ];
+  };
 
   xdg.mimeApps = {
     enable = true;
