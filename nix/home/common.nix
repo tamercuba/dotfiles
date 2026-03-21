@@ -33,6 +33,7 @@
 
     pkgs.python3
     pkgs.uv
+    pkgs.poppler-utils
   ];
 
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
