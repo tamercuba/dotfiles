@@ -1,7 +1,7 @@
 return {
 	{
 		"Olical/conjure",
-		ft = { "clojure", "fennel", "janet", "racket", "scheme", "lisp" }, -- Carregar quando abrir arquivos Clojure
+		ft = { "clojure", "fennel", "janet", "racket", "scheme", "lisp" },
 	},
 	{
 		"venantius/vim-cljfmt",

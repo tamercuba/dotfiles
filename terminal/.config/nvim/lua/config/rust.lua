@@ -4,11 +4,11 @@ vim.g.rustaceanvim = {
 			["rust-analyzer"] = {
 				cargo = {
 					allFeatures = true,
-					allTargets = true, -- Critical for project-wide checking
+					allTargets = true,
 				},
 				check = {
 					command = "clippy",
-					allTargets = true, -- Essential for comprehensive error display
+					allTargets = true,
 				},
 			},
 		},
