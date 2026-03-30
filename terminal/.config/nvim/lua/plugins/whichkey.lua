@@ -30,6 +30,18 @@ return {
 			{ "<leader>gk", desc = "Prev Conflict" },
 			{ "<leader>gp", desc = "Preview Hunk" },
 			{ "<leader>gc", desc = "Toggle Copilot" },
+			{ "<leader>gd", desc = "Diff View" },
+			{ "<leader>gD", desc = "Diff vs Last Commit" },
+			{ "<leader>gf", desc = "File History (current)" },
+			{ "<leader>gF", desc = "File History (all)" },
+
+			-- ECA (AI Assistant)
+			{ "<leader>e", group = "󰚩 ECA" },
+			{ "<leader>ec", desc = "Open Chat" },
+			{ "<leader>ef", desc = "Focus Sidebar" },
+			{ "<leader>et", desc = "Toggle Sidebar" },
+			{ "<leader>ea", desc = "Add File/Selection" },
+			{ "<leader>eA", desc = "Pick File to Add" },
 
 			-- Harpoon navigation
 			{ "<leader>h", group = "󰛢 Harpoon" },
