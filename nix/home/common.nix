@@ -27,6 +27,7 @@
     pkgs.go
     pkgs.rustc
     pkgs.cargo
+    pkgs.clippy
     pkgs.jdk
     pkgs.clojure
     pkgs.leiningen
