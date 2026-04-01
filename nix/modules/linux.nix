@@ -73,6 +73,12 @@
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
