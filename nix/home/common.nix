@@ -31,6 +31,7 @@
     pkgs.jdk
     pkgs.clojure
     pkgs.leiningen
+    pkgs.rlwrap
 
     pkgs.python3
     pkgs.uv

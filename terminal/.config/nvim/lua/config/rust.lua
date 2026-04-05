@@ -10,6 +10,17 @@ vim.g.rustaceanvim = {
 					command = "clippy",
 					allTargets = true,
 				},
+				completion = {
+					autoimport = { enable = true },
+					autoself = { enable = true },
+				},
+				imports = {
+					granularity = {
+						group = "module",
+						enforce = true,
+					},
+					prefix = "self",
+				},
 			},
 		},
 	},
