@@ -30,6 +30,7 @@
     pkgs.kind
     pkgs.kubectl
     pkgs.gh
+    pkgs.rlwrap
 
     pkgs.mpv
     pkgs.swayimg
@@ -42,7 +43,7 @@
     exec = "env QT_QPA_PLATFORM=xcb freecad %F";
     icon = "freecad";
     comment = "Feature based parametric modeler";
-    categories = [ "Graphics" "Science" "Engineering" ];
+    categories = ["Graphics" "Science" "Engineering"];
   };
 
   xdg.mimeApps = {
