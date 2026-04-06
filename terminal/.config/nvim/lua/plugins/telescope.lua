@@ -75,7 +75,7 @@ return {
 			})
 
 			require("telescope").load_extension("conflicts")
-			require("telescope").load_extension("smart_history")
+			pcall(require("telescope").load_extension, "smart_history")
 		end,
 	},
 	{
