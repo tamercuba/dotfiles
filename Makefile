@@ -5,7 +5,8 @@ linux:
 	@$(STOW) terminal wayland
 
 macos:
-	@$(STOW) macos terminal
+	@$(STOW) macos
+	@$(STOW) --ignore='\.zshrc' terminal
 
 .PHONY: linux macos
 
