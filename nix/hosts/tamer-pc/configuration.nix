@@ -37,6 +37,7 @@
     };
     extraSpecialArgs = {
       inherit pkgs pkgs-unstable;
+      dotfilesDir = "/mnt/storage/projects/dotfiles";
     };
   };
 

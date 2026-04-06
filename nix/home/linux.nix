@@ -15,6 +15,7 @@
     ./linux/screenshot.nix
     ./linux/waybar.nix
     ./linux/kb.nix
+    ./linux/yazi.nix
   ];
 
   home.packages = [
