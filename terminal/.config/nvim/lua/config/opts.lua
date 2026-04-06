@@ -1,3 +1,7 @@
+if vim.env.LIBSQLITE then
+	vim.g.sqlite_clib_path = vim.env.LIBSQLITE
+end
+
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.g.mapleader = " "

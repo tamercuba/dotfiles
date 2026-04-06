@@ -8,6 +8,7 @@
     ./common/git.nix
     ./common/zsh.nix
     ./common/lsps.nix
+    ./common/sqlite.nix
   ];
 
   home.packages = [

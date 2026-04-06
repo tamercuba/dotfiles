@@ -4,6 +4,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"Snikimonkd/telescope-git-conflicts.nvim",
+			"nvim-telescope/telescope-smart-history.nvim",
+			"kkharji/sqlite.lua",
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
@@ -37,6 +39,16 @@ return {
 
 			require("telescope").setup({
 				defaults = {
+					history = {
+						path = vim.fn.stdpath("data") .. "/telescope_history.sqlite3",
+						limit = 100,
+					},
+					mappings = {
+						i = {
+							["<C-p>"] = require("telescope.actions").cycle_history_prev,
+							["<C-n>"] = require("telescope.actions").cycle_history_next,
+						},
+					},
 					layout_config = {
 						horizontal = {
 							preview_width = 0.3,
@@ -63,6 +75,7 @@ return {
 			})
 
 			require("telescope").load_extension("conflicts")
+			require("telescope").load_extension("smart_history")
 		end,
 	},
 	{

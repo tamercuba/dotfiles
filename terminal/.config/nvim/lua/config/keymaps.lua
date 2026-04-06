@@ -76,6 +76,16 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "moves lines up in visual 
 
 vim.keymap.set("n", "x", '"_x', opts)
 
+vim.keymap.set("n", "<leader>d", function()
+	for _, win in ipairs(vim.fn.getwininfo()) do
+		if win.loclist == 1 then
+			vim.cmd("lclose")
+			return
+		end
+	end
+	vim.diagnostic.setloclist()
+end, { desc = "Toggle diagnostics (buffer)" })
+
 vim.keymap.set(
 	"n",
 	"<leader>s",

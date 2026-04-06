@@ -6,7 +6,7 @@ return {
 	},
 	keys = {
 		{ "<leader>m", "<cmd>Yazi<cr>", desc = "Open yazi at the current file" },
-		{ "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open yazi in working directory" },
+		{ "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open yazi in project root" },
 	},
 	opts = {
 		open_for_directories = true,
