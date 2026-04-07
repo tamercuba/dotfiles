@@ -12,7 +12,7 @@
   ];
 
   home.packages = [
-    pkgs.neovim
+    pkgs-unstable.neovim
     pkgs.kitty
     pkgs.tmux
     pkgs.babashka
