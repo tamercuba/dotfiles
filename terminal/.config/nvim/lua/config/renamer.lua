@@ -24,9 +24,12 @@ return function()
 		api.nvim_buf_delete(buf, { force = true })
 
 		if #newName > 0 and newName ~= var then
-			local params = vim.lsp.util.make_position_params()
+			local params = vim.lsp.util.make_position_params(0, nil)
 			params.newName = newName
-			vim.lsp.buf_request(0, "textDocument/rename", params)
+			local clients = vim.lsp.get_clients({ bufnr = 0, method = "textDocument/rename" })
+			for _, client in ipairs(clients) do
+				client:request("textDocument/rename", params, nil, 0)
+			end
 		end
 	end)
 end
