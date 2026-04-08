@@ -20,6 +20,7 @@
   ];
 
   home.packages = [
+    pkgs.github-mcp-server
     pkgs.kdePackages.dolphin
     pkgs.dbeaver-bin
     pkgs.pwvucontrol
