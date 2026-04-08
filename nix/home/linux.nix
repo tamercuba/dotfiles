@@ -16,6 +16,7 @@
     ./linux/waybar.nix
     ./linux/kb.nix
     ./linux/yazi.nix
+    ./linux/ghostty.nix
   ];
 
   home.packages = [

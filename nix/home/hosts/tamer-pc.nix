@@ -24,10 +24,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.local/bin/tmux_attach_clj";
     };
 
-    file.".local/bin/tmux_auto_attach" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.local/bin/tmux_auto_attach";
-    };
-
     file.".local/bin/bb-nrepl" = {
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.local/bin/bb-nrepl";
     };
