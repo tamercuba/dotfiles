@@ -1,3 +1,5 @@
+vim.g.loaded_matchparen = 1
+
 if vim.env.LIBSQLITE then
 	vim.g.sqlite_clib_path = vim.env.LIBSQLITE
 end

@@ -5,6 +5,8 @@ return {
 		build = ":TSUpdate",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		config = function()
+			vim.treesitter.language.register("clojure", "risp")
+
 			require("nvim-treesitter").setup({
 				ensure_installed = {
 					"bash",

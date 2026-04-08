@@ -1,10 +1,11 @@
 return {
   {
     "julienvincent/nvim-paredit",
-    ft = { "clojure", "fennel", "scheme" },
+    ft = { "clojure", "fennel", "scheme", "risp" },
     config = function()
       local paredit = require("nvim-paredit")
       paredit.setup({
+        filetypes = { "clojure", "fennel", "scheme", "risp" },
         keys = {
           -- Slurps
           ["<localleader>ps"] = { paredit.api.slurp_forwards, "Slurp forwards" },

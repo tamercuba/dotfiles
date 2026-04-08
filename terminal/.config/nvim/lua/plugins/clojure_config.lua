@@ -1,7 +1,7 @@
 return {
 	{
 		"Olical/conjure",
-		ft = { "clojure", "fennel", "janet", "racket", "scheme", "lisp" },
+		ft = { "clojure", "fennel", "janet", "racket", "scheme", "lisp", "risp" },
 	},
 	{
 		"venantius/vim-cljfmt",
