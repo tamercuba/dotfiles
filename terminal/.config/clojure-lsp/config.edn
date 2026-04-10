@@ -1,5 +1,5 @@
 {:source-paths #{"src" "test"}
- :dependency-scheme "jar"
+ :dependency-scheme "zipfile"
  :ignore-paths #{"target"
                  ".lsp"
                  ".lsp/.cache"

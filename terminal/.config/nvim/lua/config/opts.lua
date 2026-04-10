@@ -1,5 +1,3 @@
-vim.g.loaded_matchparen = 1
-
 if vim.env.LIBSQLITE then
 	vim.g.sqlite_clib_path = vim.env.LIBSQLITE
 end
@@ -43,7 +41,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
+vim.opt.updatetime = 80
 
 vim.diagnostic.config({
 	virtual_text = {
