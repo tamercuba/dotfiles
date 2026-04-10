@@ -25,6 +25,8 @@
     pkgs.dbeaver-bin
     pkgs.pwvucontrol
     pkgs.chromium
+    pkgs.fcitx5
+    pkgs.qt6Packages.fcitx5-configtool
 
     pkgs.brightnessctl
     pkgs.playerctl
