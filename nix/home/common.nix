@@ -9,6 +9,7 @@
     ./common/zsh.nix
     ./common/lsps.nix
     ./common/sqlite.nix
+    ./common/newsboat.nix
   ];
 
   home.packages = [
