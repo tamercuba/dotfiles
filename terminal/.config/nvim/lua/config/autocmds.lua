@@ -131,3 +131,26 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufReadCmd", {
+	pattern = "zipfile://*",
+	callback = function(ev)
+		local name = vim.api.nvim_buf_get_name(ev.buf)
+		local zipfile_path = name:gsub("^zipfile://", "")
+		local jar, entry = zipfile_path:match("^(.-)::(.+)$")
+		if not jar or not entry then return end
+
+		local content = vim.fn.system({ "unzip", "-p", jar, entry })
+		if vim.v.shell_error ~= 0 then return end
+
+		local lines = vim.split(content, "\n", { trimempty = false })
+		vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, lines)
+		vim.bo[ev.buf].modifiable = false
+		vim.bo[ev.buf].buftype = "nofile"
+		vim.bo[ev.buf].readonly = true
+
+		vim.schedule(function()
+			vim.cmd("filetype detect")
+		end)
+	end,
+})
