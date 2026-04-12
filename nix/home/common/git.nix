@@ -7,5 +7,9 @@
       init.defaultBranch = "main";
       core.editor = "nvim";
     };
+    ignores = [
+      ".direnv/"
+      "**/.claude/settings.local.json"
+    ];
   };
 }
