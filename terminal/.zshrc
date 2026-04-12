@@ -19,6 +19,17 @@ source "$HOME/.nix-profile/share/zsh-history-substring-search/zsh-history-substr
 
 eval "$(fzf --zsh)"
 
+function _nix_shell_rprompt() {
+  if [[ -n "$NIX_SHELL_NAME" ]]; then
+    RPROMPT="%F{81}❄ $NIX_SHELL_NAME%f"
+  elif [[ -n "$IN_NIX_SHELL" ]]; then
+    RPROMPT="%F{81}❄ nix-shell%f"
+  else
+    RPROMPT=""
+  fi
+}
+add-zsh-hook precmd _nix_shell_rprompt
+
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY

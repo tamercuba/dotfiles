@@ -28,7 +28,6 @@
     pkgs.go
     pkgs.rustc
     pkgs.cargo
-    pkgs.clippy
     pkgs.jdk
     pkgs.clojure
     pkgs.leiningen
@@ -36,9 +35,12 @@
     pkgs.python3
     pkgs.uv
     pkgs.poppler-utils
-    pkgs.pandoc
-    pkgs.texlive.combined.scheme-medium
   ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
   home.file.".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/kitty";
