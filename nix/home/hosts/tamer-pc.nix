@@ -16,6 +16,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/drive";
     };
 
+    file."facul" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/facul";
+    };
+
     file.".local/bin/toggle-audio-sink-clj" = {
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
     };
