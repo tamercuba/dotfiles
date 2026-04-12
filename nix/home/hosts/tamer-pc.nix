@@ -20,6 +20,16 @@
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/facul";
     };
 
+    file.".config/direnv/direnv.toml".text = ''
+      [whitelist]
+      prefix = [
+        "/home/tamer/projects",
+        "/home/tamer/facul",
+        "/mnt/storage/projects",
+        "/mnt/storage/facul"
+      ]
+    '';
+
     file.".local/bin/toggle-audio-sink-clj" = {
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
     };
