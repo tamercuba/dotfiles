@@ -38,6 +38,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export LESS_TERMCAP_md="$(tput bold 2>/dev/null; tput setaf 2 2>/dev/null)"
 export LESS_TERMCAP_me="$(tput sgr0 2>/dev/null)"
+export ENABLE_TOOL_SEARCH=true
 
 alias img="kitten icat"
 
