@@ -1,22 +1,7 @@
 #!/usr/bin/env bb
 (require '[babashka.process :as p]
-         '[clojure.string :as s])
-
-(def aliases
-  [{:name  "PCM2902 Audio Codec Analog Stereo"
-    :alias "Speakers"}
-   {:name  "Starship/Matisse HD Audio Controller Analog Stereo"
-    :alias "Earphones"}
-   {:name  "AD107 High Definition Audio Controller Digital Stereo (HDMI)"
-    :alias "HDMI"}])
-
-(defn set-aliases [device]
-  (let [device-name  (:name device)
-        device-alias (-> (filter #(= device-name (:name %)) aliases)
-                         first
-                         :alias)
-        device-alias (if device-alias device-alias device-name)]
-    (assoc device :alias device-alias)))
+         '[clojure.string :as s]
+         '[cheshire.core :as json])
 
 (defn devices []
   (-> (p/sh "wpctl" "status")
@@ -30,11 +15,10 @@
                   {:id id
                    :name (s/trim name)
                    :default? (not (s/blank? default?))}))
-           (sort-by :id)
-           (map set-aliases))))
+           (sort-by :id))))
 
 (defn next-device [sound-devices]
-  (if (:default?  (last sound-devices))
+  (if (:default? (last sound-devices))
     (first sound-devices)
     (loop [targets sound-devices
            current (first targets)
@@ -43,35 +27,35 @@
         (nil? current)      nil
         (nil? next-)        current
         (:default? current) next-
-        :else              (let [next-targets (rest targets)]
-                             (recur next-targets
-                                    (first next-targets)
-                                    (second next-targets)))))))
+        :else               (recur (rest targets)
+                                   (second targets)
+                                   (nth targets 2 nil))))))
 
 (defn set-new-default-sink [device]
-  (p/process ["wpctl" "set-default" (:id device)] {:out :string}))
+  (p/sh "wpctl" "set-default" (:id device)))
 
-(defn move-running-audio-streams []
-  (let [sink-inputs (->> (p/sh "pactl" "list" "short" "sink-inputs")
-                         :out
-                         s/split-lines
-                         (map #(first (s/split % #"\s+")))
-                         (filter seq))
-        default-sink (:out (p/sh "pactl" "get-default-sink"))]
-    (doseq [index sink-inputs]
-      (p/sh "pactl" "move-sink-input" index (s/trim default-sink)))))
+(defn audio-stream-ids []
+  (->> (p/sh "pw-dump")
+       :out
+       json/parse-string
+       (filter #(and (= "PipeWire:Interface:Node" (get % "type"))
+                     (= "Stream/Output/Audio" (get-in % ["info" "props" "media.class"]))))
+       (map #(str (get % "id")))))
+
+(defn move-streams [sink-id]
+  (doseq [stream-id (audio-stream-ids)]
+    (p/sh "pw-metadata" stream-id "target.node" sink-id)))
 
 (defn notify [device]
   (if (nil? device)
     (p/sh "notify-send" "🔊 Audio" "Device not found")
-    (p/sh "notify-send" "🔊 Audio" (str "   " (:alias device)))))
+    (p/sh "notify-send" "🔊 Audio" (:name device))))
 
 (defn- ^:private -main []
   (let [sound-devices   (devices)
         selected-device (next-device sound-devices)]
-    (set-new-default-sink       selected-device)
-    (move-running-audio-streams)
-    (notify                     selected-device)))
+    (set-new-default-sink selected-device)
+    (move-streams (:id selected-device))
+    (notify selected-device)))
 
 (-main)
-
