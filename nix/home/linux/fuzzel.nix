@@ -20,14 +20,14 @@
         fields = "filename,name,generic,keywords";
       };
       colors = {
-        background = "24273aff";
-        text = "cad3f5ff";
-        match = "c6a0f6ff";
-        selection = "363a4fff";
-        selection-text = "cad3f5ff";
-        selection-match = "c6a0f6ff";
-        border = "b7bdf8ff";
-        input = "cad3f5ff";
+        background = "282828ff";
+        text = "d4be98ff";
+        match = "d3869bff";
+        selection = "3c3836ff";
+        selection-text = "d4be98ff";
+        selection-match = "d3869bff";
+        border = "7daea3ff";
+        input = "d4be98ff";
       };
       border = {
         width = 2;

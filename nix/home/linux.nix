@@ -23,7 +23,8 @@
     pkgs.github-mcp-server
     pkgs.kdePackages.dolphin
     pkgs.dbeaver-bin
-    pkgs.pwvucontrol
+    pkgs.pulsemixer
+    pkgs.bluetuith
     pkgs.chromium
     pkgs.fcitx5
     pkgs.qt6Packages.fcitx5-configtool

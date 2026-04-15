@@ -13,7 +13,6 @@
 
   home.packages = [
     pkgs-unstable.neovim
-    pkgs.kitty
     pkgs.tmux
     pkgs.babashka
     pkgs.stow
@@ -43,6 +42,5 @@
   };
 
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
-  home.file.".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/kitty";
   home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/tmux";
 }

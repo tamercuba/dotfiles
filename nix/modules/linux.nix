@@ -15,6 +15,7 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = [
+    pkgs.psmisc
     pkgs.sddm-astronaut
     pkgs-unstable.uwsm
     pkgs.libnotify
