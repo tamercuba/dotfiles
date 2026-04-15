@@ -102,6 +102,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.keymap.set("n", "<localleader>rn", function()
+	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
+	local ns_name = first_line:match("^%s*%(ns%s+([%w%.%-]+)")
+	if not ns_name then
+		vim.notify("Namespace não encontrado na primeira linha", vim.log.levels.WARN)
+		return
+	end
+	vim.cmd("ConjureEval (require '" .. ns_name .. " :reload-all)")
+end, { desc = "Reload namespace and all deps", noremap = true, silent = true })
+
 vim.keymap.set("n", "<localleader>rp", function()
 	vim.fn.system("pkill -f lein")
 	vim.fn.jobstart("lein repl", { detach = true })

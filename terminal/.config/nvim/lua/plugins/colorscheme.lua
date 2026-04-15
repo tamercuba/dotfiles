@@ -1,15 +1,12 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"f4z3r/gruvbox-material.nvim",
+	name = "gruvbox-material",
 	lazy = false,
 	priority = 1000,
-	config = function()
-		require("catppuccin").setup({
-			flavour = "macchiato",
-			background = {
-				light = "latte",
-			},
-		})
-		vim.cmd.colorscheme("catppuccin")
-	end,
+	opts = {
+		contrast = "hard",
+		background = {
+			transparent = true,
+		},
+	},
 }

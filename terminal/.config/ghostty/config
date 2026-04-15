@@ -16,7 +16,7 @@ keybind = ctrl+shift+v=paste_from_clipboard
 keybind = super+shift+q=unbind
 
 config-file = ?local
-config-file = themes/catppuccin-macchiato.conf
+config-file = themes/gruvbox-material.conf
 
 command = /bin/zsh -lc /Users/tamer.cuba/.local/bin/tmux_attach_clj
 

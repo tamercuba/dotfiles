@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin/nvim" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local function filename_with_path()
 			local filepath = vim.fn.expand("%:p")
@@ -12,10 +12,9 @@ return {
 				return directory .. "/" .. filename
 			end
 		end
-
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin-macchiato",
+				theme = "gruvbox-material",
 			},
 			sections = {
 				lualine_c = { filename_with_path },
