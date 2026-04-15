@@ -22,4 +22,8 @@
   home.file.".zshrc".source =
     config.lib.file.mkOutOfStoreSymlink
     "/mnt/storage/projects/dotfiles/terminal/.zshrc";
+
+  home.file.".config/zsh/bira-gruvbox.zsh-theme".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "/mnt/storage/projects/dotfiles/terminal/.config/zsh/bira-gruvbox.zsh-theme";
 }
