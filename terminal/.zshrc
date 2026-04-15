@@ -1,5 +1,5 @@
 # oh-my-zsh
-export ZSH_THEME="bira"
+export ZSH_THEME=""
 export DISABLE_MAGIC_FUNCTIONS="true"
 export ENABLE_CORRECTION="true"
 export COMPLETION_WAITING_DOTS="true"
@@ -8,6 +8,7 @@ plugins=(git fzf extract)
 
 export ZSH="$HOME/.nix-profile/share/oh-my-zsh"
 source "$ZSH/oh-my-zsh.sh"
+source ~/.config/zsh/bira-gruvbox.zsh-theme
 
 if [[ -f ~/.secrets.zshrc ]]; then
   source ~/.secrets.zshrc

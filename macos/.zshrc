@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="bira"
+ZSH_THEME=""
 DISABLE_MAGIC_FUNCTIONS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -9,6 +9,7 @@ plugins=(git fzf extract python rust golang )
 
 source $ZSH/oh-my-zsh.sh
 
+source ~/.config/zsh/bira-gruvbox.zsh-theme
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Instalar
