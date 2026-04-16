@@ -79,6 +79,7 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
+  services.upower.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire.wireplumber.extraConfig."10-rename-sinks" = {
