@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 DEV="E4_97_B9_DC_D0_3C"
-LEFT_PATH="/org/bluez/hci0/dev_${DEV}/service0015/char0016"
-RIGHT_PATH="/org/bluez/hci0/dev_${DEV}/service0010/char0011"
+LEFT_PATH="/org/bluez/hci0/dev_${DEV}/service0010/char0011"
+RIGHT_PATH="/org/bluez/hci0/dev_${DEV}/service0015/char0016"
 
 read_gatt() {
     local path="$1"

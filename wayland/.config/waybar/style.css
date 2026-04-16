@@ -154,11 +154,22 @@ tooltip label {
 
 #custom-disk_sata {
     padding: 0px 10px;
-    margin: 5px 10px 5px 0px;
+    margin: 5px 5px 5px 0px;
     margin-top: 10px;
     border: 0px;
     font-weight: bold;
     border-radius: 0px 15px 15px 0px;
     background: @bg1;
     color: @aqua;
+}
+
+#custom-corne_battery {
+    padding: 0px 10px;
+    margin: 5px 10px 5px 5px;
+    margin-top: 10px;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px;
+    background: @bg1;
+    color: @blue;
 }
