@@ -34,6 +34,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
     };
 
+    file.".local/bin/corne-battery" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/wayland/.local/bin/corne-battery";
+    };
+
     file.".local/bin/tmux_attach_clj" = {
       source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.local/bin/tmux_attach_clj";
     };

@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+DEV="E4_97_B9_DC_D0_3C"
+LEFT_PATH="/org/bluez/hci0/dev_${DEV}/service0015/char0016"
+RIGHT_PATH="/org/bluez/hci0/dev_${DEV}/service0010/char0011"
+
+read_gatt() {
+    local path="$1"
+    { printf 'menu gatt\nselect-attribute %s\nread\n' "$path"; sleep 1; } \
+        | bluetoothctl 2>/dev/null \
+        | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' \
+        | tr -d '\r' \
+        | grep -A2 "Value:" \
+        | grep -oP '>\s+\K[0-9a-f]{2}(?=\s)' \
+        | head -1 \
+        | xargs -I{} printf '%d' "0x{}" 2>/dev/null
+}
+
+battery_icon() {
+    local pct="$1"
+    if   [ "$pct" -ge 90 ]; then echo "󰁹"
+    elif [ "$pct" -ge 70 ]; then echo "󰂀"
+    elif [ "$pct" -ge 50 ]; then echo "󰁾"
+    elif [ "$pct" -ge 30 ]; then echo "󰁼"
+    else                         echo "󰁺"
+    fi
+}
+
+format_side() {
+    local icon="$1"
+    local pct="$2"
+    local label="$3"
+    if [ "$pct" -lt 15 ]; then
+        printf '<span color=\\"#ff5555\\">%s %s:%d%%</span>' "$icon" "$label" "$pct"
+    else
+        printf '%s %s:%d%%' "$icon" "$label" "$pct"
+    fi
+}
+
+LEFT=$(read_gatt "$LEFT_PATH")
+RIGHT=$(read_gatt "$RIGHT_PATH")
+
+[ -z "$LEFT" ]  && LEFT=0
+[ -z "$RIGHT" ] && RIGHT=0
+
+ICON_L=$(battery_icon "$LEFT")
+ICON_R=$(battery_icon "$RIGHT")
+
+LEFT_TEXT=$(format_side "$ICON_L" "$LEFT" "L")
+RIGHT_TEXT=$(format_side "$ICON_R" "$RIGHT" "R")
+
+printf '{"text": "%s  %s", "tooltip": "Esquerdo: %d%%\\nDireito: %d%%"}\n' \
+    "$LEFT_TEXT" "$RIGHT_TEXT" "$LEFT" "$RIGHT"
