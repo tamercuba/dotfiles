@@ -125,6 +125,31 @@
                             "to": [{ "key_code": "right_gui" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 24926,
+                        "vendor_id": 7504
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_gui" },
+                            "to": [{ "key_code": "left_alt" }]
+                        },
+                        {
+                            "from": { "key_code": "left_alt" },
+                            "to": [{ "key_code": "left_gui" }]
+                        },
+                        {
+                            "from": { "key_code": "right_gui" },
+                            "to": [{ "key_code": "right_alt" }]
+                        },
+                        {
+                            "from": { "key_code": "right_alt" },
+                            "to": [{ "key_code": "right_gui" }]
+                        }
+                    ]
                 }
             ],
             "name": "Default profile",
