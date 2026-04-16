@@ -59,7 +59,7 @@ alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 0'
 
 alt-f = 'fullscreen'
-alt-shift-q = 'close'
+alt-escape = 'close'
 
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
