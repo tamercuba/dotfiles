@@ -5,6 +5,8 @@ window-padding-x = 0
 window-padding-y = 0
 window-padding-balance = true
 
+background-opacity = 0.83
+
 cursor-style = block
 cursor-style-blink = false
 custom-shader = shaders/cursor_tail.glsl
