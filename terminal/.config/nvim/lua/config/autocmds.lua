@@ -5,30 +5,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
 
-		-- defaults:
-		-- https://neovim.io/doc/user/news-0.11.html#_defaults
-
 		map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-		map("K", vim.lsp.buf.hover, "Hover Documentation")
-		map("gs", vim.lsp.buf.signature_help, "[S]ignature Documentation")
+		map("K", function() vim.lsp.buf.hover({ border = "rounded" }) end, "Hover Documentation")
+		map("gs", function() vim.lsp.buf.signature_help({ border = "rounded" }) end, "[S]ignature Documentation")
 		map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		map("<leader>lr", vim.lsp.buf.rename, "[R]ename all references")
 		map("<leader>lf", vim.lsp.buf.format, "[F]ormat")
 		map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
-		map("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next Diagnostic")
-		map("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Previous Diagnostic")
+		map("]d", function()
+			vim.diagnostic.jump({ count = 1, float = true })
+		end, "Next Diagnostic")
+		map("[d", function()
+			vim.diagnostic.jump({ count = -1, float = true })
+		end, "Previous Diagnostic")
 		map("<leader>vr", require("config.renamer"), "[R]ename buffer")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens, { bufnr = event.buf }) then
+			vim.lsp.codelens.enable(true, { bufnr = event.buf })
+		end
+
 		if
-				client
-				and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, { bufnr = event.buf })
+			client
+			and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, { bufnr = event.buf })
 		then
 			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
 
-			-- When cursor stops moving: Highlights all instances of the symbol under the cursor
-			-- When cursor moves: Clears the highlighting
 			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = event.buf,
 				group = highlight_augroup,
@@ -40,7 +44,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				callback = vim.lsp.buf.clear_references,
 			})
 
-			-- When LSP detaches: Clears the highlighting
 			vim.api.nvim_create_autocmd("LspDetach", {
 				group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 				callback = function(event2)
@@ -56,8 +59,6 @@ vim.api.nvim_create_user_command("ConjureGo", function()
 end, { desc = "Conecta o Conjure ao REPL" })
 
 local function insert_clojure_ns_if_needed(args)
-	-- This check is necessary because neotree doesnt use BufNewFile
-	-- So any empty clj file under the follow criteria will get the ns inserted
 	local buf = args.buf
 	if vim.api.nvim_buf_line_count(buf) > 1 then
 		return
@@ -75,8 +76,10 @@ local function insert_clojure_ns_if_needed(args)
 	local root = vim.fs.dirname(marker)
 
 	local rel = file:sub(#root + 2) -- path relative to root
-	local subpath = rel:match("^src/clj[sc]?/(.+)") or rel:match("^test/clj[sc]?/(.+)") or rel:match("^src/(.+)") or
-			rel:match("^test/(.+)")
+	local subpath = rel:match("^src/clj[sc]?/(.+)")
+		or rel:match("^test/clj[sc]?/(.+)")
+		or rel:match("^src/(.+)")
+		or rel:match("^test/(.+)")
 	if not subpath then
 		return
 	end
@@ -104,7 +107,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	callback = insert_clojure_ns_if_needed,
 })
 
--- Detect babashka scripts (no extension) as Clojure
 vim.filetype.add({
 	extension = { risp = "risp" },
 })
@@ -138,10 +140,14 @@ vim.api.nvim_create_autocmd("BufReadCmd", {
 		local name = vim.api.nvim_buf_get_name(ev.buf)
 		local zipfile_path = name:gsub("^zipfile://", "")
 		local jar, entry = zipfile_path:match("^(.-)::(.+)$")
-		if not jar or not entry then return end
+		if not jar or not entry then
+			return
+		end
 
 		local content = vim.fn.system({ "unzip", "-p", jar, entry })
-		if vim.v.shell_error ~= 0 then return end
+		if vim.v.shell_error ~= 0 then
+			return
+		end
 
 		local lines = vim.split(content, "\n", { trimempty = false })
 		vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, lines)
