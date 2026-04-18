@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ../../modules/common.nix
     ../../modules/linux.nix
+    ../../modules/keyboard.nix
   ];
 
   networking.hostName = "tamer-pc";
