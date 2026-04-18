@@ -55,7 +55,7 @@
         "custom/corne_battery" = {
           "exec" = "$HOME/.local/bin/corne-battery";
           "return-type" = "json";
-          "interval" = 60;
+          "interval" = 15;
           "escape" = false;
         };
       }
