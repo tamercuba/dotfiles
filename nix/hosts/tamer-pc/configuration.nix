@@ -47,6 +47,7 @@
     fsType = "btrfs";
     options = ["defaults" "nofail"];
   };
+  services.udisks2.enable = true;
 
   system.stateVersion = "25.11";
 }
