@@ -21,6 +21,7 @@
     pkgs.gnumake
     pkgs.ripgrep
     pkgs.unzip
+    pkgs-unstable.calibre
 
     pkgs.nodejs
     pkgs.neofetch
