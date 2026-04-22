@@ -9,6 +9,7 @@
     ./common/zsh.nix
     ./common/lsps.nix
     ./common/sqlite.nix
+    ./common/calibre.nix
   ];
 
   home.packages = [
@@ -21,7 +22,6 @@
     pkgs.gnumake
     pkgs.ripgrep
     pkgs.unzip
-    pkgs-unstable.calibre
 
     pkgs.nodejs
     pkgs.neofetch
@@ -44,4 +44,5 @@
 
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
   home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/tmux";
+  home.file."books".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/books";
 }
