@@ -10,12 +10,12 @@
     ./common/lsps.nix
     ./common/sqlite.nix
     ./common/calibre.nix
+    ./common/clojure.nix
   ];
 
   home.packages = [
     pkgs-unstable.neovim
     pkgs.tmux
-    pkgs.babashka
     pkgs.stow
     pkgs-unstable.claude-code
     pkgs.btop
@@ -28,9 +28,6 @@
     pkgs.go
     pkgs.rustc
     pkgs.cargo
-    pkgs.jdk
-    pkgs.clojure
-    pkgs.leiningen
 
     pkgs.python3
     pkgs.uv
