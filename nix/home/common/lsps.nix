@@ -25,6 +25,6 @@
   ];
 
   home.file.".config/clojure-lsp/config.edn" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/clojure-lsp/config.edn";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/clojure-lsp/config.edn";
   };
 }

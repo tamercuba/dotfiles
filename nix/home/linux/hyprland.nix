@@ -6,7 +6,7 @@
     enable = true;
     package = pkgs-unstable.hyprland;
     extraConfig = ''
-      source = /mnt/storage/projects/dotfiles/wayland/.config/hypr/hyprland.conf
+      source = /home/tamer/projects/dotfiles/wayland/.config/hypr/hyprland.conf
     '';
   };
 }

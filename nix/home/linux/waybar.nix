@@ -47,7 +47,7 @@
           "tooltip" = false;
         };
         "custom/disk_sata" = {
-          "exec" = "echo \"$(df /mnt/storage | awk 'NR==2{print $5}') $(sudo smartctl -A /dev/sda | awk '/Temperature_Celsius/{print $10\"°C\"}')\"";
+          "exec" = "echo \"$(df /mnt/backup | awk 'NR==2{print $5}') $(sudo smartctl -A /dev/sda | awk '/Temperature_Celsius/{print $10\"°C\"}')\"";
           "format" = "  {}";
           "interval" = 30;
           "tooltip" = false;

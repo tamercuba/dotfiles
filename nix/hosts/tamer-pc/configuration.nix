@@ -38,15 +38,42 @@
     };
     extraSpecialArgs = {
       inherit pkgs pkgs-unstable;
-      dotfilesDir = "/mnt/storage/projects/dotfiles";
+      dotfilesDir = "/home/tamer/projects/dotfiles";
     };
   };
 
-  fileSystems."/mnt/storage" = {
-    device = "/dev/disk/by-uuid/3e4c39a3-799a-42e6-92d5-fe7d136fac6a";
+  fileSystems."/home/tamer/games" = {
+    device = "/dev/disk/by-uuid/d73004f4-6c92-4246-85e9-a368b1cefdda";
+    fsType = "btrfs";
+    options = ["subvol=@games" "defaults" "nofail"];
+  };
+
+  # UUID será atualizado na fase 4, após formatar o SATA
+  fileSystems."/mnt/backup" = {
+    device = "/dev/disk/by-uuid/eb4a70ca-5bd6-47ed-b236-81529253bf85";
     fsType = "btrfs";
     options = ["defaults" "nofail"];
   };
+
+  services.btrbk = {
+    instances.main = {
+      onCalendar = "hourly";
+      settings = {
+        snapshot_preserve_min = "2d";
+        snapshot_preserve = "7d";
+        target_preserve_min = "no";
+        target_preserve = "20d 10w *m";
+
+        volume."/".subvolume = {
+          "@" = {};
+          "@home" = {};
+        };
+
+        volume."/".target = "/mnt/backup/@snapshots";
+      };
+    };
+  };
+
   services.udisks2.enable = true;
 
   system.stateVersion = "25.11";

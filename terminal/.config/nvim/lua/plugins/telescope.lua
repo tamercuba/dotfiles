@@ -3,7 +3,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-"nvim-telescope/telescope-smart-history.nvim",
+			"nvim-telescope/telescope-smart-history.nvim",
 			"kkharji/sqlite.lua",
 		},
 		config = function()
@@ -26,7 +26,7 @@ return {
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [Help]" })
 			vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[F]ind [R]eferences" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
-vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus" })
+			vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus" })
 			vim.keymap.set("n", "<leader>fi", builtin.lsp_implementations, { desc = "[F]ind [I]mplementations" })
 			vim.keymap.set("n", "<leader>fu", function()
 				builtin.find_files({
@@ -60,6 +60,7 @@ vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus"
 						".git/",
 						"%.lock",
 						"target/",
+						".clj-kondo/",
 					},
 				},
 				pickers = {
@@ -72,7 +73,7 @@ vim.keymap.set("n", "<leader>fs", builtin.git_status, { desc = "[F]ind [S]tatus"
 				},
 			})
 
-pcall(require("telescope").load_extension, "smart_history")
+			pcall(require("telescope").load_extension, "smart_history")
 		end,
 	},
 	{

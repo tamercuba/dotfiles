@@ -7,5 +7,5 @@
     pkgs.ghostty
   ];
 
-  home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/ghostty";
+  home.file.".config/ghostty".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/ghostty";
 }

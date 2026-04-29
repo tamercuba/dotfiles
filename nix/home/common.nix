@@ -42,7 +42,7 @@
     nix-direnv.enable = true;
   };
 
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/nvim";
-  home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/projects/dotfiles/terminal/.config/tmux";
-  home.file."books".source = config.lib.file.mkOutOfStoreSymlink "/mnt/storage/books";
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/nvim";
+  home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/tmux";
+  home.file."books".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/books";
 }

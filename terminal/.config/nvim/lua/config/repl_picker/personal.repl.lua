@@ -1,8 +1,8 @@
 return {
-	["julius"] = {
+	["defund"] = {
 		["REPL"] = {
 			command = "lein repl",
-			cwd = "julius",
+			cwd = "defund",
 		},
 	},
 }

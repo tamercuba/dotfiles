@@ -5,14 +5,14 @@ return {
 	settings = {
 		nixd = {
 			nixpkgs = {
-				expr = 'import (builtins.getFlake "/mnt/storage/projects/dotfiles").inputs.nixpkgs {}',
+				expr = 'import (builtins.getFlake "/home/tamer/projects/dotfiles").inputs.nixpkgs {}',
 			},
 			formatting = {
 				command = { "alejandra" },
 			},
 			options = {
 				nixos = {
-					expr = '(builtins.getFlake "/mnt/storage/projects/dotfiles").nixosConfigurations.tamer-pc.options',
+					expr = '(builtins.getFlake "/home/tamer/projects/dotfiles").nixosConfigurations.tamer-pc.options',
 				},
 			},
 		},
