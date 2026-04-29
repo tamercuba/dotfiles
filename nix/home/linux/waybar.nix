@@ -1,4 +1,6 @@
-{...}: {
+{pkgs, ...}: {
+  systemd.user.services.waybar.Service.ExecStartPre = "-${pkgs.procps}/bin/pkill -x waybar";
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;

@@ -7,12 +7,12 @@ return {
 	end,
 	filetypes = { "clojure", "edn" },
 	root_markers = {
+		".git",
 		"project.clj",
 		"deps.edn",
 		"build.boot",
 		"shadow-cljs.edn",
 		"bb.edn",
-		".git",
 	},
 	settings = {
 		clojure = {
