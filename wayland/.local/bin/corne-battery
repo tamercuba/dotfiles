@@ -1,53 +1,77 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bb
 
-DEV="E4_97_B9_DC_D0_3C"
-LEFT_PATH="/org/bluez/hci0/dev_${DEV}/service0010/char0011"
-RIGHT_PATH="/org/bluez/hci0/dev_${DEV}/service0015/char0016"
+(require '[babashka.process :as p]
+         '[clojure.string :as str]
+         '[cheshire.core :as json])
 
-read_gatt() {
-    local path="$1"
-    { printf 'menu gatt\nselect-attribute %s\nread\n' "$path"; sleep 1; } \
-        | bluetoothctl 2>/dev/null \
-        | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' \
-        | tr -d '\r' \
-        | grep -A2 "Value:" \
-        | grep -oP '>\s+\K[0-9a-f]{2}(?=\s)' \
-        | head -1 \
-        | xargs -I{} printf '%d' "0x{}" 2>/dev/null
-}
+(def corne-mac "E4:97:B9:DC:D0:3C")
+(def corne-dev "E4_97_B9_DC_D0_3C")
+(def left-path  (str "/org/bluez/hci0/dev_" corne-dev "/service0010/char0011"))
+(def right-path (str "/org/bluez/hci0/dev_" corne-dev "/service0015/char0016"))
 
-battery_icon() {
-    local pct="$1"
-    if   [ "$pct" -ge 90 ]; then echo "󰁹"
-    elif [ "$pct" -ge 70 ]; then echo "󰂀"
-    elif [ "$pct" -ge 50 ]; then echo "󰁾"
-    elif [ "$pct" -ge 30 ]; then echo "󰁼"
-    else                         echo "󰁺"
-    fi
-}
+(def mouse-icon "\uDB80\uDF7D")
+(def kb-icon    "\uF11C")
 
-format_side() {
-    local icon="$1"
-    local pct="$2"
-    local label="$3"
-    if [ "$pct" -lt 15 ]; then
-        printf '<span color=\\"#ff5555\\">%s %s:%d%%</span>' "$icon" "$label" "$pct"
-    else
-        printf '%s %s:%d%%' "$icon" "$label" "$pct"
-    fi
-}
+(defn battery-icon [pct]
+  (cond
+    (>= pct 90) "󰁹"
+    (>= pct 70) "󰂀"
+    (>= pct 50) "󰁾"
+    (>= pct 30) "󰁼"
+    :else        "󰁺"))
 
-LEFT=$(read_gatt "$LEFT_PATH")
-RIGHT=$(read_gatt "$RIGHT_PATH")
+(defn run [& args]
+  (:out (apply p/sh args)))
 
-[ -z "$LEFT" ]  && LEFT=0
-[ -z "$RIGHT" ] && RIGHT=0
+(defn corne-connected? []
+  (str/includes? (run "bluetoothctl" "info" corne-mac) "Connected: yes"))
 
-ICON_L=$(battery_icon "$LEFT")
-ICON_R=$(battery_icon "$RIGHT")
+(defn read-gatt [path]
+  (let [proc   (p/process {:err :discard} "bluetoothctl")
+        writer (java.io.PrintWriter. (:in proc) true)]
+    (doto writer
+      (.println "menu gatt")
+      (.println (str "select-attribute " path))
+      (.println "read"))
+    (Thread/sleep 1000)
+    (.close writer)
+    (let [lines (-> (slurp (:out proc))
+                    (str/replace #"\x1b\[[0-9;]*[a-zA-Z]" "")
+                    (str/replace #"\r" "")
+                    str/split-lines)]
+      (when-let [hex (some #(second (re-find #">\s+([0-9a-f]{2})\s" %))
+                           (rest (drop-while #(not (str/includes? % "Value:")) lines)))]
+        (Integer/parseInt hex 16)))))
 
-LEFT_TEXT=$(format_side "$ICON_L" "$LEFT" "L")
-RIGHT_TEXT=$(format_side "$ICON_R" "$RIGHT" "R")
+(defn find-g703 []
+  (->> (run "upower" "-e")
+       str/split-lines
+       (filter #(str/includes? % "hidpp"))
+       (some (fn [dev]
+               (when (str/includes? (run "upower" "-i" dev) "G703")
+                 dev)))))
 
-printf '{"text": "%s  %s", "tooltip": "Esquerdo: %d%%\\nDireito: %d%%"}\n' \
-    "$LEFT_TEXT" "$RIGHT_TEXT" "$LEFT" "$RIGHT"
+(defn g703-battery [path]
+  (when-let [[_ pct] (re-find #"percentage:\s+(\d+)" (run "upower" "-i" path))]
+    (Integer/parseInt pct)))
+
+(let [corne-left  (when (corne-connected?) (read-gatt left-path))
+      corne-right (when corne-left (read-gatt right-path))
+      g703-path   (find-g703)
+      g703-pct    (when g703-path (g703-battery g703-path))
+      corne?      (and corne-left corne-right)
+      g703?       (some? g703-pct)]
+
+  (when-not (or corne? g703?)
+    (System/exit 1))
+
+  (let [min-pct (apply min (remove nil? [(when corne? (min corne-left corne-right))
+                                         (when g703? g703-pct)]))
+        text    (str (battery-icon min-pct)
+                     (when g703?  (str " " mouse-icon))
+                     (when corne? (str " " kb-icon)))
+        tooltip (str/join "\n"
+                          (remove nil?
+                                  [(when corne? (str kb-icon " Corne L: " corne-left "% R: " corne-right "%"))
+                                   (when g703?  (str mouse-icon " G703: " g703-pct "%"))]))]
+    (println (json/generate-string {:text text :tooltip tooltip}))))

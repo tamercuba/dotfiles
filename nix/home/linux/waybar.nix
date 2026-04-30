@@ -11,7 +11,7 @@
         "height" = 30;
         "modules-left" = ["hyprland/workspaces"];
         "modules-center" = ["custom/clock"];
-        "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "custom/disk_nvme" "custom/disk_sata" "custom/corne_battery"];
+        "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "custom/disk_nvme" "custom/disk_sata" "custom/peripherals_battery"];
         "custom/clock" = {
           "format" = "󰃭  {}";
           "exec" = "LC_TIME=pt_BR.UTF-8 date '+%d de %B, %H:%M'";
@@ -54,10 +54,10 @@
           "interval" = 30;
           "tooltip" = false;
         };
-        "custom/corne_battery" = {
+        "custom/peripherals_battery" = {
           "exec" = "$HOME/.local/bin/corne-battery";
           "return-type" = "json";
-          "interval" = 15;
+          "interval" = 30;
           "escape" = false;
         };
       }

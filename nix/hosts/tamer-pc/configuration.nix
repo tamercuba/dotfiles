@@ -42,6 +42,12 @@
     };
   };
 
+  fileSystems."/_btrfs" = {
+    device = "/dev/disk/by-uuid/d73004f4-6c92-4246-85e9-a368b1cefdda";
+    fsType = "btrfs";
+    options = ["subvol=/" "defaults" "nofail"];
+  };
+
   fileSystems."/home/tamer/games" = {
     device = "/dev/disk/by-uuid/d73004f4-6c92-4246-85e9-a368b1cefdda";
     fsType = "btrfs";
@@ -64,12 +70,12 @@
         target_preserve_min = "no";
         target_preserve = "20d 10w *m";
 
-        volume."/".subvolume = {
+        volume."/_btrfs".subvolume = {
           "@" = {};
           "@home" = {};
         };
 
-        volume."/".target = "/mnt/backup/@snapshots";
+        volume."/_btrfs".target = "/mnt/backup/@snapshots";
       };
     };
   };
