@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -41,7 +42,7 @@
     pkgs.mpv
     pkgs.swayimg
 
-    pkgs.freecad
+    pkgs-unstable.freecad
   ];
 
   xdg.desktopEntries.freecad = {

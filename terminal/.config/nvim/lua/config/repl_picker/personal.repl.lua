@@ -15,4 +15,16 @@ return {
 			cwd = "/home/tamer/projects/clojure-lsp",
 		},
 	},
+	["clj_data_structures"] = {
+		["REPL"] = {
+			command = "lein repl",
+			cwd = "clj_data_structures",
+		},
+	},
+	["musubi"] = {
+		["BB REPL"] = {
+			command = "bb nrepl",
+			cwd = "musubi",
+		},
+	},
 }

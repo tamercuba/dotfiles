@@ -15,3 +15,6 @@ macos:
 
 rebuild-%:
 	@sudo nixos-rebuild switch --flake ~/projects/dotfiles#$*
+
+update:
+	nix flake update nixpkgs-unstable

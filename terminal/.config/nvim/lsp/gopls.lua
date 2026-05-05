@@ -8,6 +8,7 @@ return {
 			codelenses = {
 				gc_details = false,
 				generate = true,
+				implementations = false,
 				regenerate_cgo = true,
 				run_govulncheck = true,
 				test = true,

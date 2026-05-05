@@ -6,8 +6,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-		map("K", function() vim.lsp.buf.hover({ border = "rounded" }) end, "Hover Documentation")
-		map("gs", function() vim.lsp.buf.signature_help({ border = "rounded" }) end, "[S]ignature Documentation")
+		map("K", function()
+			vim.lsp.buf.hover({ border = "rounded" })
+		end, "Hover Documentation")
+		map("gs", function()
+			vim.lsp.buf.signature_help({ border = "rounded" })
+		end, "[S]ignature Documentation")
 		map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		map("<leader>lr", vim.lsp.buf.rename, "[R]ename all references")
@@ -23,9 +27,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens, { bufnr = event.buf }) then
-			vim.lsp.codelens.enable(true, { bufnr = event.buf })
-		end
+		-- if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens, { bufnr = event.buf }) then
+		-- 	vim.lsp.codelens.enable(true, { bufnr = event.buf })
+		-- end
 
 		if
 			client
@@ -134,29 +138,40 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+local function open_jar_entry(buf, jar, entry)
+	local content = vim.fn.system({ "unzip", "-p", jar, entry })
+	if vim.v.shell_error ~= 0 then
+		return
+	end
+	local lines = vim.split(content, "\n", { trimempty = false })
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+	vim.bo[buf].modifiable = false
+	vim.bo[buf].buftype = "nofile"
+	vim.bo[buf].readonly = true
+	vim.schedule(function()
+		vim.cmd("filetype detect")
+	end)
+end
+
 vim.api.nvim_create_autocmd("BufReadCmd", {
 	pattern = "zipfile://*",
 	callback = function(ev)
 		local name = vim.api.nvim_buf_get_name(ev.buf)
-		local zipfile_path = name:gsub("^zipfile://", "")
-		local jar, entry = zipfile_path:match("^(.-)::(.+)$")
-		if not jar or not entry then
-			return
+		local path = name:gsub("^zipfile://", "")
+		local jar, entry = path:match("^(.-)::(.+)$")
+		if jar and entry then
+			open_jar_entry(ev.buf, jar, entry)
 		end
+	end,
+})
 
-		local content = vim.fn.system({ "unzip", "-p", jar, entry })
-		if vim.v.shell_error ~= 0 then
-			return
+vim.api.nvim_create_autocmd("BufReadCmd", {
+	pattern = "jar:file://*",
+	callback = function(ev)
+		local name = vim.api.nvim_buf_get_name(ev.buf)
+		local jar, entry = name:match("^jar:file://(.-)!/(.+)$")
+		if jar and entry then
+			open_jar_entry(ev.buf, jar, entry)
 		end
-
-		local lines = vim.split(content, "\n", { trimempty = false })
-		vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, lines)
-		vim.bo[ev.buf].modifiable = false
-		vim.bo[ev.buf].buftype = "nofile"
-		vim.bo[ev.buf].readonly = true
-
-		vim.schedule(function()
-			vim.cmd("filetype detect")
-		end)
 	end,
 })
