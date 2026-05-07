@@ -15,9 +15,8 @@ return {
 				["<C-j>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "select_prev", "fallback" },
 				["<CR>"] = { "accept", "fallback" },
-				-- Copilot compatibility
-				["<Tab>"] = {},
-				["<S-Tab>"] = {},
+				["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
 				["<C-f>"] = {},
 				["<Up>"] = { "select_prev", "fallback" },
 				["<Down>"] = { "select_next", "fallback" },

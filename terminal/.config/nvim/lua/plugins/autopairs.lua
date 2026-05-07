@@ -10,6 +10,7 @@ return {
 				javascript = { "template_string" },
 				java = false,
 			},
+			disable_filetype = { "clojure", "fennel", "scheme", "risp" },
 		})
 	end,
 }

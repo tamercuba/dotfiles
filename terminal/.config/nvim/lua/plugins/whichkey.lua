@@ -27,8 +27,7 @@ return {
 			{ "<leader>gj", desc = "Next Conflict" },
 			{ "<leader>gk", desc = "Prev Conflict" },
 			{ "<leader>gp", desc = "Preview Hunk" },
-			{ "<leader>gc", desc = "Toggle Copilot" },
-			{ "<leader>gd", desc = "Diff View" },
+{ "<leader>gd", desc = "Diff View" },
 			{ "<leader>gD", desc = "Diff vs Last Commit" },
 			{ "<leader>gf", desc = "File History (current)" },
 			{ "<leader>gF", desc = "File History (all)" },
@@ -99,7 +98,7 @@ return {
 					{ "<localleader>pf", desc = "Select current form" },
 					{ "<localleader>pF", desc = "Select form content" },
 
-					{ "<localleader>pn", desc = "New empty form ()" },
+					{ "<localleader>n", desc = "New empty form ()" },
 					{ "<localleader>pw", desc = "Wrap symbol with ()" },
 					{ "<localleader>pW", desc = "Wrap form with ()" },
 

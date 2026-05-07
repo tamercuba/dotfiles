@@ -22,10 +22,11 @@ return {
 				require("nvim-treesitter").install(to_install)
 			end
 
+			local lisp_fts = { clojure = true, fennel = true, scheme = true, risp = true }
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(ev)
 					local ok = pcall(vim.treesitter.start, ev.buf)
-					if ok then
+					if ok and not lisp_fts[ev.match] then
 						vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end
 				end,

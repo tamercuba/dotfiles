@@ -29,13 +29,14 @@ return {
               "Select form content",
             },
 
-            -- New empty form ()
-            ["<localleader>pn"] = {
+            ["<localleader>n"] = {
               function()
-                local keys = vim.api.nvim_replace_termcodes("i()", true, false, true)
-                vim.api.nvim_feedkeys(keys, "n", false)
-                local left = vim.api.nvim_replace_termcodes("<Left>", true, false, true)
-                vim.api.nvim_feedkeys(left, "n", false)
+                local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+                local line = vim.api.nvim_get_current_line()
+                local before = line:sub(1, col)
+                local after = line:sub(col + 1)
+                vim.api.nvim_set_current_line(before .. "()" .. after)
+                vim.api.nvim_win_set_cursor(0, { row, col })
               end,
               "New empty form",
             },
