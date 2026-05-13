@@ -132,6 +132,7 @@
                         "product_id": 24926,
                         "vendor_id": 7504
                     },
+                    "treat_as_built_in_keyboard": false,
                     "simple_modifications": [
                         {
                             "from": { "key_code": "left_gui" },
