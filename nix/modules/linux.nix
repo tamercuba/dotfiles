@@ -43,10 +43,16 @@
 
   security.sudo.extraRules = [{
     users = [ "tamer" ];
-    commands = [{
-      command = "/run/current-system/sw/bin/smartctl";
-      options = [ "NOPASSWD" ];
-    }];
+    commands = [
+      {
+        command = "/run/current-system/sw/bin/smartctl";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/current-system/sw/bin/hda-verb";
+        options = [ "NOPASSWD" ];
+      }
+    ];
   }];
 
   programs.steam = {
@@ -82,22 +88,6 @@
   services.upower.enable = true;
 
   security.rtkit.enable = true;
-  services.pipewire.wireplumber.extraConfig."10-rename-sinks" = {
-    "monitor.alsa.rules" = [
-      {
-        matches = [{ "node.name" = "alsa_output.pci-0000_0a_00.4.analog-stereo"; }];
-        actions.update-props."node.description" = "P2";
-      }
-      {
-        matches = [{ "node.name" = "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.analog-stereo-output"; }];
-        actions.update-props."node.description" = "USB";
-      }
-      {
-        matches = [{ "node.name" = "alsa_output.pci-0000_08_00.1.hdmi-stereo"; }];
-        actions.update-props."node.description" = "HDMI";
-      }
-    ];
-  };
 
   services.pipewire = {
     enable = true;

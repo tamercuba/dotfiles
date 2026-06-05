@@ -41,6 +41,7 @@
 
     pkgs.mpv
     pkgs.swayimg
+    pkgs.alsa-tools
 
     pkgs-unstable.freecad
   ];

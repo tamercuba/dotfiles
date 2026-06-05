@@ -1,61 +1,53 @@
 #!/usr/bin/env bb
 (require '[babashka.process :as p]
-         '[clojure.string :as s]
-         '[cheshire.core :as json])
+         '[clojure.string :as s])
 
-(defn devices []
-  (-> (p/sh "wpctl" "status")
-      :out
-      s/split-lines
-      (->> (drop-while #(not (s/includes? % "Sinks:")))
-           (drop 1)
-           (take-while #(not (s/includes? % "Sources:")))
-           (keep #(re-find #"(\*?)\s+(\d+)\.\s+(.+?)\s+\[vol:" %))
-           (map (fn [[_ default? id name]]
-                  {:id id
-                   :name (s/trim name)
-                   :default? (not (s/blank? default?))}))
-           (sort-by :id))))
+(def hda-device "/dev/snd/hwC1D0")
+(def node-id    "45")
 
-(defn next-device [sound-devices]
-  (if (:default? (last sound-devices))
-    (first sound-devices)
-    (loop [targets sound-devices
-           current (first targets)
-           next-   (second targets)]
-      (cond
-        (nil? current)      nil
-        (nil? next-)        current
-        (:default? current) next-
-        :else               (recur (rest targets)
-                                   (second targets)
-                                   (nth targets 2 nil))))))
+(def outputs
+  [{:name       "Monitors (traseira)"
+    :route      3
+    :enable     {:node "0x14" :value "0x40"}
+    :disable    {:node "0x1b" :value "0x00"}}
+   {:name       "Fone (frontal)"
+    :route      4
+    :enable     {:node "0x1b" :value "0xc0"}
+    :disable    {:node "0x14" :value "0x00"}}])
 
-(defn set-new-default-sink [device]
-  (p/sh "wpctl" "set-default" (:id device)))
+(defn hda-verb [node value]
+  (p/sh "sudo" "hda-verb" hda-device node "SET_PIN_WIDGET_CONTROL" value))
 
-(defn audio-stream-ids []
-  (->> (p/sh "pw-dump")
-       :out
-       json/parse-string
-       (filter #(and (= "PipeWire:Interface:Node" (get % "type"))
-                     (= "Stream/Output/Audio" (get-in % ["info" "props" "media.class"]))))
-       (map #(str (get % "id")))))
+(defn current-rear-pin []
+  (->> (slurp "/proc/asound/card1/codec#0")
+       s/split-lines
+       (drop-while #(not (s/includes? % "Line Out at Ext Rear")))
+       (drop-while #(not (s/includes? % "Pin-ctls")))
+       first
+       (re-find #"0x([0-9a-f]+):")
+       second))
 
-(defn move-streams [sink-id]
-  (doseq [stream-id (audio-stream-ids)]
-    (p/sh "pw-metadata" stream-id "target.node" sink-id)))
+(defn current-output []
+  (if (= "00" (current-rear-pin))
+    (second outputs)   ; rear disabled = earphones active
+    (first outputs)))  ; rear enabled  = monitors active
 
-(defn notify [device]
-  (if (nil? device)
-    (p/sh "notify-send" "🔊 Audio" "Device not found")
-    (p/sh "notify-send" "🔊 Audio" (:name device))))
+(defn next-output [current]
+  (if (= current (first outputs))
+    (second outputs)
+    (first outputs)))
 
-(defn- ^:private -main []
-  (let [sound-devices   (devices)
-        selected-device (next-device sound-devices)]
-    (set-new-default-sink selected-device)
-    (move-streams (:id selected-device))
-    (notify selected-device)))
+(defn switch! [target]
+  (hda-verb (get-in target [:enable  :node]) (get-in target [:enable  :value]))
+  (hda-verb (get-in target [:disable :node]) (get-in target [:disable :value]))
+  (p/sh "wpctl" "set-route" node-id (str (:route target))))
+
+(defn notify [output]
+  (p/sh "notify-send" "🔊 Audio" (:name output)))
+
+(defn -main []
+  (let [target (next-output (current-output))]
+    (switch! target)
+    (notify target)))
 
 (-main)

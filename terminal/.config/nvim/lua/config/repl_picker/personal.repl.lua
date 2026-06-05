@@ -27,4 +27,10 @@ return {
 			cwd = "musubi",
 		},
 	},
+	["datomic-study"] = {
+		["REPL"] = {
+			command = "clj -M:nrepl",
+			cwd = "datomic-study",
+		},
+	},
 }
