@@ -23,7 +23,7 @@
   users.users.tamer = {
     isNormalUser = true;
     description = "tamer";
-    extraGroups = ["networkmanager" "wheel" "video" "input" "docker"];
+    extraGroups = ["networkmanager" "wheel" "video" "input" "docker" "audio"];
     shell = pkgs.zsh;
   };
 

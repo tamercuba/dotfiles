@@ -16,10 +16,11 @@
     :disable    {:node "0x14" :value "0x00"}}])
 
 (defn hda-verb [node value]
-  (p/sh "sudo" "hda-verb" hda-device node "SET_PIN_WIDGET_CONTROL" value))
+  (p/sh "hda-verb" hda-device node "SET_PIN_WIDGET_CONTROL" value))
 
 (defn current-rear-pin []
-  (->> (slurp "/proc/asound/card1/codec#0")
+  (->> (p/sh "cat" "/proc/asound/card1/codec#0")
+       :out
        s/split-lines
        (drop-while #(not (s/includes? % "Line Out at Ext Rear")))
        (drop-while #(not (s/includes? % "Pin-ctls")))

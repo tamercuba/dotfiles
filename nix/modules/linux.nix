@@ -48,10 +48,6 @@
         command = "/run/current-system/sw/bin/smartctl";
         options = [ "NOPASSWD" ];
       }
-      {
-        command = "/run/current-system/sw/bin/hda-verb";
-        options = [ "NOPASSWD" ];
-      }
     ];
   }];
 
