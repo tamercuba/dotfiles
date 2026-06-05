@@ -6,17 +6,17 @@
 (def node-id    "45")
 
 (def outputs
-  [{:name       "Monitors (traseira)"
+  [{:name       "Speakers"
     :route      3
     :enable     {:node "0x14" :value "0x40"}
     :disable    {:node "0x1b" :value "0x00"}}
-   {:name       "Fone (frontal)"
+   {:name       "Earphone"
     :route      4
     :enable     {:node "0x1b" :value "0xc0"}
     :disable    {:node "0x14" :value "0x00"}}])
 
 (defn hda-verb [node value]
-  (p/sh "hda-verb" hda-device node "SET_PIN_WIDGET_CONTROL" value))
+  (p/sh "sudo" "/run/current-system/sw/bin/hda-verb" hda-device node "SET_PIN_WIDGET_CONTROL" value))
 
 (defn current-rear-pin []
   (->> (p/sh "cat" "/proc/asound/card1/codec#0")

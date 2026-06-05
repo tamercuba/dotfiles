@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
+  home.file.".local/bin/toggle-audio-sink-clj".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
+  home.file.".local/bin/audio-status".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/wayland/.local/bin/audio-status";
+
   systemd.user.services.waybar.Service.ExecStartPre = "-${pkgs.procps}/bin/pkill -x waybar";
 
   programs.waybar = {
@@ -11,17 +14,17 @@
         "height" = 30;
         "modules-left" = ["hyprland/workspaces"];
         "modules-center" = ["custom/clock"];
-        "modules-right" = ["pulseaudio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "custom/disk_nvme" "custom/disk_sata" "custom/peripherals_battery"];
+        "modules-right" = ["custom/audio" "temperature#cpu" "cpu" "custom/gpu_temp" "custom/gpu_usage" "custom/disk_nvme" "custom/disk_sata" "custom/peripherals_battery"];
         "custom/clock" = {
           "format" = "󰃭  {}";
           "exec" = "LC_TIME=pt_BR.UTF-8 date '+%d de %B, %H:%M'";
           "interval" = 1;
           "tooltip" = false;
         };
-        "pulseaudio" = {
-          "format" = "󰕾  {volume}%";
-          "format-muted" = "󰖁  Mudo";
-          "tooltip-format" = "{desc}";
+        "custom/audio" = {
+          "exec" = "~/.local/bin/audio-status";
+          "return-type" = "json";
+          "interval" = 2;
           "on-click" = "~/.local/bin/toggle-audio-sink-clj";
         };
         "temperature#cpu" = {

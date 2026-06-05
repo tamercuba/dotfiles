@@ -81,7 +81,7 @@ tooltip label {
     color: @yellow;
 }
 
-#pulseaudio {
+#custom-audio {
     padding: 0px 10px;
     margin: 5px 5px;
     margin-top: 10px;
@@ -93,7 +93,7 @@ tooltip label {
     color: @blue;
 }
 
-#pulseaudio.muted {
+#custom-audio.muted {
     color: @red;
 }
 

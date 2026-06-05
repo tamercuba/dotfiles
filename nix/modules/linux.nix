@@ -15,6 +15,7 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = [
+    pkgs.alsa-tools
     pkgs.psmisc
     pkgs.sddm-astronaut
     pkgs-unstable.uwsm
@@ -46,6 +47,10 @@
     commands = [
       {
         command = "/run/current-system/sw/bin/smartctl";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/current-system/sw/bin/hda-verb";
         options = [ "NOPASSWD" ];
       }
     ];

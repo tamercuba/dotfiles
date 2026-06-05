@@ -1,0 +1,30 @@
+#!/usr/bin/env bb
+(require '[babashka.process :as p]
+         '[clojure.string :as s]
+         '[cheshire.core :as json])
+
+(defn current-output []
+  (let [pin (->> (p/sh "cat" "/proc/asound/card1/codec#0")
+                 :out
+                 s/split-lines
+                 (drop-while #(not (s/includes? % "Line Out at Ext Rear")))
+                 (drop-while #(not (s/includes? % "Pin-ctls")))
+                 first
+                 (re-find #"0x([0-9a-f]+):")
+                 second)]
+    (if (= "00" pin) "Earphone" "Speakers")))
+
+(defn current-volume []
+  (let [out (-> (p/sh "wpctl" "get-volume" "45") :out s/trim)]
+    (if (s/includes? out "MUTED")
+      {:volume 0 :muted true}
+      {:volume (-> (re-find #"[\d.]+" out) parse-double (* 100) Math/round)
+       :muted false})))
+
+(let [{:keys [volume muted]} (current-volume)
+      output (current-output)
+      icon   (if muted "󰖁" "󰕾")]
+  (println (json/generate-string
+             {:text    (str icon "  " volume "%")
+              :tooltip output
+              :class   (if muted "muted" "active")})))
