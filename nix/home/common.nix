@@ -9,7 +9,7 @@
     ./common/zsh.nix
     ./common/lsps.nix
     ./common/sqlite.nix
-    ./common/calibre.nix
+    ./common/books.nix
     ./common/clojure.nix
   ];
 
@@ -18,6 +18,7 @@
     pkgs.tmux
     pkgs.stow
     pkgs-unstable.claude-code
+    pkgs-unstable.opencode
     pkgs.btop
     pkgs.gnumake
     pkgs.ripgrep
@@ -42,4 +43,11 @@
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/nvim";
   home.file.".config/tmux".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/tmux";
   home.file."books".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/books";
+
+  home.file.".config/opencode/opencode.json".text = builtins.toJSON {
+    "$schema" = "https://opencode.ai/config.json";
+    model = "deepseek/deepseek-v4-pro";
+    small_model = "deepseek/deepseek-v4-flash";
+    provider.deepseek.options.apiKey = "{env:DEEPSEEK_API_KEY}";
+  };
 }

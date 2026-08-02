@@ -91,7 +91,7 @@
     };
   });
 in {
-  home.packages = [pkgs-unstable.calibre];
+  home.packages = [pkgs-unstable.calibre pkgs-unstable.foliate];
 
   home.activation.calibreConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     $DRY_RUN_CMD mkdir -p "${configDir}"
