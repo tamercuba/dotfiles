@@ -19,6 +19,7 @@
     ./linux/kb.nix
     ./linux/yazi.nix
     ./linux/ghostty.nix
+    ./linux/portals
   ];
 
   home.packages = [
@@ -44,7 +45,6 @@
     pkgs.swayimg
 
     pkgs-unstable.freecad
-    pkgs.stremio
   ];
 
   xdg.desktopEntries.freecad = {
@@ -58,6 +58,9 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      "text/html" = "chromium-browser.desktop";
+      "x-scheme-handler/http" = "chromium-browser.desktop";
+      "x-scheme-handler/https" = "chromium-browser.desktop";
       "video/mp4" = "mpv.desktop";
       "video/mkv" = "mpv.desktop";
       "video/webm" = "mpv.desktop";
