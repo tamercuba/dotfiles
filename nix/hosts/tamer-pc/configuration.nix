@@ -83,5 +83,9 @@
 
   services.udisks2.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
+
   system.stateVersion = "25.11";
 }

@@ -44,6 +44,7 @@
     pkgs.swayimg
 
     pkgs-unstable.freecad
+    pkgs.stremio
   ];
 
   xdg.desktopEntries.freecad = {
