@@ -93,6 +93,21 @@
 in {
   home.packages = [pkgs-unstable.calibre pkgs-unstable.foliate];
 
+  systemd.user.services.calibre-server = {
+    Unit = {
+      Description = "Calibre Content Server";
+      After = "network-online.target";
+      Wants = "network-online.target";
+    };
+    Service = {
+      ExecStart = "${pkgs-unstable.calibre}/bin/calibre-server --port 7070 --with-library ${booksDir}";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+  };
+
   home.activation.calibreConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     $DRY_RUN_CMD mkdir -p "${configDir}"
     if [[ ! -f "${configDir}/global.py.json" ]]; then
