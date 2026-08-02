@@ -9,6 +9,7 @@
     ./linux/cliphist.nix
     ./linux/gdrive.nix
     ./linux/fuzzel.nix
+    ./linux/gtk.nix
     ./linux/hyprland.nix
     ./linux/hyprlock.nix
     ./linux/hyprpaper.nix

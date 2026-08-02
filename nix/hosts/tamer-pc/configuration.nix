@@ -2,6 +2,7 @@
   config,
   pkgs,
   pkgs-unstable,
+  gruvbox-gtk-theme,
   ...
 }: {
   imports = [
@@ -37,7 +38,7 @@
       ];
     };
     extraSpecialArgs = {
-      inherit pkgs pkgs-unstable;
+      inherit pkgs pkgs-unstable gruvbox-gtk-theme;
       dotfilesDir = "/home/tamer/projects/dotfiles";
     };
   };
