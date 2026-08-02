@@ -10,6 +10,7 @@
     enable = true;
     package = pkgs-unstable.hyprland;
     portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -63,6 +64,8 @@
   };
 
   programs.gamemode.enable = true;
+
+  services.flatpak.enable = true;
 
   services.displayManager.sddm = {
     enable = true;
