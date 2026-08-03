@@ -70,3 +70,4 @@ function y() {
 }
 
 export ENABLE_TOOL_SEARCH=true
+alias emacs='emacsclient -t -a ""'
