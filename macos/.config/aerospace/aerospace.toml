@@ -77,18 +77,21 @@ alt-a = 'layout accordion horizontal'
 alt-shift-s = 'exec-and-forget usr/sbin/screencapture -i ~/Pictures/ss/ss-$(date +%Y%m%d-%H%M%S).png'
 
 
+# Assign by monitor IDENTITY, not left-to-right position, so it works in any
+# location regardless of how macOS orders the displays. External monitor is set
+# as Main in both home and office; the MacBook is always the built-in display.
 [workspace-to-monitor-force-assignment]
-1 = 2 
-2 = 2 
-3 = 2 
-4 = 2 
-5 = 2 
+1 = 'main'        # external (Main display) — browser, etc.
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
 
-6 = 1
-7 = 1
-8 = 1
-9 = 1
-0 = 1
+6 = 'built-in'    # MacBook built-in display — Slack, etc.
+7 = 'built-in'
+8 = 'built-in'
+9 = 'built-in'
+0 = 'built-in'
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
