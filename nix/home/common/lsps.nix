@@ -6,7 +6,7 @@
     pkgs.ruff
     pkgs.stylua
     pkgs.prettierd
-    pkgs.nodePackages.prettier
+    pkgs.prettier
     pkgs.nixd
     pkgs.alejandra
     pkgs.gotools

@@ -2,8 +2,13 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = ["~/walls/default.png"];
-      wallpaper = [", ~/walls/default.png"];
+      wallpaper = [
+        {
+          monitor = "";
+          path = "~/walls/default.png";
+          fit_mode = "fill";
+        }
+      ];
     };
   };
 }

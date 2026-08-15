@@ -78,7 +78,7 @@
     <dead_acute> <C> : "Ç" Ccedilla
   '';
 
-  home.sessionVariables.XLOCALEDIR = "${pkgs.xorg.libX11}/share/X11/locale";
+  home.sessionVariables.XLOCALEDIR = "${pkgs.libx11}/share/X11/locale";
 
   home.pointerCursor = {
     name = "BreezeX-RosePine-Linux";
