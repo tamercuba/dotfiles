@@ -22,6 +22,8 @@ return {
 			},
 			workspace = {
 				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
 					["/run/current-system/sw/share/hypr/stubs"] = true,
 				},
 			},
