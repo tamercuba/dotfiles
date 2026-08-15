@@ -4,6 +4,7 @@
 .cursor/
 **/claude
 terminal/.config/nvim/lua/config/repl_picker/company.repl.lua
+terminal/.config/nvim/docs/
 **/.config/environment.d/
 terminal/.config/tmux/plugins
 terminal/.config/ghostty/local

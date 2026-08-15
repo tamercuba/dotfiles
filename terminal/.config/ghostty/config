@@ -4,8 +4,11 @@ macos-titlebar-style = hidden
 window-padding-x = 0
 window-padding-y = 0
 window-padding-balance = true
+window-save-state = never
 
 background-opacity = 0.83
+background-blur-radius = 20
+window-colorspace = display-p3
 
 cursor-style = block
 cursor-style-blink = false

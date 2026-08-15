@@ -1,8 +1,29 @@
 local parsers = {
-	"bash", "c", "clojure", "html", "javascript", "typescript", "tsx",
-	"json", "lua", "luadoc", "luap", "query", "regex", "vim", "vimdoc",
-	"yaml", "rust", "go", "gomod", "gowork", "gosum", "nix", "markdown",
+	"bash",
+	"c",
+	"clojure",
+	"html",
+	"javascript",
+	"typescript",
+	"tsx",
+	"json",
+	"lua",
+	"luadoc",
+	"luap",
+	"query",
+	"regex",
+	"vim",
+	"vimdoc",
+	"yaml",
+	"rust",
+	"go",
+	"gomod",
+	"gowork",
+	"gosum",
+	"nix",
+	"markdown",
 	"markdown_inline",
+	"dart",
 }
 
 return {
@@ -16,7 +37,9 @@ return {
 
 			local installed = require("nvim-treesitter.config").get_installed()
 			local to_install = vim.iter(parsers)
-				:filter(function(p) return not vim.tbl_contains(installed, p) end)
+				:filter(function(p)
+					return not vim.tbl_contains(installed, p)
+				end)
 				:totable()
 			if #to_install > 0 then
 				require("nvim-treesitter").install(to_install)
@@ -60,14 +83,21 @@ return {
 			local swap = require("nvim-treesitter-textobjects.swap")
 
 			local select_maps = {
-				["af"] = "@function.outer", ["if"] = "@function.inner",
-				["ac"] = "@class.outer", ["ic"] = "@class.inner",
-				["ai"] = "@conditional.outer", ["ii"] = "@conditional.inner",
-				["al"] = "@loop.outer", ["il"] = "@loop.inner",
-				["ap"] = "@parameter.outer", ["ip"] = "@parameter.inner",
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+				["ai"] = "@conditional.outer",
+				["ii"] = "@conditional.inner",
+				["al"] = "@loop.outer",
+				["il"] = "@loop.inner",
+				["ap"] = "@parameter.outer",
+				["ip"] = "@parameter.inner",
 			}
 			for key, query in pairs(select_maps) do
-				vim.keymap.set({ "x", "o" }, key, function() select_to(query, "textobjects") end)
+				vim.keymap.set({ "x", "o" }, key, function()
+					select_to(query, "textobjects")
+				end)
 			end
 
 			local move_maps = {
@@ -79,11 +109,17 @@ return {
 				["[p"] = { fn = move.goto_previous_start, query = "@parameter.inner" },
 			}
 			for key, map in pairs(move_maps) do
-				vim.keymap.set({ "n", "x", "o" }, key, function() map.fn(map.query, "textobjects") end)
+				vim.keymap.set({ "n", "x", "o" }, key, function()
+					map.fn(map.query, "textobjects")
+				end)
 			end
 
-			vim.keymap.set("n", "<leader>sn", function() swap.swap_next("@parameter.inner") end, { desc = "Swap next parameter" })
-			vim.keymap.set("n", "<leader>sp", function() swap.swap_previous("@parameter.inner") end, { desc = "Swap previous parameter" })
+			vim.keymap.set("n", "<leader>sn", function()
+				swap.swap_next("@parameter.inner")
+			end, { desc = "Swap next parameter" })
+			vim.keymap.set("n", "<leader>sp", function()
+				swap.swap_previous("@parameter.inner")
+			end, { desc = "Swap previous parameter" })
 		end,
 	},
 }
