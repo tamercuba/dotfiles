@@ -4,7 +4,10 @@
   dotfilesDir,
   ...
 }: {
-  programs.yazi.enable = true;
+  programs.yazi = {
+    enable = true;
+    shellWrapperName = "yy";
+  };
 
   xdg.configFile."yazi/yazi.toml".source =
     config.lib.file.mkOutOfStoreSymlink
