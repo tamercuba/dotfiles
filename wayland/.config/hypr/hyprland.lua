@@ -1,10 +1,3 @@
--- Hyprland Lua configuration (ported from hyprland.conf, Hyprland 0.56)
--- Reference: https://wiki.hypr.land/Configuring/Start/
-
-------------------
----- MONITORS ----
-------------------
-
 hl.monitor({
 	output = "",
 	mode = "preferred",
@@ -12,18 +5,10 @@ hl.monitor({
 	scale = 1,
 })
 
--------------------
---- MY PROGRAMS ---
--------------------
-
 local terminal = "ghostty"
 local fileManager = "dolphin"
 local menu = "hyprlauncher"
 local browser = "chromium"
-
-------------------
---- AUTOSTART ----
-------------------
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("mako")
@@ -31,10 +16,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
 	hl.exec_cmd("fcitx5 -d")
 end)
-
------------------------------
---- ENVIRONMENT VARIABLES ---
------------------------------
 
 hl.env("QT_IM_MODULE", "fcitx")
 hl.env("XMODIFIERS", "@im=fcitx")
@@ -44,51 +25,35 @@ hl.env("XCURSOR_THEME", "rose-pine-cursor")
 hl.env("XCURSOR_SIZE", "35")
 hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 
--- Flatpak integration (moved from the NixOS hyprland settings)
 local flatpakDirs = os.getenv("HOME") .. "/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share"
 local xdgDataDirs = os.getenv("XDG_DATA_DIRS")
 hl.env("XDG_DATA_DIRS", flatpakDirs .. (xdgDataDirs and (":" .. xdgDataDirs) or ""))
-
----------------------
---- LOOK AND FEEL ---
----------------------
 
 hl.config({
 	general = {
 		gaps_in = 5,
 		gaps_out = 13,
-
 		border_size = 1,
-
 		col = {
 			active_border = "rgba(7daea3ee)",
 			inactive_border = "rgba(3c3836aa)",
 		},
-
-		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
 		resize_on_border = false,
-
-		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
 		allow_tearing = false,
-
 		layout = "dwindle",
 	},
 
 	decoration = {
 		rounding = 10,
 		rounding_power = 2,
-
-		-- Change transparency of focused and unfocused windows
 		active_opacity = 1.0,
 		inactive_opacity = 1.0,
-
 		shadow = {
 			enabled = true,
 			range = 4,
 			render_power = 3,
 			color = "rgba(1a1a1aee)",
 		},
-
 		blur = {
 			enabled = true,
 			size = 3,
@@ -96,20 +61,17 @@ hl.config({
 			vibrancy = 0.1696,
 		},
 	},
-
 	animations = {
 		enabled = true,
 	},
 })
 
--- Default curves, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
 hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
--- Default animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows", enabled = true, speed = 4.79, bezier = "easeOutQuint" })
@@ -128,23 +90,17 @@ hl.animation({ leaf = "workspacesIn", enabled = true, speed = 1.21, bezier = "al
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
 	dwindle = {
 		preserve_split = true,
 	},
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
 hl.config({
 	master = {
 		new_status = "master",
 	},
 })
-
-----------------
-----  MISC  ----
-----------------
 
 hl.config({
 	misc = {
@@ -159,10 +115,6 @@ hl.config({
 	},
 })
 
--------------
---- INPUT ---
--------------
-
 hl.config({
 	input = {
 		kb_layout = "us",
@@ -170,31 +122,22 @@ hl.config({
 		kb_model = "pc105",
 		kb_options = "",
 		kb_rules = "",
-
 		repeat_rate = 40,
 		repeat_delay = 300,
-
 		follow_mouse = 1,
-
-		sensitivity = -0.8, -- -1.0 - 1.0, 0 means no modification.
-
+		sensitivity = -0.8,
 		touchpad = {
 			natural_scroll = false,
 		},
 	},
 })
 
--- Example per-device config
 hl.device({
 	name = "epic-mouse-v1",
 	sensitivity = -0.5,
 })
 
--------------------
---- KEYBINDINGS ---
--------------------
-
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + Space", hl.dsp.exec_cmd(browser))
@@ -213,28 +156,21 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/toggle-audio-sink-clj"))
 
--- Move focus with mainMod + hjkl
 hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
 
--- Switch workspaces + move active window with mainMod + [0-9]
 for i = 1, 10 do
 	local key = i % 10 -- 10 maps to key 0
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
--- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-
--- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
--- Laptop multimedia keys for volume and LCD brightness
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
@@ -259,27 +195,17 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/toggle-audio-sink"))
-
--- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
-
-------------------------------
---- WINDOWS AND WORKSPACES ---
-------------------------------
-
 hl.window_rule({
-	-- Ignore maximize requests from all apps.
 	name = "suppress-maximize-events",
 	match = { class = ".*" },
-
 	suppress_event = "maximize",
 })
 
 hl.window_rule({
-	-- Fix some dragging issues with XWayland
 	name = "fix-xwayland-drags",
 	match = {
 		class = "^$",
@@ -293,7 +219,6 @@ hl.window_rule({
 	no_focus = true,
 })
 
--- Hyprland-run windowrule
 hl.window_rule({
 	name = "move-hyprland-run",
 	match = { class = "hyprland-run" },
