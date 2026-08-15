@@ -6,8 +6,6 @@ hl.monitor({
 })
 
 local terminal = "ghostty"
-local fileManager = "dolphin"
-local menu = "hyprlauncher"
 local browser = "chromium"
 
 hl.on("hyprland.start", function()

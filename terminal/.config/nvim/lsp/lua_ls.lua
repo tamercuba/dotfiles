@@ -18,7 +18,12 @@ return {
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { "vim" },
+				globals = { "vim", "hl" },
+			},
+			workspace = {
+				library = {
+					["/run/current-system/sw/share/hypr/stubs"] = true,
+				},
 			},
 		},
 	},
