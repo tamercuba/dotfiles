@@ -33,4 +33,10 @@ return {
 			cwd = "datomic-study",
 		},
 	},
+	["typing-tool"] = {
+		["JS NREPL"] = {
+			command = "npm run repl",
+			cwd = "typing-tool",
+		},
+	},
 }

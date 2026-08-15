@@ -116,3 +116,12 @@ vim.keymap.set("n", "<localleader>rp", function()
 	vim.fn.system("pkill -f lein")
 	vim.fn.jobstart("lein repl", { detach = true })
 end, { desc = "Kill lein processes, start new REPL ", noremap = true, silent = true })
+
+vim.keymap.set("n", "<localleader>cj", function()
+	vim.ui.input({ prompt = "Shadow-cljs build: " }, function(input)
+		if not input or input == "" then
+			return
+		end
+		vim.cmd("ConjureShadowSelect " .. input)
+	end)
+end, { desc = "Select shadow-cljs build", noremap = true, silent = true })
