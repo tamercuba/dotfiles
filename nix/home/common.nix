@@ -25,7 +25,7 @@
     pkgs.unzip
 
     pkgs.nodejs
-    pkgs.neofetch
+    pkgs.fastfetch
     pkgs.go
     pkgs.rustc
     pkgs.cargo

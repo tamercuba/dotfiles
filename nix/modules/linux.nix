@@ -10,7 +10,6 @@
     enable = true;
     package = pkgs-unstable.hyprland;
     portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];

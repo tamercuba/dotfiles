@@ -31,6 +31,7 @@ in {
       name = themeName;
       package = gruvbox-theme;
     };
+    gtk4.theme = config.gtk.theme;
   };
 
   xdg.configFile = {
