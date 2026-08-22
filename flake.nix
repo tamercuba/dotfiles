@@ -12,6 +12,9 @@
       url = "github:Fausto-Korpsvart/Gruvbox-GTK-Theme";
       flake = false;
     };
+    open-design = {
+      url = "github:nexu-io/open-design";
+    };
   };
 
   outputs = {
@@ -20,6 +23,7 @@
     nixpkgs-unstable,
     home-manager,
     gruvbox-gtk-theme,
+    open-design,
     ...
   }: let
     system = "x86_64-linux";
@@ -30,7 +34,7 @@
   in {
     nixosConfigurations.tamer-pc = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit pkgs-unstable gruvbox-gtk-theme;};
+      specialArgs = {inherit pkgs-unstable gruvbox-gtk-theme open-design;};
       modules = [
         ./nix/hosts/tamer-pc/configuration.nix
         home-manager.nixosModules.home-manager
