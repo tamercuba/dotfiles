@@ -11,6 +11,13 @@ return {
 		{ "<leader>ef", "<cmd>EcaFocus<cr>", desc = "Focus ECA sidebar" },
 		{ "<leader>et", "<cmd>EcaToggle<cr>", desc = "Toggle ECA sidebar" },
 		{ "<leader>ea", "<cmd>EcaChatAddFile<cr>", desc = "Add current file to ECA chat" },
+		{ "<leader>eb", "<cmd>EcaChatSelectBehavior<cr>", desc = "Select ECA chat behavior" },
+		{ "<leader>em", "<cmd>EcaChatSelectModel<cr>", desc = "Select ECA chat model" },
+		{ "<leader>es", "<cmd>EcaStopResponse<cr>", desc = "Stop ECA response" },
+		{ "<leader>en", "<cmd>EcaChatClear<cr>", desc = "Clear ECA chat" },
+		{ "<leader>er", "<cmd>EcaServerRestart<cr>", desc = "Restart ECA server" },
+		{ "<leader>el", "<cmd>EcaChatListContexts<cr>", desc = "List ECA chat contexts" },
+		{ "<leader>ek", "<cmd>EcaChatClearContexts<cr>", desc = "Clear ECA chat contexts" },
 		{ "<leader>ea", "<cmd>EcaChatAddSelection<cr>", mode = "x", desc = "Add selection to ECA chat" },
 		{
 			"<leader>eA",

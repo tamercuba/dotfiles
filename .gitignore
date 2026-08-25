@@ -8,3 +8,4 @@ terminal/.config/nvim/docs/
 **/.config/environment.d/
 terminal/.config/tmux/plugins
 terminal/.config/ghostty/local
+terminal/.config/eca
