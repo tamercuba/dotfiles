@@ -1,0 +1,8 @@
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+[mgr]
+prepend_keymap = [
+  # Close yazi with <Esc> instead of reaching for `q`.
+  # Prepend wins over the default <Esc> -> escape binding.
+  { on = "<Esc>", run = "quit", desc = "Quit the process" },
+]

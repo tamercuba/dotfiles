@@ -13,6 +13,10 @@
     config.lib.file.mkOutOfStoreSymlink
     "${dotfilesDir}/terminal/.config/yazi/yazi.toml";
 
+  xdg.configFile."yazi/keymap.toml".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "${dotfilesDir}/terminal/.config/yazi/keymap.toml";
+
   home.packages = with pkgs; [
     file
     ffmpeg

@@ -1,6 +1,6 @@
 return {
-	"editor-code-assistant/eca-nvim",
-	-- dir = "~/projects/eca-nvim", -- local path takes priority
+	-- "editor-code-assistant/eca-nvim",
+	dir = "~/projects/eca-nvim", -- local path takes priority
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
@@ -40,6 +40,9 @@ return {
 	opts = {
 		debug = false,
 		server_path = "",
+		log = {
+			level = vim.log.levels.DEBUG,
+		},
 		behavior = {
 			auto_set_keymaps = true,
 			auto_focus_sidebar = true,
