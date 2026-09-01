@@ -60,17 +60,33 @@ local function get_current_project_repls()
 	return nil, nil
 end
 
+local function build_default_repl_list(cwd)
+	return {
+		{
+			display = "Babashka",
+			config = {
+				command = "bb-nrepl",
+				cwd = cwd,
+			},
+		},
+		{
+			display = "REPL",
+			config = {
+				command = "lein repl",
+				cwd = cwd,
+			},
+		},
+	}
+end
+
 local function start_repl_in_tmux(display_name, repl_config)
 	local command = repl_config.command
-
-
 
 	local cwd = repl_config.cwd
 	if M.projects_dir and not cwd:match("^/") then
 		cwd = M.projects_dir .. cwd
 		vim.print("start_repl_in_tmux: " .. cwd)
 	end
-
 
 	local full_command = string.format("cd %s && %s", vim.fn.shellescape(cwd), command)
 
@@ -106,9 +122,10 @@ local function start_repl_in_tmux(display_name, repl_config)
 end
 
 function M.select_and_start_repl()
-	local repls, project_root = get_current_project_repls()
+	local repls = get_current_project_repls()
+	local detected_project_root = find_project_root()
 
-	local has_telescope, telescope = pcall(require, "telescope.pickers")
+	local has_telescope = pcall(require, "telescope.pickers")
 	if not has_telescope then
 		vim.notify("Telescope is not installed", vim.log.levels.ERROR)
 		return
@@ -130,14 +147,8 @@ function M.select_and_start_repl()
 			})
 		end
 	else
-		-- No project REPLs configured — offer Babashka as fallback
-		table.insert(repl_list, {
-			display = "Babashka",
-			config = {
-				command = "bb-nrepl",
-				cwd = vim.fn.getcwd(),
-			},
-		})
+		local default_cwd = detected_project_root or vim.fn.getcwd()
+		repl_list = build_default_repl_list(default_cwd)
 	end
 
 	table.sort(repl_list, function(a, b)
@@ -145,37 +156,37 @@ function M.select_and_start_repl()
 	end)
 
 	pickers
-			.new({}, {
-				prompt_title = "REPL Picker",
-				finder = finders.new_table({
-					results = repl_list,
-					entry_maker = function(entry)
-						return {
-							value = entry,
-							display = entry.display,
-							ordinal = entry.display,
-						}
-					end,
-				}),
-				sorter = conf.generic_sorter({}),
-				layout_strategy = "center",
-				layout_config = {
-					height = 0.4,
-					width = 0.5,
-					prompt_position = "top",
-				},
-				attach_mappings = function(prompt_bufnr, map)
-					actions.select_default:replace(function()
-						actions.close(prompt_bufnr)
-						local selection = action_state.get_selected_entry()
-						if selection then
-							start_repl_in_tmux(selection.value.display, selection.value.config)
-						end
-					end)
-					return true
+		.new({}, {
+			prompt_title = "REPL Picker",
+			finder = finders.new_table({
+				results = repl_list,
+				entry_maker = function(entry)
+					return {
+						value = entry,
+						display = entry.display,
+						ordinal = entry.display,
+					}
 				end,
-			})
-			:find()
+			}),
+			sorter = conf.generic_sorter({}),
+			layout_strategy = "center",
+			layout_config = {
+				height = 0.4,
+				width = 0.5,
+				prompt_position = "top",
+			},
+			attach_mappings = function(prompt_bufnr, map)
+				actions.select_default:replace(function()
+					actions.close(prompt_bufnr)
+					local selection = action_state.get_selected_entry()
+					if selection then
+						start_repl_in_tmux(selection.value.display, selection.value.config)
+					end
+				end)
+				return true
+			end,
+		})
+		:find()
 end
 
 function M.setup(opts)
