@@ -125,17 +125,11 @@ function M.select_and_start_repl()
 	local repls = get_current_project_repls()
 	local detected_project_root = find_project_root()
 
-	local has_telescope = pcall(require, "telescope.pickers")
-	if not has_telescope then
-		vim.notify("Telescope is not installed", vim.log.levels.ERROR)
+	local has_snacks, snacks = pcall(require, "snacks")
+	if not has_snacks then
+		vim.notify("snacks.nvim is not installed", vim.log.levels.ERROR)
 		return
 	end
-
-	local pickers = require("telescope.pickers")
-	local finders = require("telescope.finders")
-	local conf = require("telescope.config").values
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
 
 	local repl_list = {}
 
@@ -155,38 +149,28 @@ function M.select_and_start_repl()
 		return a.display < b.display
 	end)
 
-	pickers
-		.new({}, {
-			prompt_title = "REPL Picker",
-			finder = finders.new_table({
-				results = repl_list,
-				entry_maker = function(entry)
-					return {
-						value = entry,
-						display = entry.display,
-						ordinal = entry.display,
-					}
-				end,
-			}),
-			sorter = conf.generic_sorter({}),
-			layout_strategy = "center",
-			layout_config = {
-				height = 0.4,
-				width = 0.5,
-				prompt_position = "top",
-			},
-			attach_mappings = function(prompt_bufnr, map)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
-					local selection = action_state.get_selected_entry()
-					if selection then
-						start_repl_in_tmux(selection.value.display, selection.value.config)
-					end
-				end)
-				return true
-			end,
+	local items = {}
+	for _, repl in ipairs(repl_list) do
+		table.insert(items, {
+			text = repl.display,
+			repl = repl,
 		})
-		:find()
+	end
+
+	snacks.picker.pick({
+		title = "REPL Picker",
+		items = items,
+		layout = { preset = "select" },
+		format = function(item)
+			return { { item.text } }
+		end,
+		confirm = function(picker, item)
+			picker:close()
+			if item then
+				start_repl_in_tmux(item.repl.display, item.repl.config)
+			end
+		end,
+	})
 end
 
 function M.setup(opts)

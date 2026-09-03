@@ -27,7 +27,7 @@ return {
 			{ "<leader>gj", desc = "Next Conflict" },
 			{ "<leader>gk", desc = "Prev Conflict" },
 			{ "<leader>gp", desc = "Preview Hunk" },
-{ "<leader>gd", desc = "Diff View" },
+			{ "<leader>gd", desc = "Diff View" },
 			{ "<leader>gD", desc = "Diff vs Last Commit" },
 			{ "<leader>gf", desc = "File History (current)" },
 			{ "<leader>gF", desc = "File History (all)" },
@@ -39,15 +39,6 @@ return {
 			{ "<leader>et", desc = "Toggle Sidebar" },
 			{ "<leader>ea", desc = "Add File/Selection" },
 			{ "<leader>eA", desc = "Pick File to Add" },
-
-			-- Harpoon navigation
-			{ "<leader>h", group = "󰛢 Harpoon" },
-			{ "<leader>a", desc = "Add to Harpoon" },
-			{ "<leader>h1", desc = "Harpoon 1" },
-			{ "<leader>h2", desc = "Harpoon 2" },
-			{ "<leader>h3", desc = "Harpoon 3" },
-			{ "<leader>h4", desc = "Harpoon 4" },
-			{ "<leader>hc", desc = "Clear Harpoon" },
 
 			-- LSP operations
 			{ "<leader>l", group = "󰿘 LSP" },
@@ -110,4 +101,3 @@ return {
 		})
 	end,
 }
-

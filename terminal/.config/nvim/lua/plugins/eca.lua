@@ -22,15 +22,16 @@ return {
 		{
 			"<leader>eA",
 			function()
-				require("telescope.builtin").find_files({
-					prompt_title = "Add file to ECA chat",
-					attach_mappings = function(_, map)
-						map("i", "<CR>", function(prompt_bufnr)
-							local selection = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
-							require("telescope.actions").close(prompt_bufnr)
-							vim.cmd("EcaChatAddFile " .. selection.path)
-						end)
-						return true
+				Snacks.picker.files({
+					title = "Add file to ECA chat",
+					confirm = function(picker, item)
+						picker:close()
+						if item then
+							local path = Snacks.picker.util.path(item)
+							if path then
+								vim.cmd("EcaChatAddFile " .. vim.fn.fnameescape(path))
+							end
+						end
 					end,
 				})
 			end,
