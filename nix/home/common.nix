@@ -50,4 +50,5 @@
     small_model = "deepseek/deepseek-v4-flash";
     provider.deepseek.options.apiKey = "{env:DEEPSEEK_API_KEY}";
   };
+  home.file.".config/opencode/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.config/opencode/AGENTS.md";
 }

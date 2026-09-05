@@ -7,6 +7,7 @@
     pkgs.clojure
     pkgs.leiningen
     pkgs.babashka
+    pkgs.bbin
     pkgs.jdk
     pkgs.clojure-lsp
     pkgs.clj-kondo
