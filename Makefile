@@ -6,7 +6,7 @@ linux:
 
 macos:
 	@$(STOW) macos
-	@$(STOW) --ignore='\.zshrc' terminal
+	@$(STOW) --ignore='\.zshrc' --ignore='eca/config\.json' terminal
 
 .PHONY: linux macos
 

@@ -1,10 +1,4 @@
 return {
-	["defund"] = {
-		["REPL"] = {
-			command = "lein repl",
-			cwd = "defund",
-		},
-	},
 	["clojure-lsp"] = {
 		["Lib nREPL"] = {
 			command = "clojure -M:test:nrepl",
@@ -13,12 +7,6 @@ return {
 		["Build Debug CLI"] = {
 			command = "bb debug-cli",
 			cwd = "/home/tamer/projects/clojure-lsp",
-		},
-	},
-	["clj_data_structures"] = {
-		["REPL"] = {
-			command = "lein repl",
-			cwd = "clj_data_structures",
 		},
 	},
 	["musubi"] = {

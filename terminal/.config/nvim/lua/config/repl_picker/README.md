@@ -1,6 +1,6 @@
 # REPL Picker
 
-A Telescope-based picker for starting project/module-specific REPLs in tmux.
+A snacks.nvim-based picker for starting project/module-specific REPLs in tmux.
 
 ## Usage
 
@@ -12,7 +12,7 @@ A Telescope-based picker for starting project/module-specific REPLs in tmux.
 ### How It Works
 
 1. Press `<localleader>mr` (or run `:ReplPicker`)
-2. A Telescope picker will appear showing all available REPLs
+2. A snacks picker will appear showing all available REPLs
 3. Select a module using:
    - Arrow keys or `j`/`k` to navigate
    - Type to filter/search modules
@@ -112,7 +112,7 @@ This naming convention prevents accidental loading of utility files.
 
 ## Requirements
 
-- Neovim with Telescope installed
+- Neovim with snacks.nvim installed (picker enabled)
 - tmux (must be running inside a tmux session)
 - Your REPL tool of choice (e.g., lein, clj, node, python, etc.)
 
@@ -125,8 +125,8 @@ tmux
 nvim
 ```
 
-### "Telescope is not installed"
-Install Telescope.nvim through your plugin manager.
+### "snacks.nvim is not installed"
+Install folke/snacks.nvim through your plugin manager.
 
 ### "No REPL configurations found for this project"
 Either:

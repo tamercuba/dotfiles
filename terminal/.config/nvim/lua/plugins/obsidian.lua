@@ -26,12 +26,6 @@ return {
 				time_format = "%H:%M",
 			},
 
-			completion = {
-				nvim_cmp = false,
-				blink = true,
-				min_chars = 2,
-				create_new = true,
-			},
 			legacy_commands = false,
 		})
 		vim.keymap.set("n", "<leader>o", ":Obsidian<CR>", { desc = "[O]bsidian", silent = true })

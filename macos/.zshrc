@@ -30,6 +30,9 @@ export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin:/bin:/usr/bin"
 # Datomic
 export PATH="$HOME/.datomic/datomic-pro-1.0.7394/:$HOME/.datomic/datomic-pro-1.0.7394/bin:$PATH"
 
+# Coursier (cs-installed apps, e.g. metals)
+export PATH="$PATH:$HOME/Library/Application Support/Coursier/bin"
+
 export PYTHONBREAKPOINT=ipdb.set_trace
 export PYENV_ROOT="$HOME/.pyenv"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
@@ -71,3 +74,19 @@ function y() {
 
 export ENABLE_TOOL_SEARCH=true
 alias emacs='emacsclient -t -a ""'
+
+[ -f "${HOME}/.nurc" ] && source "${HOME}/.nurc"
+
+# >>> Nubank SSL Inspection CA — managed by: nu zscaler setup env >>>
+# mode: baseline
+NUBANK_CA_CERT="$HOME/dev/nu/.nu/certificates/zscaler/ca-bundle-with-zscaler.pem"
+
+
+# BASELINE — Essential SSL/TLS trust
+export SSL_CERT_FILE="$NUBANK_CA_CERT"
+export SSL_CERT_DIR="/etc/ssl/certs"
+export REQUESTS_CA_BUNDLE="$NUBANK_CA_CERT"              # Python requests, urllib3
+export CURL_CA_BUNDLE="$NUBANK_CA_CERT"                  # curl, libcurl
+export AWS_CA_BUNDLE="$NUBANK_CA_CERT"                   # AWS CLI, boto3, AWS SDKs
+export NODE_EXTRA_CA_CERTS="$NUBANK_CA_CERT"             # Node.js, Bun, Claude Code, Cursor, VS Code, Copilot
+# <<< Nubank SSL Inspection CA <<<
