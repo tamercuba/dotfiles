@@ -3,7 +3,6 @@
   pkgs,
   pkgs-unstable,
   gruvbox-gtk-theme,
-  open-design,
   ...
 }: {
   imports = [
@@ -34,7 +33,6 @@
   home-manager = {
     users.tamer = {
       imports = [
-        open-design.homeManagerModules.default
         ../../home/linux.nix
         ../../home/hosts/tamer-pc.nix
       ];

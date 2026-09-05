@@ -20,7 +20,6 @@
     ./linux/yazi.nix
     ./linux/ghostty.nix
     ./linux/portals
-    ./linux/open-design.nix
   ];
 
   home.packages = [
