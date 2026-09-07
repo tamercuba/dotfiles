@@ -27,4 +27,10 @@ return {
 			cwd = "typing-tool",
 		},
 	},
+	["musicaltec/app"] = {
+		["Shadow REPL"] = {
+			command = "lein shadow watch app",
+			cwd = "musicaltec/app",
+		},
+	},
 }

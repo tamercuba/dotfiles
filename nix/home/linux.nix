@@ -45,6 +45,7 @@
     pkgs.swayimg
 
     pkgs-unstable.freecad
+    pkgs-unstable.emacs
   ];
 
   xdg.desktopEntries.freecad = {

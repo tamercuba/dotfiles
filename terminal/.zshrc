@@ -43,6 +43,9 @@ export ENABLE_TOOL_SEARCH=true
 
 alias img="kitten icat"
 
+alias emacs="emacsclient -t -a ''"
+alias emacs-gui="emacsclient -c -a ''"
+
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
