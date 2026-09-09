@@ -1,2 +1,3 @@
+-- [nfnl] fnl/core/init.fnl
 require("core.lazy")
-require("core.lsp")
+return require("core.lsp")
