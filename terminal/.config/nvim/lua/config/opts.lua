@@ -1,10 +1,10 @@
+-- [nfnl] fnl/config/opts.fnl
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = {tab = "\194\187 ", trail = "\194\183", nbsp = "\226\144\163"}
 vim.g.mapleader = " "
 vim.g.maplocalleader = ";"
 vim.o.autoread = true
 vim.wo.relativenumber = true
-
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -13,13 +13,12 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.breakindent = true
 vim.opt.wrap = true
-vim.opt.linebreak = true -- only wrap at characters in 'breakat'
+vim.opt.linebreak = true
 vim.opt.breakindent = true
-vim.opt.breakindentopt = { "shift:2", "sbr" } -- indent wrapped parts + use showbreak
-vim.opt.showbreak = "↳ " -- what to display at the start of a wrapped screen line
+vim.opt.breakindentopt = {"shift:2", "sbr"}
+vim.opt.showbreak = "\226\134\179 "
 vim.opt.sidescrolloff = 8
 vim.opt.display:append("lastline")
-
 vim.cmd("set number")
 vim.cmd("set colorcolumn=80,120")
 vim.cmd("set clipboard+=unnamedplus")
@@ -31,24 +30,9 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.incsearch = true
 vim.opt.inccommand = "split"
-
-vim.opt.backspace = { "start", "eol", "indent" }
+vim.opt.backspace = {"start", "eol", "indent"}
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 80
-
-vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●", -- Pode ser qualquer caractere
-		source = "always", -- Inclui o nome do LSP
-	},
-	signs = true,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = {
-		source = "always", -- Inclui o nome do LSP
-	},
-})
+return vim.diagnostic.config({virtual_text = {prefix = "\226\151\143", source = "always"}, signs = true, underline = true, severity_sort = true, float = {source = "always"}, update_in_insert = false})

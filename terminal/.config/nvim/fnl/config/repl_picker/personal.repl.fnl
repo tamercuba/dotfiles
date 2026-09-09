@@ -1,0 +1,7 @@
+{:clojure-lsp {"Lib nREPL" {:command "clojure -M:test:nrepl"
+                            :cwd :/home/tamer/projects/clojure-lsp/lib}
+               "Build Debug CLI" {:command "bb debug-cli"
+                                  :cwd :/home/tamer/projects/clojure-lsp}}
+ :musubi {"BB REPL" {:command "bb nrepl" :cwd :musubi}}
+ :datomic-study {:REPL {:command "clj -M:nrepl" :cwd :datomic-study}}
+ :typing-tool {"JS NREPL" {:command "npm run repl" :cwd :typing-tool}}}

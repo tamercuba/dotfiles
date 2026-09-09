@@ -3,7 +3,9 @@
 **/.nrepl-port
 .cursor/
 **/claude
+**/.eca/
 terminal/.config/nvim/lua/config/repl_picker/company.repl.lua
+terminal/.config/nvim/fnl/config/repl_picker/company.repl.fnl
 terminal/.config/nvim/docs/
 **/.config/environment.d/
 terminal/.config/tmux/plugins

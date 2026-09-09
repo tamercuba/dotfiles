@@ -1,103 +1,14 @@
-return {
-	"folke/which-key.nvim",
-	event = "VimEnter",
-	config = function()
-		local wk = require("which-key")
-		wk.setup({
-			preset = "modern",
-			filter = function(mapping)
-				return mapping.desc and mapping.desc ~= ""
-			end,
-		})
-
-		wk.add({
-			-- File & Search operations
-			{ "<leader>f", group = "󰈞 Find" },
-			{ "<leader>ff", desc = "Find Files" },
-			{ "<leader>fg", desc = "Live Grep" },
-			{ "<leader>fb", desc = "Find Buffers" },
-			{ "<leader>fh", desc = "Find Help" },
-			{ "<leader>fn", desc = "New File" },
-
-			{ "<leader>g", group = "󰊢 Git" },
-			{ "<leader>go", desc = "Choose Ours" },
-			{ "<leader>gt", desc = "Choose Theirs" },
-			{ "<leader>gb", desc = "Choose Both" },
-			{ "<leader>gn", desc = "Choose None" },
-			{ "<leader>gj", desc = "Next Conflict" },
-			{ "<leader>gk", desc = "Prev Conflict" },
-			{ "<leader>gp", desc = "Preview Hunk" },
-			{ "<leader>gd", desc = "Diff View" },
-			{ "<leader>gD", desc = "Diff vs Last Commit" },
-			{ "<leader>gf", desc = "File History (current)" },
-			{ "<leader>gF", desc = "File History (all)" },
-
-			-- ECA (AI Assistant)
-			{ "<leader>e", group = "󰚩 ECA" },
-			{ "<leader>ec", desc = "Open Chat" },
-			{ "<leader>ef", desc = "Focus Sidebar" },
-			{ "<leader>et", desc = "Toggle Sidebar" },
-			{ "<leader>ea", desc = "Add File/Selection" },
-			{ "<leader>eA", desc = "Pick File to Add" },
-
-			-- LSP operations
-			{ "<leader>l", group = "󰿘 LSP" },
-			{ "<leader>lr", desc = "Rename" },
-			{ "<leader>lf", desc = "Format" },
-
-			-- Code actions
-			{ "<leader>c", group = "󰅱 Code" },
-			{ "<leader>ca", desc = "Code Action" },
-
-			-- Panel/Window management
-			{ "<leader>p", group = "󰽉 Panel" },
-			{ "<leader>pn", desc = "New Vertical" },
-			{ "<leader>ph", desc = "New Horizontal" },
-			{ "<leader>prl", desc = "Resize Right" },
-			{ "<leader>prh", desc = "Resize Left" },
-			{ "<leader>prk", desc = "Resize Up" },
-			{ "<leader>prj", desc = "Resize Down" },
-
-			-- File explorer
-			{ "<leader>m", desc = "󰙅 Toggle Neo-tree" },
-
-			-- Search and replace
-			{ "<leader>s", desc = "󰛔 Replace Word" },
-
-			-- Vim operations
-			{ "<leader>v", desc = "󰕷 Goto Definition (Split)" },
-
-			-- Format
-			{ "<leader>F", desc = "󰉤 Format Buffer" },
-
-			-- Visual mode specific
-			{ "<leader>h", group = "Git Hunk", mode = "v" },
-		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = { "clojure", "fennel", "scheme" },
-			callback = function()
-				wk.add({
-					{ "<localleader>p", group = "󱗘 Paredit" },
-
-					{ "<localleader>ps", desc = "Slurp forwards" },
-					{ "<localleader>pS", desc = "Slurp backwards" },
-
-					{ "<localleader>pb", desc = "Barf forwards" },
-					{ "<localleader>pB", desc = "Barf backwards" },
-
-					{ "<localleader>pf", desc = "Select current form" },
-					{ "<localleader>pF", desc = "Select form content" },
-
-					{ "<localleader>n", desc = "New empty form ()" },
-					{ "<localleader>pw", desc = "Wrap symbol with ()" },
-					{ "<localleader>pW", desc = "Wrap form with ()" },
-
-					{ "<localleader>r", group = " REPL" },
-					{ "<localleader>rp", desc = "Restart REPL" },
-					{ "<localleader>mr", desc = "REPL Picker" },
-				})
-			end,
-		})
-	end,
-}
+-- [nfnl] fnl/plugins/whichkey.fnl
+local function config()
+  local wk = require("which-key")
+  local function _1_(mapping)
+    return (mapping.desc and (mapping.desc ~= ""))
+  end
+  wk.setup({preset = "modern", filter = _1_})
+  wk.add({{"<leader>f", group = "\243\176\136\158 Find"}, {"<leader>ff", desc = "Find Files"}, {"<leader>fg", desc = "Live Grep"}, {"<leader>fb", desc = "Find Buffers"}, {"<leader>fh", desc = "Find Help"}, {"<leader>fn", desc = "New File"}, {"<leader>g", group = "\243\176\138\162 Git"}, {"<leader>go", desc = "Choose Ours"}, {"<leader>gt", desc = "Choose Theirs"}, {"<leader>gb", desc = "Choose Both"}, {"<leader>gn", desc = "Choose None"}, {"<leader>gj", desc = "Next Conflict"}, {"<leader>gk", desc = "Prev Conflict"}, {"<leader>gp", desc = "Preview Hunk"}, {"<leader>gd", desc = "Diff View"}, {"<leader>gD", desc = "Diff vs Last Commit"}, {"<leader>gf", desc = "File History (current)"}, {"<leader>gF", desc = "File History (all)"}, {"<leader>e", group = "\243\176\154\169 ECA"}, {"<leader>ec", desc = "Open Chat"}, {"<leader>ef", desc = "Focus Sidebar"}, {"<leader>et", desc = "Toggle Sidebar"}, {"<leader>ea", desc = "Add File/Selection"}, {"<leader>eA", desc = "Pick File to Add"}, {"<leader>l", group = "\243\176\191\152 LSP"}, {"<leader>lr", desc = "Rename"}, {"<leader>lf", desc = "Format"}, {"<leader>c", group = "\243\176\133\177 Code"}, {"<leader>ca", desc = "Code Action"}, {"<leader>p", group = "\243\176\189\137 Panel"}, {"<leader>pn", desc = "New Vertical"}, {"<leader>ph", desc = "New Horizontal"}, {"<leader>prl", desc = "Resize Right"}, {"<leader>prh", desc = "Resize Left"}, {"<leader>prk", desc = "Resize Up"}, {"<leader>prj", desc = "Resize Down"}, {"<leader>m", desc = "\243\176\153\133 Toggle Neo-tree"}, {"<leader>s", desc = "\243\176\155\148 Replace Word"}, {"<leader>v", desc = "\243\176\149\183 Goto Definition (Split)"}, {"<leader>F", desc = "\243\176\137\164 Format Buffer"}, {"<leader>h", group = "Git Hunk", mode = "v"}})
+  local function _2_()
+    return wk.add({{"<localleader>p", group = "\243\177\151\152 Paredit"}, {"<localleader>ps", desc = "Slurp forwards"}, {"<localleader>pS", desc = "Slurp backwards"}, {"<localleader>pb", desc = "Barf forwards"}, {"<localleader>pB", desc = "Barf backwards"}, {"<localleader>pf", desc = "Select current form"}, {"<localleader>pF", desc = "Select form content"}, {"<localleader>n", desc = "New empty form ()"}, {"<localleader>pw", desc = "Wrap symbol with ()"}, {"<localleader>pW", desc = "Wrap form with ()"}, {"<localleader>r", group = " REPL"}, {"<localleader>rp", desc = "Restart REPL"}, {"<localleader>mr", desc = "REPL Picker"}})
+  end
+  return vim.api.nvim_create_autocmd("FileType", {pattern = {"clojure", "fennel", "scheme"}, callback = _2_})
+end
+return {"folke/which-key.nvim", event = "VimEnter", config = config}
