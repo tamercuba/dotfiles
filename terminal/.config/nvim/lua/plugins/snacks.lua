@@ -13,7 +13,7 @@ local function find_help()
   return Snacks.picker.help()
 end
 local function find_reference()
-  return Snacks.picker.lsp_reference()
+  return Snacks.picker.lsp_references()
 end
 local function find_diagnostics()
   return Snacks.picker.diagnostics()
@@ -22,7 +22,7 @@ local function find_git_status()
   return Snacks.picker.git_status()
 end
 local function find_lsp_implementation()
-  return Snacks.picker.lsp_implementation()
+  return Snacks.picker.lsp_implementations()
 end
 local function find_git_unstaged()
   return Snacks.picker.git_diff({group = true})

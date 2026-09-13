@@ -12,7 +12,7 @@
                  :metals
                  :fennel_ls])
 
-(vim.lsp.log.set_level :OFF)
+(vim.lsp.log.set_level :debug)
 
 (vim.diagnostic.config {:virtual_text true
                         :underline true

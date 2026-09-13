@@ -17,13 +17,13 @@
 (fn find-help []
   (Snacks.picker.help))
 
-(fn find-reference [] (Snacks.picker.lsp_reference))
+(fn find-reference [] (Snacks.picker.lsp_references))
 
 (fn find-diagnostics [] (Snacks.picker.diagnostics))
 
 (fn find-git-status [] (Snacks.picker.git_status))
 
-(fn find-lsp-implementation [] (Snacks.picker.lsp_implementation))
+(fn find-lsp-implementation [] (Snacks.picker.lsp_implementations))
 
 (fn find-git-unstaged [] (Snacks.picker.git_diff {:group true}))
 
