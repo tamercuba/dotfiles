@@ -1,0 +1,27 @@
+(vim.lsp.enable [:lua_ls
+                 :pyright
+                 :gopls
+                 :ruff
+                 :ruff_lsp
+                 :ts_ls
+                 :clojure-lsp
+                 :eslint
+                 :nixd
+                 :yamlls
+                 :dartls
+                 :metals
+                 :fennel_ls])
+
+(vim.lsp.log.set_level :OFF)
+
+(vim.diagnostic.config {:virtual_text true
+                        :underline true
+                        :update_in_insert false
+                        :severity_sort true
+                        :float {:border :rounded :source true}
+                        :signs {:text {vim.diagnostic.severity.ERROR "󰅚 "
+                                       vim.diagnostic.severity.WARN "󰀪 "
+                                       vim.diagnostic.severity.INFO "󰋽 "
+                                       vim.diagnostic.severity.HINT "󰌶 "}}
+                        :numhl {vim.diagnostic.severity.ERROR :ErrorMsg
+                                vim.diagnostic.severity.WARN :WarningMsg}})

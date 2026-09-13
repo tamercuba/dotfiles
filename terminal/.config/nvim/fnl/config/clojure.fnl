@@ -1,0 +1,30 @@
+(tset vim.g "conjure#filetype#risp" :conjure.client.clojure.nrepl)
+(tset vim.g "conjure#client#clojure#nrepl#eval#auto_require" true)
+(tset vim.g "conjure#client#clojure#nrepl#connection#auto_repl#enabled" false)
+(tset vim.g "conjure#client#clojure#nrepl#eval#pretty_print" true)
+(tset vim.g "conjure#client#clojure#nrepl#connection#port_files"
+      [:.nrepl-port :modules/**/.nrepl-port])
+
+(tset vim.g "conjure#extract#tree_sitter#enabled" true)
+(tset vim.g "conjure#client#clojure#nrepl#test#runner" :clojure)
+(tset vim.g "conjure#completion#enabled" true)
+(tset vim.g "conjure#completion#omnifunc" "v:lua.require'blink.cmp'.omnifunc")
+(tset vim.g "conjure#mapping#doc_word" :gK)
+(tset vim.g "conjure#log#hud#enabled" false)
+(tset vim.g "conjure#mapping#log_vsplit" false)
+(tset vim.g "conjure#mapping#log_tab" false)
+(tset vim.g "conjure#client#clojure#nrepl#refresh#backend"
+      :clojure.tools.namespace)
+
+(tset vim.g "conjure#client#clojure#nrepl#refresh#before" nil)
+(tset vim.g "conjure#client#clojure#nrepl#refresh#after" nil)
+(tset vim.g "conjure#mapping#session_select" false)
+(tset vim.g "conjure#mapping#session_prev" false)
+(tset vim.g "conjure#mapping#session_next" false)
+(tset vim.g "conjure#mapping#session_list" false)
+(tset vim.g "conjure#mapping#session_close" false)
+(tset vim.g "conjure#mapping#session_close_all" false)
+(tset vim.g "conjure#mapping#session_fresh" false)
+(tset vim.g "conjure#mapping#session_clone" false)
+(tset vim.g "conjure#client#clojure#nrepl#test#current_form_names"
+      [:deftest :defflow :defflow-i18n :defspec :facts])

@@ -16,5 +16,6 @@
     pkgs.sql-formatter
     pkgs.yaml-language-server
     pkgs.tree-sitter
+    pkgs.fnlfmt
   ];
 }

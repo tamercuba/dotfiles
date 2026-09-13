@@ -1,127 +1,138 @@
-local opts = { noremap = true, silent = true }
-
-vim.keymap.set("n", "<leader>fn", function()
-	local current_path = vim.api.nvim_buf_get_name(0)
-	if current_path == "" then
-		vim.notify("Este buffer não está associado a um arquivo salvo.", vim.log.levels.WARN)
-		return
-	end
-
-	local current_dir = vim.fn.fnamemodify(current_path, ":h")
-
-	vim.ui.input({ prompt = "Nome do novo arquivo: ", completion = "file" }, function(input)
-		if not input or input == "" then
-			return
-		end
-
-		local new_file_path = current_dir .. "/" .. input
-		local uv = vim.loop
-
-		-- Cria o arquivo vazio se não existir
-		local fd = uv.fs_open(new_file_path, "w", 420) -- 0644
-		if not fd then
-			vim.notify("Erro ao criar o arquivo: " .. new_file_path, vim.log.levels.ERROR)
-			return
-		end
-		uv.fs_close(fd)
-
-		-- Abre o novo arquivo em um novo buffer
-		vim.cmd("edit " .. vim.fn.fnameescape(new_file_path))
-	end)
-end, { desc = "[N]ew [F]ile", noremap = true, silent = true })
-
--- Split current buffer
-vim.keymap.set("n", "<leader>pn", ":vsplit<CR>", { desc = "New vertical panel", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ph", ":split<CR>", { desc = "New horizontal panel", noremap = true, silent = true })
-
--- Navigate tabs
-vim.keymap.set("n", "<c-l>", ":wincmd l<CR>", { desc = "Go to right table" })
-vim.keymap.set("n", "<c-h>", ":wincmd h<CR>", { desc = "Go to left table" })
-vim.keymap.set("n", "<c-j>", ":wincmd j<CR>", { desc = "Go to upper table" })
-vim.keymap.set("n", "<c-k>", ":wincmd k<CR>", { desc = "Go to bottom table" })
-
--- Resize tabs
-vim.keymap.set("n", "<Leader>prl", function()
-	local count = vim.v.count1
-	vim.cmd("vertical resize -" .. (5 * count))
-end, { desc = "Increase window width" })
-
-vim.keymap.set("n", "<Leader>prh", function()
-	local count = vim.v.count1
-	vim.cmd("vertical resize +" .. (5 * count))
-end, { desc = "Decrease window width" })
-
-vim.keymap.set("n", "<Leader>prk", function()
-	local count = vim.v.count1
-	vim.cmd("resize +" .. (3 * count))
-end, { desc = "Increase window height" })
-
-vim.keymap.set("n", "<Leader>prj", function()
-	local count = vim.v.count1
-	vim.cmd("resize -" .. (3 * count))
-end, { desc = "Decrease window height" })
-
--- Navigate between tabs and terminal
-vim.api.nvim_set_keymap("t", "<C-k>", [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-j>", [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "moves lines down in visual selection" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "moves lines up in visual selection" })
-
-vim.keymap.set("n", "x", '"_x', opts)
-
-vim.keymap.set("n", "<leader>d", function()
-	for _, win in ipairs(vim.fn.getwininfo()) do
-		if win.loclist == 1 then
-			vim.cmd("lclose")
-			return
-		end
-	end
-	vim.diagnostic.setloclist()
-end, { desc = "Toggle diagnostics (buffer)" })
-
-vim.keymap.set(
-	"n",
-	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Replace word cursor is on globally", noremap = true, silent = false }
-)
-
--- Hightlight yanking
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
-
-vim.keymap.set("n", "<localleader>rn", function()
-	local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
-	local ns_name = first_line:match("^%s*%(ns%s+([%w%.%-]+)")
-	if not ns_name then
-		vim.notify("Namespace não encontrado na primeira linha", vim.log.levels.WARN)
-		return
-	end
-	vim.cmd("ConjureEval (require '" .. ns_name .. " :reload-all)")
-end, { desc = "Reload namespace and all deps", noremap = true, silent = true })
-
-vim.keymap.set("n", "<localleader>rp", function()
-	vim.fn.system("pkill -f lein")
-	vim.fn.jobstart("lein repl", { detach = true })
-end, { desc = "Kill lein processes, start new REPL ", noremap = true, silent = true })
-
-vim.keymap.set("n", "<localleader>cj", function()
-	vim.ui.input({ prompt = "Shadow-cljs build: " }, function(input)
-		if not input or input == "" then
-			return
-		end
-		vim.cmd("ConjureShadowSelect " .. input)
-	end)
-end, { desc = "Select shadow-cljs build", noremap = true, silent = true })
+-- [nfnl] fnl/config/keymaps.fnl
+local opts = {noremap = true, silent = true}
+local function buf_not_saved_warning()
+  return vim.notify("Este buffer n\195\163o est\195\161 associado a um arquivo salvo.", vim.log.levels.WARN)
+end
+local function create_empty_file(path)
+  local uv = vim.loop
+  local fd = uv.fs_open(path, "w", 420)
+  if fd then
+    uv.fs_close(fd)
+    return true
+  else
+    vim.notify(("Erro ao criar o arquivo: " .. path), vim.log.levels.ERROR)
+    return false
+  end
+end
+local function open_file(path)
+  return vim.cmd(("edit " .. vim.fn.fnameescape(path)))
+end
+local function create_and_open_file(dir, input)
+  if (input and (input ~= "")) then
+    local new_path = (dir .. "/" .. input)
+    if create_empty_file(new_path) then
+      return open_file(new_path)
+    else
+      return nil
+    end
+  else
+    return nil
+  end
+end
+local function new_file()
+  local current_path = vim.api.nvim_buf_get_name(0)
+  if (current_path == "") then
+    return buf_not_saved_warning()
+  else
+    local current_dir = vim.fn.fnamemodify(current_path, ":h")
+    local function _4_(input)
+      return create_and_open_file(current_dir, input)
+    end
+    return vim.ui.input({prompt = "Nome do novo arquivo: ", completion = "file"}, _4_)
+  end
+end
+local function resize(command, sign, amount)
+  return vim.cmd((command .. " " .. sign .. amount))
+end
+local function resize_by(command, sign, step)
+  return resize(command, sign, (step * vim.v.count1))
+end
+local function increase_window_width()
+  return resize_by("vertical resize", "-", 5)
+end
+local function decrease_window_width()
+  return resize_by("vertical resize", "+", 5)
+end
+local function increase_window_height()
+  return resize_by("resize", "+", 3)
+end
+local function decrease_window_height()
+  return resize_by("resize", "-", 3)
+end
+local function any_loclist_open_3f()
+  local found = false
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    found = (found or (win.loclist == 1))
+  end
+  return found
+end
+local function toggle_diagnostics()
+  if any_loclist_open_3f() then
+    return vim.cmd("lclose")
+  else
+    return vim.diagnostic.setloclist()
+  end
+end
+local function first_line()
+  return (vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or "")
+end
+local function namespace_name(line)
+  return line:match("^%s*%(ns%s+([%w%.%-]+)")
+end
+local function reload_namespace()
+  local ns_name = namespace_name(first_line())
+  if ns_name then
+    return vim.cmd(("ConjureEval (require '" .. ns_name .. " :reload-all)"))
+  else
+    return vim.notify("Namespace n\195\163o encontrado na primeira linha", vim.log.levels.WARN)
+  end
+end
+local function restart_repl()
+  vim.fn.system("pkill -f lein")
+  return vim.fn.jobstart("lein repl", {detach = true})
+end
+local function select_shadow_build()
+  local function _8_(input)
+    if (input and (input ~= "")) then
+      return vim.cmd(("ConjureShadowSelect " .. input))
+    else
+      return nil
+    end
+  end
+  return vim.ui.input({prompt = "Shadow-cljs build: "}, _8_)
+end
+local function highlight_yank()
+  return vim.hl.on_yank()
+end
+local simple_keymaps = {{"n", "n", "nzzzv"}, {"n", "N", "Nzzzv"}, {"v", "<", "<gv", opts}, {"v", ">", ">gv", opts}, {"n", "x", "\"_x", opts}}
+for _, _10_ in ipairs(simple_keymaps) do
+  local mode = _10_[1]
+  local lhs = _10_[2]
+  local rhs = _10_[3]
+  local kopts = _10_[4]
+  vim.keymap.set(mode, lhs, rhs, kopts)
+end
+local window_nav_keymaps = {{"<c-l>", ":wincmd l<CR>", "Go to right table"}, {"<c-h>", ":wincmd h<CR>", "Go to left table"}, {"<c-j>", ":wincmd j<CR>", "Go to upper table"}, {"<c-k>", ":wincmd k<CR>", "Go to bottom table"}}
+for _, _11_ in ipairs(window_nav_keymaps) do
+  local lhs = _11_[1]
+  local rhs = _11_[2]
+  local desc = _11_[3]
+  vim.keymap.set("n", lhs, rhs, {desc = desc})
+end
+vim.keymap.set("n", "<leader>fn", new_file, {desc = "[N]ew [F]ile", noremap = true, silent = true})
+vim.keymap.set("n", "<leader>pn", ":vsplit<CR>", {desc = "New vertical panel", noremap = true, silent = true})
+vim.keymap.set("n", "<leader>ph", ":split<CR>", {desc = "New horizontal panel", noremap = true, silent = true})
+vim.keymap.set("n", "<Leader>prl", increase_window_width, {desc = "Increase window width"})
+vim.keymap.set("n", "<Leader>prh", decrease_window_width, {desc = "Decrease window width"})
+vim.keymap.set("n", "<Leader>prk", increase_window_height, {desc = "Increase window height"})
+vim.keymap.set("n", "<Leader>prj", decrease_window_height, {desc = "Decrease window height"})
+vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", {noremap = true, silent = true})
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "moves lines down in visual selection"})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "moves lines up in visual selection"})
+vim.keymap.set("n", "<leader>d", toggle_diagnostics, {desc = "Toggle diagnostics (buffer)"})
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", {desc = "Replace word cursor is on globally", noremap = true, silent = false})
+vim.api.nvim_create_autocmd("TextYankPost", {desc = "Highlight when yanking (copying) text", group = vim.api.nvim_create_augroup("kickstart-highlight-yank", {clear = true}), callback = highlight_yank})
+vim.keymap.set("n", "<localleader>rn", reload_namespace, {desc = "Reload namespace and all deps", noremap = true, silent = true})
+vim.keymap.set("n", "<localleader>rp", restart_repl, {desc = "Kill lein processes, start new REPL ", noremap = true, silent = true})
+return vim.keymap.set("n", "<localleader>cj", select_shadow_build, {desc = "Select shadow-cljs build", noremap = true, silent = true})

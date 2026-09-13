@@ -1,3 +1,5 @@
+-- [nfnl] fnl/config/init.fnl
+require("config.trust")
 require("config.autocmds")
 require("config.clojure")
 require("config.opts")
@@ -5,4 +7,4 @@ require("config.keymaps")
 require("config.renamer")
 require("config.lsp_info")
 require("config.rust")
-require("config.repl_picker")
+return require("config.repl_picker")
