@@ -11,7 +11,7 @@
         (snacks-picker.files))))
 
 {1 :editor-code-assistant/eca-nvim
- :dir (vim.fn.expand "~/projects/eca-nvim")
+ ;:dir (vim.fn.expand "~/projects/eca-nvim")
  :dependencies [:MunifTanjim/nui.nvim
                 :nvim-lua/plenary.nvim
                 :folke/snacks.nvim]
