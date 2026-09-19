@@ -20,6 +20,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/wayland/.local/bin/toggle-audio-sink-clj";
     };
 
+    file.".local/bin/power-menu" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/wayland/.local/bin/power-menu";
+    };
+
     file.".local/bin/corne-battery" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/wayland/.local/bin/corne-battery";
     };

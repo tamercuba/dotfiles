@@ -93,6 +93,11 @@
   services.blueman.enable = true;
   services.upower.enable = true;
 
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    HandlePowerKeyLongPress = "ignore";
+  };
+
   security.rtkit.enable = true;
 
   services.pipewire = {

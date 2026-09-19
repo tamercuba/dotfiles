@@ -1,0 +1,21 @@
+#!/usr/bin/env bb
+(require '[babashka.process :as p]
+         '[clojure.string :as s])
+
+(def options ["Lock screen" "Logoff" "Turn off"])
+
+(defn menu-choice []
+  (let [{:keys [out exit]}
+        (p/sh {:in (s/join "\n" options) :continue true}
+              "fuzzel" "--dmenu" "--prompt" "Energy: ")]
+    (when (zero? exit)
+      (s/trim-newline out))))
+
+(defn run [choice]
+  (case choice
+    "Lock screen" (p/sh "hyprlock")
+    "Logoff"      (p/sh "hyprctl" "dispatch" "exit")
+    "Turn off"      (p/sh "systemctl" "poweroff")
+    nil))
+
+(run (menu-choice))
