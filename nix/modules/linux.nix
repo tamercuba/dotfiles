@@ -12,7 +12,7 @@
     portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -44,24 +44,26 @@
     "d /mnt/drive 0755 tamer users -"
   ];
 
-  security.sudo.extraRules = [{
-    users = [ "tamer" ];
-    commands = [
-      {
-        command = "/run/current-system/sw/bin/smartctl";
-        options = [ "NOPASSWD" ];
-      }
-      {
-        command = "/run/current-system/sw/bin/hda-verb";
-        options = [ "NOPASSWD" ];
-      }
-    ];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = ["tamer"];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/smartctl";
+          options = ["NOPASSWD"];
+        }
+        {
+          command = "/run/current-system/sw/bin/hda-verb";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
 
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
-    extraCompatPackages = [ pkgs.proton-ge-bin ];
+    extraCompatPackages = [pkgs.proton-ge-bin];
   };
 
   programs.gamemode.enable = true;
@@ -75,12 +77,11 @@
     extraPackages = [pkgs.qt6.qtmultimedia];
     settings = {
       Theme = {
-          CursorTheme = "BreezeX-RosePine-Linux";
-          CursorSize = "35";
+        CursorTheme = "BreezeX-RosePine-Linux";
+        CursorSize = "35";
       };
     };
   };
-
 
   nixpkgs.config.allowUnfree = true;
   networking.networkmanager.enable = true;
@@ -109,10 +110,11 @@
     };
   };
 
-
-  # ============================================================
-  # NVIDIA — RTX 4060 (Ada Lovelace)
-  # ============================================================
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+  ];
 
   services.xserver.videoDrivers = ["nvidia"];
 
