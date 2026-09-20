@@ -10,6 +10,7 @@
     ../../modules/common.nix
     ../../modules/linux.nix
     ../../modules/keyboard.nix
+    ../../modules/docs.nix
   ];
 
   networking.hostName = "tamer-pc";
