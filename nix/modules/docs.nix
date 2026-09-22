@@ -17,7 +17,7 @@
         }
       ];
       locations."/" = {
-        proxyPass = "http://127.0.0.1:6666";
+        proxyPass = "http://127.0.0.1:7766";
         proxyWebsockets = true;
       };
     };
