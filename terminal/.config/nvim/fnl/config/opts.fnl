@@ -21,7 +21,6 @@
 (vim.opt.display:append :lastline)
 
 (vim.cmd "set number")
-(vim.cmd "set colorcolumn=80,120")
 (vim.cmd "set clipboard+=unnamedplus")
 (vim.cmd "set laststatus=2")
 

@@ -20,7 +20,6 @@ vim.opt.showbreak = "\226\134\179 "
 vim.opt.sidescrolloff = 8
 vim.opt.display:append("lastline")
 vim.cmd("set number")
-vim.cmd("set colorcolumn=80,120")
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set laststatus=2")
 vim.g.python3_host_prog = "/Users/tamer.cuba/.pyenv/shims/python3"

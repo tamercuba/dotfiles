@@ -13,14 +13,14 @@
                  :PaterJason/cmp-conjure
                  :mikavilpas/blink-ripgrep.nvim
                  :L3MON4D3/LuaSnip]
-  :opts {:keymap {:keymap {:<C-j> [:select_next :fallback]
-                           :<C-k> [:select_prev :fallback]
-                           :<CR> [:accept :fallback]
-                           :<Tab> [:snippet_forward :select_next :fallback]
-                           :<S-Tab> [:snippet_backward :select_prev :fallback]
-                           :<C-f> []
-                           :<Up> [:select_prev :fallback]
-                           :<Down> [:select_next :fallback]}}
+  :opts {:keymap {:<C-j> [:select_next :fallback]
+                  :<C-k> [:select_prev :fallback]
+                  :<CR> [:select_and_accept :fallback]
+                  :<Tab> [:select_and_accept :snippet_forward :fallback]
+                  :<S-Tab> [:snippet_backward :select_prev :fallback]
+                  :<C-f> []
+                  :<Up> [:select_prev :fallback]
+                  :<Down> [:select_next :fallback]}
          :cmdline {:enabled false
                    :completion {:menu {:auto_show true}}
                    :keymap {:<CR> {:accept_and_enter :fallback}}}
