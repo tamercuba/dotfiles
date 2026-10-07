@@ -44,7 +44,8 @@
              {1 :<leader>prk :desc "Resize Up"}
              {1 :<leader>prj :desc "Resize Down"}
              ;; File explorer
-             {1 :<leader>m :desc "󰙅 Toggle Neo-tree"}
+             {1 :<leader>m :desc "Browse files with Oil"}
+             {1 :<leader>M :desc "Browse working directory with Oil"}
              ;; Search and replace
              {1 :<leader>s :desc "󰛔 Replace Word"}
              ;; Vim operations
