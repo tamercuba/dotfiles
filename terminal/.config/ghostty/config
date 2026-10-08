@@ -6,8 +6,8 @@ window-padding-y = 0
 window-padding-balance = true
 window-save-state = never
 
-background-opacity = 0.85
-background-blur = 78
+background-opacity = 0.70
+background-blur = 50
 window-colorspace = display-p3
 
 cursor-style = block
