@@ -100,7 +100,7 @@ in {
       Wants = "network-online.target";
     };
     Service = {
-      ExecStart = "${pkgs-unstable.calibre}/bin/calibre-server --port 7070 ${booksDir}";
+      ExecStart = "${pkgs-unstable.calibre}/bin/calibre-server --port 7070 --enable-auth ${booksDir}";
       Restart = "on-failure";
     };
     Install = {

@@ -5,7 +5,7 @@ return {
 		-- This prevents clojure-lsp from overriding s/defn, s/def etc. colors
 		client.server_capabilities.semanticTokensProvider = nil
 	end,
-	filetypes = { "clojure", "edn" },
+	filetypes = { "clojure" },
 	root_markers = {
 		".git",
 		"project.clj",
