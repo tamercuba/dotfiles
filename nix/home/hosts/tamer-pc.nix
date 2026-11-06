@@ -32,6 +32,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.local/bin/tmux_attach_clj";
     };
 
+    file.".local/bin/tmux-new-session" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.local/bin/tmux-new-session";
+    };
+
     file.".local/bin/bb-nrepl" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/tamer/projects/dotfiles/terminal/.local/bin/bb-nrepl";
     };

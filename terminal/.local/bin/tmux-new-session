@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+set -eu
+
+name="$1"
+
+expand_tilde() {
+  case "$1" in
+    '~') printf '%s\n' "$HOME" ;;
+    '~/'*) printf '%s\n' "$HOME/${1#~/}" ;;
+    *) printf '%s\n' "$1" ;;
+  esac
+}
+
+if [ -n "${TMUX_PROJECT_DIRS:-}" ]; then
+  oldifs=$IFS
+  IFS=','
+  set -- $TMUX_PROJECT_DIRS
+  IFS=$oldifs
+  for dir in "$@"; do
+    dir=$(expand_tilde "$dir")
+    dir=$(printf '%s' "$dir" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+    if [ -d "$dir/$name" ]; then
+      tmux new-session -d -s "$name" -c "$dir/$name"
+      tmux switch-client -t "$name"
+      exit 0
+    fi
+  done
+fi
+
+tmux new-session -d -s "$name"
+tmux switch-client -t "$name"
