@@ -2,6 +2,9 @@
   (set vim.opt_local.foldenable false)
   (vim.opt_local.fillchars:append "diff: "))
 
+(fn diff_main []
+  ((. (require :diffview) :open) [:origin/main...HEAD]))
+
 (fn config []
   (let [actions (require :diffview.actions)
         diffview (require :diffview)]
@@ -72,5 +75,6 @@
          :desc "[G]it [F]ile History (current)"}
         {1 :<leader>gF
          2 :<cmd>DiffviewFileHistory<cr>
-         :desc "[G]it [F]ile History (all)"}]
+         :desc "[G]it [F]ile History (all)"}
+        {1 :<leader>gr 2 diff_main :desc "[G]it [R]eview branch"}]
  : config}
